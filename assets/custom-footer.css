@@ -1,0 +1,451 @@
+/**
+ * Panasonic Custom Footer Styles
+ * Matches Figma Desktop and Mobile UI specifications
+ * Reference: site-footer.dc.html
+ */
+
+/* Main Footer Container */
+.hp-footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e6ee;
+  padding: 40px 0 0;
+  position: relative;
+  z-index: 10;
+  font-family: inherit;
+  color: #111827;
+}
+
+.hp-footer *,
+.hp-footer *::before,
+.hp-footer *::after {
+  box-sizing: border-box;
+}
+
+.hp-footer-container {
+  width: 100%;
+  max-width: min(1376px, 100%);
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+/* 4-Column Grid */
+.hp-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  column-gap: 48px;
+  row-gap: 0;
+  padding-bottom: 34px;
+}
+
+/* Brand Column */
+.hp-footer-brand {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  text-align: left;
+}
+
+.hp-footer-logo-wrap {
+  min-width: 0;
+  display: block;
+}
+
+.hp-footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.hp-footer-logo {
+  display: block;
+  width: 236px;
+  max-width: 100%;
+  height: auto;
+}
+
+.hp-footer-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hp-footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: #3e4757;
+  text-decoration: none;
+  transition: color 320ms ease;
+}
+
+.hp-footer-contact-item:hover {
+  color: #0041c0;
+  text-decoration: none;
+}
+
+.hp-footer-contact-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #dce7fb;
+  color: #0041c0;
+  transition:
+    background 320ms ease,
+    color 320ms ease;
+}
+
+.hp-footer-contact-item:hover .hp-footer-contact-icon {
+  background: #0041c0;
+  color: #ffffff;
+}
+
+.hp-footer-contact-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.hp-footer-contact-text {
+  min-width: 0;
+}
+
+/* Link Columns */
+.hp-footer-col {
+  min-width: 0;
+}
+
+.hp-footer-acc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: default;
+  font-family: inherit;
+}
+
+.hp-footer-col-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.hp-footer-acc-chev {
+  display: none;
+  flex: none;
+  align-items: center;
+  color: #4a5567;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hp-footer-acc-chev svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.hp-footer-links-wrap {
+  display: block;
+}
+
+.hp-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.hp-footer-link {
+  font-size: 15px;
+  font-weight: 400;
+  color: #3e4757;
+  text-decoration: none;
+  transition:
+    color 300ms ease,
+    transform 200ms ease;
+  display: inline-block;
+  width: fit-content;
+}
+
+.hp-footer-link:hover {
+  color: #0041c0;
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+/* Copyright Row */
+.hp-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding-top: 22px;
+  border-top: 1px solid #e4e8f0;
+}
+
+.hp-footer-copy {
+  min-width: 0;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #5a6478;
+}
+
+/* --------------------------------------------------------------------------
+   Earth Horizon Band & Orbit Animation
+   -------------------------------------------------------------------------- */
+.hp-footer-globe-band {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2103 / 250;
+  min-height: 0;
+  margin-top: -1px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.hp-footer-globe-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hp-footer-globe-canvas,
+.hp-footer-globe-svg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  aspect-ratio: 2103 / 748;
+  height: auto;
+  pointer-events: none;
+  display: block;
+}
+
+.hp-footer-slogan-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 80px;
+  width: 100%;
+  max-width: min(1376px, 100%);
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.hp-footer-slogan {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.hp-footer-slogan .hp-text-brand {
+  font-weight: 700;
+  color: #0041c0;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet Responsive Layout (760px - 1179px)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 760px) and (max-width: 1179px) {
+  .hp-footer-container {
+    padding: 0 24px;
+  }
+
+  .hp-footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 44px;
+    column-gap: 32px;
+  }
+
+  .hp-footer-brand {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 0;
+  }
+
+  .hp-footer-contacts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .hp-footer-slogan-wrap {
+    top: 24%;
+    padding: 0 24px;
+    gap: 40px;
+  }
+
+  .hp-footer-slogan {
+    font-size: 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Responsive Layout (< 760px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 759px) {
+  .hp-footer {
+    padding: 30px 0 0;
+  }
+
+  .hp-footer-container {
+    padding: 0 16px;
+  }
+
+  .hp-footer-grid {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+    column-gap: 0;
+    padding-bottom: 24px;
+  }
+
+  /* Mobile Brand Stack */
+  .hp-footer-brand {
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 18px;
+  }
+
+  .hp-footer-logo-wrap {
+    text-align: center;
+  }
+
+  .hp-footer-logo {
+    margin: 0 auto;
+  }
+
+  .hp-footer-contacts {
+    width: 100%;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .hp-footer-contact-item {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  /* Mobile Accordions */
+  .hp-footer-col {
+    border-bottom: 1px solid #e2e6ee;
+  }
+
+  .hp-footer-acc-btn {
+    height: 52px;
+    cursor: pointer;
+  }
+
+  .hp-footer-col-title {
+    font-size: 15px;
+  }
+
+  .hp-footer-acc-chev {
+    display: inline-flex;
+  }
+
+  .hp-footer-col.is-open .hp-footer-acc-chev {
+    transform: rotate(180deg);
+  }
+
+  .hp-footer-links-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hp-footer-col.is-open .hp-footer-links-wrap {
+    grid-template-rows: 1fr;
+  }
+
+  .hp-footer-links-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .hp-footer-links {
+    padding: 2px 0 18px;
+    gap: 14px;
+  }
+
+  .hp-footer-link {
+    font-size: 14px;
+  }
+
+  /* Mobile Bottom */
+  .hp-footer-bottom {
+    border-top: 0;
+    padding-top: 20px;
+    padding-bottom: 16px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hp-footer-copy {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Mobile Globe Band */
+  .hp-footer-globe-band {
+    aspect-ratio: auto;
+    min-height: 170px;
+    height: 170px;
+  }
+
+  .hp-footer-globe-canvas,
+  .hp-footer-globe-svg {
+    width: 787px;
+  }
+
+  .hp-footer-slogan-wrap {
+    top: 14%;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 16px;
+  }
+
+  .hp-footer-slogan {
+    font-size: 15px;
+  }
+}

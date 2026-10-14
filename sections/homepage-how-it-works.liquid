@@ -1,0 +1,189 @@
+{{ 'homepage-steps.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage-steps.js' | asset_url }}" defer="defer"></script>
+
+<div class="hp-section hp-steps">
+  <div class="hp-container">
+    <div class="hp-steps-header">
+      {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
+        <h2 class="hp-steps-title">
+          {{ section.settings.title_prefix | escape }}
+          {%- if section.settings.title_highlight != blank -%}
+            <span class="hp-text-brand">{{ section.settings.title_highlight | escape }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.show_subtext and section.settings.subtext != blank -%}
+        <p class="hp-steps-subtext">{{ section.settings.subtext | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="hp-steps-track" data-steps-track>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="hp-step-card" {{ block.shopify_attributes }}>
+            <div class="hp-step-media">
+              {%- if block.settings.image != blank -%}
+                {%- assign step_alt = block.settings.image.alt | default: block.settings.title | escape -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: class: 'hp-step-img', loading: 'lazy', alt: step_alt }}
+              {%- endif -%}
+              {%- assign step_badge = block.settings.step_number | default: forloop.index | prepend: '0' | slice: -2, 2 -%}
+              <span class="hp-step-badge">{{ step_badge }}</span>
+            </div>
+
+            <div class="hp-step-body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="hp-step-card-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="hp-step-card-desc">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.btn_text != blank -%}
+                <a href="{{ block.settings.btn_url | default: '#' }}" class="hp-step-btn">
+                  <span class="hp-step-btn-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="10.6" cy="10.6" r="6.8"></circle>
+                      <path d="m15.5 15.5 4 4"></path>
+                    </svg>
+                  </span>
+                  <span class="hp-step-btn-text">{{ block.settings.btn_text | escape }}</span>
+                  <span class="hp-step-btn-arrow" aria-hidden="true">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="square">
+                      <path d="m9 5 7 7-7 7"></path>
+                    </svg>
+                  </span>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- unless forloop.last -%}
+            <div class="hp-step-arrow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12h15"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hp-steps-dots" aria-hidden="true">
+        {%- for block in section.blocks -%}
+          <button type="button" class="hp-steps-dot{% if forloop.first %} is-active{% endif %}" data-steps-dot data-index="{{ forloop.index0 }}" aria-label="Step {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How It Works (3 Steps)",
+  "class": "section-homepage-how-it-works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Get The Right Part In",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "3 Steps",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtext",
+      "default": false,
+      "label": "Show Subtext"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Fast, simple, and guaranteed fit for your Panasonic model.",
+      "label": "Subtext"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "default": "01",
+          "label": "Step Number"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Identify Your Product",
+          "label": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "Locate your appliance’s model number on its product label to ensure you find the right replacement parts.",
+          "label": "Step Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Image"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "default": "Find my model number",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works (3 Steps)",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "01",
+            "title": "Identify Your Product",
+            "description": "Locate your appliance’s model number on its product label to ensure you find the right replacement parts.",
+            "btn_text": "Find my model number"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "02",
+            "title": "Find The Right Part",
+            "description": "Search using your model number, explore compatible parts, and find exactly what your appliance needs.",
+            "btn_text": "Identify my part"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "03",
+            "title": "Order With Confidence",
+            "description": "Choose genuine Panasonic parts, enjoy a secure checkout, and get your appliance back to working.",
+            "btn_text": "Start shopping"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

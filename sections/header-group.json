@@ -1,0 +1,96 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-1",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "disabled": true,
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "custom_header_LwfYUf": {
+      "type": "custom-header",
+      "name": "Custom Header",
+      "settings": {
+        "logo": "shopify://shop_images/haeder-icon.png",
+        "logo_width": 180,
+        "menu": "",
+        "show_utility_bar": true,
+        "utility_menu": "",
+        "utility_link_1_text": "Find My Model & Serial Number",
+        "utility_link_1_url": "",
+        "utility_link_2_text": "Track Order",
+        "utility_link_2_url": "",
+        "utility_link_3_text": "Contact Support",
+        "utility_link_3_url": "",
+        "show_wishlist": true,
+        "wishlist_count": "0",
+        "wishlist_url": "",
+        "promo_appliances_heading": "Parts For Every Panasonic Appliance",
+        "promo_appliances_subtext": "Kitchen, home, heating, personal care and more. Find the right part for any Panasonic appliance.",
+        "promo_appliances_btn_text": "Browse All Appliances",
+        "promo_appliances_btn_url": "",
+        "promo_microwave_heading": "Microwave Parts",
+        "promo_microwave_subtext": "Keep your Panasonic microwave running like new.",
+        "promo_microwave_btn_text": "View All Microwave Parts",
+        "promo_microwave_btn_url": "",
+        "promo_shaver_heading": "Electric Shaver Parts",
+        "promo_shaver_subtext": "Keep your Panasonic shaver running like new.",
+        "promo_shaver_btn_text": "View All Electric Shaver Parts",
+        "promo_shaver_btn_url": ""
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "custom_header_LwfYUf"
+  ]
+}

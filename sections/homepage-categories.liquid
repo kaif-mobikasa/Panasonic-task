@@ -1,0 +1,241 @@
+{% comment %}
+  Homepage Categories Section - Panasonic Shopify OS 2.0 Theme
+  Matches Figma UI specification:
+  - Desktop: 8 appliance cards in a single row with light blue circular backdrop
+  - Mobile: 2-column grid with horizontal cards
+  - Configurable image/icon upload settings for each block
+{% endcomment %}
+
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-categories">
+  <div class="hp-container">
+    <div class="hp-header-row">
+      <div class="hp-header-text">
+        <h2 class="hp-title-lg">
+          {{ section.settings.title_prefix | default: 'Shop Parts By' }}
+          <span class="hp-text-brand">{{ section.settings.title_highlight | default: 'Appliances' }}</span>
+        </h2>
+        {%- if section.settings.subtext != blank -%}
+          <p class="hp-subtext">{{ section.settings.subtext | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="hp-link-more">
+        <span>{{ section.settings.cta_text | default: 'Explore All Appliances' }}</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path><path d="M19.5 12H5"></path></svg>
+      </a>
+    </div>
+
+    <div class="hp-categories-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.url | default: '#' }}" class="hp-cat-card" {{ block.shopify_attributes }}>
+            <div class="hp-cat-media">
+              <span class="hp-cat-blob" aria-hidden="true"></span>
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 240 | image_tag: class: 'hp-cat-img', loading: 'lazy', alt: block.settings.title }}
+              {%- else -%}
+                <span class="hp-cat-placeholder" aria-hidden="true">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="6" width="18" height="13" rx="2"></rect>
+                    <circle cx="12" cy="12.5" r="3"></circle>
+                  </svg>
+                </span>
+              {%- endif -%}
+            </div>
+            <span class="hp-cat-name">{{ block.settings.title | escape }}</span>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {% comment %} Default 8 Figma Categories {% endcomment %}
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <rect x="4.5" y="7.5" width="10.5" height="9" rx="1"></rect>
+                <circle cx="18" cy="9" r="1" fill="currentColor"></circle>
+                <circle cx="18" cy="12" r="1" fill="currentColor"></circle>
+                <line x1="16.5" y1="14.5" x2="19.5" y2="14.5"></line>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Microwave</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <img src="{{ 'appliance-vacuum.jpg' | asset_url }}" alt="Vacuum Cleaner" class="hp-cat-img" loading="lazy">
+          </div>
+          <span class="hp-cat-name">Vacuum Cleaner</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                <line x1="5" y1="9" x2="19" y2="9"></line>
+                <line x1="8" y1="5" x2="8" y2="7"></line>
+                <line x1="8" y1="12" x2="8" y2="15"></line>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Refrigerator</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 3h6v4H9z"></path>
+                <path d="M7 7h10l-1.5 6a3.5 3.5 0 0 1-3.5 3h0a3.5 3.5 0 0 1-3.5-3z"></path>
+                <path d="M10 16v4a2 2 0 0 0 4 0v-4"></path>
+                <circle cx="12" cy="11" r="1" fill="currentColor"></circle>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Shaver</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path>
+                <path d="M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path>
+                <line x1="19" y1="13" x2="21" y2="13"></line>
+                <circle cx="16" cy="15" r="1" fill="currentColor"></circle>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Toaster</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Cameras</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v6a2 2 0 0 0 2 2h0a2 2 0 0 1 2 2v9a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-9a2 2 0 0 1 2-2h0a2 2 0 0 0-2-2V2"></path>
+                <path d="M10 3h4"></path>
+                <path d="M10 5h4"></path>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">Toothbrushes</span>
+        </a>
+
+        <a href="#" class="hp-cat-card">
+          <div class="hp-cat-media">
+            <span class="hp-cat-blob" aria-hidden="true"></span>
+            <span class="hp-cat-placeholder" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <line x1="6" y1="10" x2="18" y2="10"></line>
+                <line x1="6" y1="13" x2="18" y2="13"></line>
+                <line x1="16" y1="15" x2="18" y2="15"></line>
+              </svg>
+            </span>
+          </div>
+          <span class="hp-cat-name">HVAC</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Categories",
+  "class": "section-homepage-categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Shop Parts By",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Appliances",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "Explore All Appliances",
+      "label": "CTA Link Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link Destination"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Appliance Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Microwave",
+          "label": "Appliance Name"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Appliance Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Appliance Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Microwave" } },
+        { "type": "category", "settings": { "title": "Vacuum Cleaner" } },
+        { "type": "category", "settings": { "title": "Refrigerator" } },
+        { "type": "category", "settings": { "title": "Shaver" } },
+        { "type": "category", "settings": { "title": "Toaster" } },
+        { "type": "category", "settings": { "title": "Cameras" } },
+        { "type": "category", "settings": { "title": "Toothbrushes" } },
+        { "type": "category", "settings": { "title": "HVAC" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

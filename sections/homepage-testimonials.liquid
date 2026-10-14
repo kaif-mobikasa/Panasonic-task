@@ -1,0 +1,105 @@
+{% comment %}
+  Homepage Testimonials Section - Panasonic Shopify OS 2.0 Theme
+{% endcomment %}
+
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-testimonials">
+  <div class="hp-container">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <h2 class="hp-title-lg">
+        {{ section.settings.title_prefix | default: 'Trusted by' }}
+        <span class="hp-text-brand">{{ section.settings.title_highlight | default: 'Panasonic Users' }}</span>
+      </h2>
+      <p class="hp-subtext">
+        {{ section.settings.subtext | default: 'Read what real customers say about repairing their appliances with our OEM parts.' }}
+      </p>
+    </div>
+
+    <div class="hp-tst-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="hp-tst-card" {{ block.shopify_attributes }}>
+            <div class="hp-tst-stars">★★★★★</div>
+            <p class="hp-tst-quote">"{{ block.settings.quote | escape }}"</p>
+            <div class="hp-tst-author">{{ block.settings.author | escape }}</div>
+            <div class="hp-tst-verified">✓ Verified Buyer</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="hp-tst-card">
+          <div class="hp-tst-stars">★★★★★</div>
+          <p class="hp-tst-quote">"Exact replacement turntable glass for my 10-year-old Inverter microwave. Delivered in 2 days and fit perfectly!"</p>
+          <div class="hp-tst-author">Robert M. — Chicago, IL</div>
+          <div class="hp-tst-verified">✓ Verified Buyer</div>
+        </div>
+
+        <div class="hp-tst-card">
+          <div class="hp-tst-stars">★★★★★</div>
+          <p class="hp-tst-quote">"Finding genuine Panasonic ARC5 shaver foils used to be difficult. The part here was 100% original and restored my shaver to brand new condition."</p>
+          <div class="hp-tst-author">David K. — Seattle, WA</div>
+          <div class="hp-tst-verified">✓ Verified Buyer</div>
+        </div>
+
+        <div class="hp-tst-card">
+          <div class="hp-tst-stars">★★★★★</div>
+          <p class="hp-tst-quote">"Saved hundreds by replacing the HEPA filter and motor belt myself. Fast shipping and great technical support guidance."</p>
+          <div class="hp-tst-author">Elena R. — Austin, TX</div>
+          <div class="hp-tst-verified">✓ Verified Buyer</div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Testimonials",
+  "class": "section-homepage-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Trusted by",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Panasonic Users",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Read what real customers say about repairing their appliances with our OEM parts.",
+      "label": "Subtext"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "default": "Exact replacement part. Delivered in 2 days and fit perfectly!",
+          "label": "Customer Review Quote"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "default": "Robert M. — Chicago, IL",
+          "label": "Customer Name & Location"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Testimonials"
+    }
+  ]
+}
+{% endschema %}

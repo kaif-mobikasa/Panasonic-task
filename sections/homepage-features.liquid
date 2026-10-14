@@ -1,0 +1,117 @@
+{% comment %}
+  Homepage Features Section - Panasonic Shopify OS 2.0 Theme
+{% endcomment %}
+
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-features">
+  <div class="hp-container">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <h2 class="hp-title-lg">
+        {{ section.settings.title_prefix | default: 'Made For A Simpler' }}
+        <span class="hp-text-brand">{{ section.settings.title_highlight | default: 'Parts Experience' }}</span>
+      </h2>
+      <p class="hp-subtext">
+        {{ section.settings.subtext | default: 'We make finding and ordering genuine Panasonic replacement parts effortless.' }}
+      </p>
+    </div>
+
+    <div class="hp-features-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="hp-feature-card" {{ block.shopify_attributes }}>
+            <span class="hp-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m9 12 2 2 4-4"></path></svg>
+            </span>
+            <div class="hp-feature-title">{{ block.settings.title | escape }}</div>
+            <div class="hp-feature-desc">{{ block.settings.description | escape }}</div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="hp-feature-card">
+          <span class="hp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><circle cx="11.5" cy="14.5" r="2.5"></circle></svg>
+          </span>
+          <div class="hp-feature-title">Diagram Explorer</div>
+          <div class="hp-feature-desc">Interactive schematics let you pinpoint exact internal components on exploded model diagrams.</div>
+        </div>
+
+        <div class="hp-feature-card">
+          <span class="hp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 5.8v5.4c0 4 2.8 7.2 7 8.6 4.2-1.4 7-4.6 7-8.6V5.8z"></path><path d="m9.2 12 2 2 3.6-3.8"></path></svg>
+          </span>
+          <div class="hp-feature-title">Exact Fit Guarantee</div>
+          <div class="hp-feature-desc">100% factory original parts guaranteed to fit your exact model or your money back.</div>
+        </div>
+
+        <div class="hp-feature-card">
+          <span class="hp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 15.5v-3.2a7.4 7.4 0 0 1 14.8 0v3.2"></path><rect x="2.8" y="13.4" width="3.6" height="5.4" rx="1.6"></rect><rect x="17.6" y="13.4" width="3.6" height="5.4" rx="1.6"></rect></svg>
+          </span>
+          <div class="hp-feature-title">Expert Technical Support</div>
+          <div class="hp-feature-desc">Our dedicated parts specialists are available to verify compatibility and guide your repair.</div>
+        </div>
+
+        <div class="hp-feature-card">
+          <span class="hp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.2h9.6v8.6H3z"></path><path d="M12.6 10.4h3.8L19.8 13v2.8h-7.2z"></path><circle cx="6.8" cy="17.8" r="1.7"></circle><circle cx="16.4" cy="17.8" r="1.7"></circle></svg>
+          </span>
+          <div class="hp-feature-title">Fast Direct Dispatch</div>
+          <div class="hp-feature-desc">Orders placed before 4 PM EST ship same-day from our nationwide fulfillment hubs.</div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Features",
+  "class": "section-homepage-features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Made For A Simpler",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Parts Experience",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "We make finding and ordering genuine Panasonic replacement parts effortless.",
+      "label": "Subtext"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Exact Fit Guarantee",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "100% factory original parts guaranteed to fit your exact model or your money back.",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Features"
+    }
+  ]
+}
+{% endschema %}

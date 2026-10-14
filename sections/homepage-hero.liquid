@@ -1,0 +1,494 @@
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage-sections.js' | asset_url }}" defer="defer"></script>
+
+{%- assign slide_blocks = section.blocks | where: 'type', 'slide' -%}
+
+<div class="hp-section hp-hero" data-hero-slider>
+  {% comment %} Right Media Stage (Full-bleed on desktop: touches top, bottom, and right edge) {% endcomment %}
+  <div class="hp-hero-media-wrapper">
+    <div class="hp-hero-stage">
+      {%- if slide_blocks.size > 0 -%}
+        {%- for block in slide_blocks -%}
+          {%- assign slide_index = forloop.index0 -%}
+          <div class="hp-hero-slide{% if forloop.first %} is-active{% endif %}" data-hero-slide="{{ slide_index }}" data-appliance-label="{{ block.settings.label | escape }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {%- assign img_alt = block.settings.image.alt | default: block.settings.label | default: 'Panasonic Genuine OEM Appliance Parts' | escape -%}
+              {%- assign img_loading = 'lazy' -%}
+              {%- if forloop.first -%}
+                {%- assign img_loading = 'eager' -%}
+              {%- endif -%}
+              {{ block.settings.image | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: img_loading, alt: img_alt }}
+            {%- endif -%}
+
+            {% comment %} Hotspot from slide block settings {% endcomment %}
+            {%- if block.settings.hotspot_enable and block.settings.hotspot_title != blank -%}
+              {% render 'hp-hotspot-item',
+                hs_top: block.settings.hotspot_top,
+                hs_left: block.settings.hotspot_left,
+                hs_image: block.settings.hotspot_image,
+                hs_title: block.settings.hotspot_title,
+                hs_desc: block.settings.hotspot_desc,
+                hs_btn_label: block.settings.hotspot_btn_label,
+                hs_btn_url: block.settings.hotspot_btn_url
+              %}
+            {%- endif -%}
+
+            {% comment %} Additional standalone hotspot blocks {% endcomment %}
+            {%- for hs in section.blocks -%}
+              {%- if hs.type == 'hotspot' -%}
+                {%- assign hs_slide_idx = hs.settings.slide | plus: 0 -%}
+                {%- if hs_slide_idx == slide_index -%}
+                  {% render 'hp-hotspot-item',
+                    hs_top: hs.settings.top,
+                    hs_left: hs.settings.left,
+                    hs_image: hs.settings.image,
+                    hs_title: hs.settings.title,
+                    hs_desc: hs.settings.description,
+                    hs_btn_label: hs.settings.button_label,
+                    hs_btn_url: hs.settings.button_url,
+                    shopify_attributes: hs.shopify_attributes
+                  %}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {% comment %} Fallback for index.json prior to adding slide blocks {% endcomment %}
+        <div class="hp-hero-slide is-active" data-hero-slide="0" data-appliance-label="{{ section.settings.label_1 | default: 'Appliances.' | escape }}">
+          {%- if section.settings.image_1 != blank -%}
+            {{ section.settings.image_1 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'eager', alt: 'Panasonic Genuine OEM Appliance Parts' }}
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.image_2 != blank or section.settings.label_2 != blank -%}
+          <div class="hp-hero-slide" data-hero-slide="1" data-appliance-label="{{ section.settings.label_2 | default: 'Microwave.' | escape }}">
+            {%- if section.settings.image_2 != blank -%}
+              {{ section.settings.image_2 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'lazy', alt: 'Panasonic Microwave Parts' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_3 != blank or section.settings.label_3 != blank -%}
+          <div class="hp-hero-slide" data-hero-slide="2" data-appliance-label="{{ section.settings.label_3 | default: 'Shaver.' | escape }}">
+            {%- if section.settings.image_3 != blank -%}
+              {{ section.settings.image_3 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'lazy', alt: 'Panasonic Shaver Parts' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_4 != blank or section.settings.label_4 != blank -%}
+          <div class="hp-hero-slide" data-hero-slide="3" data-appliance-label="{{ section.settings.label_4 | default: 'Camera.' | escape }}">
+            {%- if section.settings.image_4 != blank -%}
+              {{ section.settings.image_4 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'lazy', alt: 'Panasonic Camera Parts' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_5 != blank or section.settings.label_5 != blank -%}
+          <div class="hp-hero-slide" data-hero-slide="4" data-appliance-label="{{ section.settings.label_5 | default: 'Vacuum Cleaner.' | escape }}">
+            {%- if section.settings.image_5 != blank -%}
+              {{ section.settings.image_5 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'lazy', alt: 'Panasonic Vacuum Cleaner Parts' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {% comment %} Left Content Column inside standard Container {% endcomment %}
+  <div class="hp-container hp-hero-container">
+    <div class="hp-hero-content">
+      {%- assign first_slide_label = '' -%}
+      {%- if slide_blocks.size > 0 -%}
+        {%- for block in slide_blocks -%}
+          {%- if block.settings.label != blank and first_slide_label == '' -%}
+            {%- assign first_slide_label = block.settings.label -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- elsif section.settings.label_1 != blank -%}
+        {%- assign first_slide_label = section.settings.label_1 -%}
+      {%- endif -%}
+
+      <h1 class="hp-hero-title">
+        {%- if section.settings.heading_prefix != blank -%}
+          {{ section.settings.heading_prefix }}
+        {%- endif -%}
+        {%- if section.settings.heading_brand != blank -%}
+          <span class="hp-text-brand">{{ section.settings.heading_brand }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading_suffix != blank -%}
+          {{ section.settings.heading_suffix }}
+        {%- endif -%}
+        {%- if first_slide_label != blank -%}
+          <span class="hp-text-brand hp-hero-appliance-target" data-hero-target>{{ first_slide_label }}</span>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="hp-hero-subtext">
+          {{ section.settings.subtext | escape }}
+        </p>
+      {%- endif -%}
+
+      {% comment %} Search Capsule {% endcomment %}
+      <form action="{{ routes.search_url }}" method="get" role="search" class="hp-hero-search-capsule">
+        <input type="search" name="q" class="hp-hero-search-input" value="{{ search.terms | escape }}"
+          {% if section.settings.search_placeholder != blank %}placeholder="{{ section.settings.search_placeholder | escape }}"{% endif %}
+          aria-label="Search by model or part number" autocomplete="off">
+        <button type="submit" class="hp-hero-search-btn">
+          <svg class="hp-hero-search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          {%- if section.settings.search_button_text != blank -%}
+            <span>{{ section.settings.search_button_text }}</span>
+          {%- endif -%}
+        </button>
+      </form>
+
+      {% comment %} Model Number Link {% endcomment %}
+      {%- if section.settings.model_link_text != blank -%}
+        <div class="hp-hero-link-wrapper">
+          <a href="{{ section.settings.model_link_url | default: '#' }}" class="hp-hero-model-link">
+            {{ section.settings.model_link_text | escape }}
+          </a>
+        </div>
+      {%- endif -%}
+
+      {% comment %} Slider Navigation Controls {% endcomment %}
+      <div class="hp-hero-slider-ctrls">
+        <button type="button" class="hp-hero-arrow hp-hero-arrow-prev" data-hero-prev aria-label="Previous Hero Slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div class="hp-hero-dots">
+          {%- if slide_blocks.size > 0 -%}
+            {%- for block in slide_blocks -%}
+              <button type="button" class="hp-hero-dot{% if forloop.first %} is-active{% endif %}" data-hero-dot="{{ forloop.index0 }}"
+                aria-label="Slide {{ forloop.index }}{% if block.settings.label != blank %}: {{ block.settings.label | escape }}{% endif %}"></button>
+            {%- endfor -%}
+          {%- else -%}
+            <button type="button" class="hp-hero-dot is-active" data-hero-dot="0" aria-label="Slide 1: All Appliances"></button>
+            {%- if section.settings.label_2 != blank or section.settings.image_2 != blank -%}
+              <button type="button" class="hp-hero-dot" data-hero-dot="1" aria-label="Slide 2: Microwave"></button>
+            {%- endif -%}
+            {%- if section.settings.label_3 != blank or section.settings.image_3 != blank -%}
+              <button type="button" class="hp-hero-dot" data-hero-dot="2" aria-label="Slide 3: Shaver"></button>
+            {%- endif -%}
+            {%- if section.settings.label_4 != blank or section.settings.image_4 != blank -%}
+              <button type="button" class="hp-hero-dot" data-hero-dot="3" aria-label="Slide 4: Camera"></button>
+            {%- endif -%}
+            {%- if section.settings.label_5 != blank or section.settings.image_5 != blank -%}
+              <button type="button" class="hp-hero-dot" data-hero-dot="4" aria-label="Slide 5: Vacuum Cleaner"></button>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        <button type="button" class="hp-hero-arrow hp-hero-arrow-next" data-hero-next aria-label="Next Hero Slide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Hero",
+  "class": "section-homepage-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading & Text"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "default": "Find The Exact",
+      "label": "Heading Prefix"
+    },
+    {
+      "type": "text",
+      "id": "heading_brand",
+      "default": "Panasonic",
+      "label": "Heading Highlighted Brand"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "default": "Part For Your",
+      "label": "Heading Suffix"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Over 500,000 genuine parts for Panasonic microwaves, refrigerators, TV, dishwashers, and more.",
+      "label": "Subtext"
+    },
+    {
+      "type": "header",
+      "content": "Search Bar"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "default": "e.g. LRSOS2706S",
+      "label": "Search Placeholder"
+    },
+    {
+      "type": "text",
+      "id": "search_button_text",
+      "default": "SEARCH",
+      "label": "Search Button Text"
+    },
+    {
+      "type": "text",
+      "id": "model_link_text",
+      "default": "Where's my model number?",
+      "label": "Model Link Text"
+    },
+    {
+      "type": "url",
+      "id": "model_link_url",
+      "label": "Model Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Fallback Slide Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Slide 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "label_1",
+      "default": "Appliances.",
+      "label": "Slide 1 Target Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Slide 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "default": "Microwave.",
+      "label": "Slide 2 Target Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Slide 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "label_3",
+      "default": "Shaver.",
+      "label": "Slide 3 Target Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Slide 4 Image"
+    },
+    {
+      "type": "text",
+      "id": "label_4",
+      "default": "Camera.",
+      "label": "Slide 4 Target Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Slide 5 Image"
+    },
+    {
+      "type": "text",
+      "id": "label_5",
+      "default": "Vacuum Cleaner.",
+      "label": "Slide 5 Target Label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "default": "Appliances.",
+          "label": "Target Appliance Label (e.g. Appliances., Microwave.)"
+        },
+        {
+          "type": "header",
+          "content": "Hotspot (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "hotspot_enable",
+          "default": false,
+          "label": "Enable Hotspot on this slide"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_top",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50,
+          "label": "Vertical Position (Top %)"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_left",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50,
+          "label": "Horizontal Position (Left %)"
+        },
+        {
+          "type": "image_picker",
+          "id": "hotspot_image",
+          "label": "Hotspot Product Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "hotspot_title",
+          "label": "Hotspot Product Title"
+        },
+        {
+          "type": "text",
+          "id": "hotspot_desc",
+          "label": "Hotspot Category / Description"
+        },
+        {
+          "type": "text",
+          "id": "hotspot_btn_label",
+          "default": "View Parts",
+          "label": "Hotspot Button Label"
+        },
+        {
+          "type": "url",
+          "id": "hotspot_btn_url",
+          "label": "Hotspot Button Link"
+        }
+      ]
+    },
+    {
+      "type": "hotspot",
+      "name": "Additional Hotspot",
+      "settings": [
+        {
+          "type": "text",
+          "id": "slide",
+          "label": "Belongs to Slide Index (0, 1, 2, 3, 4)",
+          "default": "0"
+        },
+        {
+          "type": "range",
+          "id": "top",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50,
+          "label": "Vertical Position (Top %)"
+        },
+        {
+          "type": "range",
+          "id": "left",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "default": 50,
+          "label": "Horizontal Position (Left %)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Thumbnail"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description / Category"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "View Parts",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Hero",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "label": "Appliances."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "Microwave."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "Shaver."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "Camera."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "label": "Vacuum Cleaner."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

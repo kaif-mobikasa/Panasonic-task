@@ -1,0 +1,301 @@
+/**
+ * Homepage Parts Experience Slider Section Styles
+ * Matches Figma Desktop and Mobile UI specifications
+ */
+
+.hp-parts-slider {
+  padding: 64px 0 72px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hp-parts-slider .hp-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Mobile Section Header (Centered on Mobile) */
+.hp-ps-mobile-header {
+  display: none;
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.hp-ps-mobile-title {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.hp-ps-mobile-title .hp-text-brand {
+  color: #0041c0;
+  font-weight: 700;
+}
+
+/* Main Grid Layout */
+.hp-ps-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* Left: 3D Stack Deck */
+.hp-ps-deck-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hp-ps-deck {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 520px;
+}
+
+.hp-ps-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #eceff3;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition:
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms ease,
+    box-shadow 420ms ease;
+  will-change: transform, opacity;
+}
+
+.hp-ps-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Desktop Pagination Dots Under Deck */
+.hp-ps-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.hp-ps-dot {
+  display: inline-block;
+  height: 9px;
+  width: 9px;
+  border-radius: 999px;
+  background: #d4d9e2;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 380ms ease;
+}
+
+.hp-ps-dot.is-active {
+  width: 32px;
+  background: #111827;
+}
+
+/* Mobile Controls Bar (Arrows + Dots) */
+.hp-ps-mobile-controls {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 440px;
+  margin: 24px auto 0;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+/* Right: Content Column */
+.hp-ps-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hp-ps-eyebrow {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a5567;
+  letter-spacing: -0.01em;
+}
+
+.hp-ps-title {
+  margin: 14px 0 0;
+  font-size: clamp(34px, 4.2vw, 48px);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #111827;
+  transition: opacity 240ms ease;
+}
+
+.hp-ps-body {
+  margin: 16px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #4a5567;
+  max-width: 44ch;
+  transition: opacity 240ms ease;
+}
+
+.hp-ps-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 28px;
+  margin-top: 26px;
+  border-radius: 999px;
+  background: #0041c0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  transition:
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.hp-ps-cta:hover {
+  background: #00309a;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.hp-ps-cta svg {
+  flex: none;
+  transition: transform 200ms ease;
+}
+
+.hp-ps-cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* Navigation Arrow Buttons */
+.hp-ps-arrows {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hp-ps-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d5d9e2;
+  color: #111827;
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hp-ps-arrow:hover {
+  background: #0041c0;
+  border-color: #0041c0;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 65, 192, 0.2);
+}
+
+.hp-ps-arrow svg {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Tablet Responsive (Matches Figma Screenshot 2)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 989px) {
+  .hp-parts-slider {
+    padding: 36px 0 44px;
+  }
+
+  .hp-ps-mobile-header {
+    display: block;
+  }
+
+  .hp-ps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hp-ps-deck-wrap {
+    max-width: 400px;
+  }
+
+  .hp-ps-deck {
+    max-height: 380px;
+  }
+
+  .hp-ps-dots--desktop {
+    display: none;
+  }
+
+  .hp-ps-mobile-controls {
+    display: flex;
+  }
+
+  .hp-ps-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hp-ps-eyebrow {
+    display: none;
+  }
+
+  .hp-ps-title {
+    font-size: 26px;
+    margin-top: 10px;
+  }
+
+  .hp-ps-body {
+    font-size: 15px;
+    margin-top: 12px;
+    max-width: 90%;
+  }
+
+  .hp-ps-cta {
+    height: 44px;
+    font-size: 15px;
+    padding: 0 24px;
+    margin-top: 20px;
+  }
+
+  .hp-ps-arrows--desktop {
+    display: none;
+  }
+}

@@ -1,0 +1,776 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "homepage-hero",
+      "blocks": {
+        "slide_fNpM8H": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/home-img.webp",
+            "label": "Appliances.",
+            "hotspot_enable": true,
+            "hotspot_top": 50,
+            "hotspot_left": 50,
+            "hotspot_image": "shopify://shop_images/cleaner.png",
+            "hotspot_title": "Cleaner",
+            "hotspot_desc": "Cleaner",
+            "hotspot_btn_label": "View Parts",
+            "hotspot_btn_url": "shopify://products/copy-1"
+          }
+        },
+        "slide_VEC6hg": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Oven.webp",
+            "label": "Appliances.",
+            "hotspot_enable": true,
+            "hotspot_top": 50,
+            "hotspot_left": 50,
+            "hotspot_image": "shopify://shop_images/trimmer.png",
+            "hotspot_title": "Oven",
+            "hotspot_desc": "Oven",
+            "hotspot_btn_label": "View Parts",
+            "hotspot_btn_url": ""
+          }
+        },
+        "hotspot_PLnELw": {
+          "type": "hotspot",
+          "settings": {
+            "slide": "0",
+            "top": 50,
+            "left": 64,
+            "image": "shopify://shop_images/fridge.png",
+            "title": "Fridge",
+            "description": "Fridge",
+            "button_label": "View Parts",
+            "button_url": ""
+          }
+        },
+        "hotspot_TCL3R4": {
+          "type": "hotspot",
+          "settings": {
+            "slide": "0",
+            "top": 67,
+            "left": 59,
+            "image": "shopify://shop_images/microwave.png",
+            "title": "Oven",
+            "description": "Oven",
+            "button_label": "View Parts",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_fNpM8H",
+        "slide_VEC6hg",
+        "hotspot_PLnELw",
+        "hotspot_TCL3R4"
+      ],
+      "settings": {
+        "heading_prefix": "Find The Exact",
+        "heading_brand": "Panasonic",
+        "heading_suffix": "Part For Your",
+        "subtext": "Over 500,000 genuine parts for Panasonic microwaves, refrigerators, TV, dishwashers, and more.",
+        "search_placeholder": "e.g. LRSOS2706S",
+        "search_button_text": "SEARCH",
+        "model_link_text": "Where's my model number?",
+        "model_link_url": "",
+        "image_1": "shopify://shop_images/home-img.webp",
+        "label_1": "Appliances.",
+        "image_2": "shopify://shop_images/microwave.webp",
+        "label_2": "Microwave.",
+        "image_3": "shopify://shop_images/Trimmer.webp",
+        "label_3": "Shaver.",
+        "image_4": "shopify://shop_images/camera.webp",
+        "label_4": "Camera.",
+        "image_5": "shopify://shop_images/vaccum-cleaner.webp",
+        "label_5": "Vacuum Cleaner."
+      }
+    },
+    "trust_bar": {
+      "type": "homepage-trust-bar",
+      "blocks": {
+        "trust_item_1": {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg class=\"hp-trust-svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                        <path d=\"M3 18v-6a9 9 0 0 1 18 0v6\"></path>\n                        <path d=\"M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z\"></path>\n                      </svg>",
+            "title": "Brand Warranty",
+            "subtitle": "guaranteed to fit",
+            "link": ""
+          }
+        },
+        "trust_item_2": {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg class=\"hp-trust-svg\" width=\"24\" height=\"24\" viewbox=\"-0.55 1.3 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                        <path d=\"M2.6 6.8h10.2v9.1H2.6z\"></path>\n                        <path d=\"M12.8 10.2h3.9l3.6 2.8v2.9h-7.5z\"></path>\n                        <circle cx=\"6.6\" cy=\"17.9\" r=\"1.9\"></circle>\n                        <circle cx=\"16.6\" cy=\"17.9\" r=\"1.9\"></circle>\n                      </svg>",
+            "title": "Fast Shipping",
+            "subtitle": "on stocked parts",
+            "link": ""
+          }
+        },
+        "trust_item_3": {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg class=\"hp-trust-svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                        <rect x=\"4.5\" y=\"10.5\" width=\"15\" height=\"10\" rx=\"2\"></rect>\n                        <path d=\"M8 10.5V7.6a4 4 0 0 1 8 0v2.9\"></path>\n                        <path d=\"M12 14.6v2.2\"></path>\n                      </svg>",
+            "title": "Secure Payment",
+            "subtitle": "encrypted checkout",
+            "link": ""
+          }
+        },
+        "trust_item_4": {
+          "type": "trust_item",
+          "settings": {
+            "svg_code": "<svg class=\"hp-trust-svg\" width=\"24\" height=\"24\" viewbox=\"0 2.28 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                        <path d=\"M4.4 11.2A7.6 7.6 0 0 1 19.2 12.9\"></path>\n                        <path d=\"M4.2 6.2v5h5\"></path>\n                        <path d=\"M19.6 17.7a7.6 7.6 0 0 1-14.6-1.4\"></path>\n                        <path d=\"M19.8 21.4v-5h-5\"></path>\n                      </svg>",
+            "title": "Easy Returns",
+            "subtitle": "30-day return policy",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "trust_item_1",
+        "trust_item_2",
+        "trust_item_3",
+        "trust_item_4"
+      ],
+      "settings": {
+        "show_dividers": true
+      }
+    },
+    "categories": {
+      "type": "homepage-categories",
+      "blocks": {
+        "category_F7rVaT": {
+          "type": "category",
+          "settings": {
+            "title": "HVAC",
+            "url": "",
+            "image": "shopify://shop_images/hvac.png"
+          }
+        },
+        "category_MKFwfR": {
+          "type": "category",
+          "settings": {
+            "title": "Toothbrushes",
+            "url": "",
+            "image": "shopify://shop_images/Tooth-paste.png"
+          }
+        },
+        "category_Ba4Ncd": {
+          "type": "category",
+          "settings": {
+            "title": "Cameras",
+            "url": "",
+            "image": "shopify://shop_images/camera.png"
+          }
+        },
+        "category_iny6ew": {
+          "type": "category",
+          "settings": {
+            "title": "Toaster",
+            "url": "",
+            "image": "shopify://shop_images/Toaster.png"
+          }
+        },
+        "category_68Mq4h": {
+          "type": "category",
+          "settings": {
+            "title": "Shaver",
+            "url": "",
+            "image": "shopify://shop_images/trimmer.png"
+          }
+        },
+        "category_C9pXQn": {
+          "type": "category",
+          "settings": {
+            "title": "Refrigerator",
+            "url": "",
+            "image": "shopify://shop_images/fridge.png"
+          }
+        },
+        "category_WnUwDT": {
+          "type": "category",
+          "settings": {
+            "title": "Microwave",
+            "url": "",
+            "image": "shopify://shop_images/microwave.png"
+          }
+        },
+        "category_UREafX": {
+          "type": "category",
+          "settings": {
+            "title": "Vaccum Cleaner",
+            "url": "",
+            "image": "shopify://shop_images/cleaner.png"
+          }
+        }
+      },
+      "block_order": [
+        "category_F7rVaT",
+        "category_MKFwfR",
+        "category_Ba4Ncd",
+        "category_iny6ew",
+        "category_68Mq4h",
+        "category_C9pXQn",
+        "category_WnUwDT",
+        "category_UREafX"
+      ],
+      "settings": {
+        "title_prefix": "Shop Parts By",
+        "title_highlight": "Appliances",
+        "subtext": "Find genuine replacement parts and accessories for all your Panasonic home, kitchen, and personal care appliances.",
+        "cta_text": "Explore All Appliances",
+        "cta_link": ""
+      }
+    },
+    "parts_by_type": {
+      "type": "homepage-parts-by-type",
+      "blocks": {
+        "part_type_XfyhWG": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/buytype1.webp",
+            "url": ""
+          }
+        },
+        "part_type_8eE4fd": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/buytype6.webp",
+            "url": ""
+          }
+        },
+        "part_type_gMnHgt": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/bytype2.webp",
+            "url": ""
+          }
+        },
+        "part_type_GenthF": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/buytype4.webp",
+            "url": ""
+          }
+        },
+        "part_type_DNnptQ": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/buytype5.webp",
+            "url": ""
+          }
+        },
+        "part_type_3Fn9MJ": {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new.",
+            "image": "shopify://shop_images/bytype3.webp",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "part_type_XfyhWG",
+        "part_type_8eE4fd",
+        "part_type_gMnHgt",
+        "part_type_GenthF",
+        "part_type_DNnptQ",
+        "part_type_3Fn9MJ"
+      ],
+      "settings": {
+        "title_prefix": "Shop Panasonic Parts",
+        "title_highlight": "By Type",
+        "show_subtext": false,
+        "subtext": "Browse by part category to quickly replace worn foils, trays, filters, and attachments.",
+        "cta_text": "Explore All Types",
+        "cta_link": ""
+      }
+    },
+    "how_it_works": {
+      "type": "homepage-how-it-works",
+      "blocks": {
+        "step_L7LYXd": {
+          "type": "step",
+          "settings": {
+            "step_number": "01",
+            "title": "Identify Your Product",
+            "description": "Locate your appliance’s model number on its product label to ensure you find the right replacement parts.",
+            "image": "shopify://shop_images/3steps.webp",
+            "btn_text": "Find my model number",
+            "btn_url": ""
+          }
+        },
+        "step_DXcQ3f": {
+          "type": "step",
+          "settings": {
+            "step_number": "2",
+            "title": "Identify Your Product",
+            "description": "Locate your appliance’s model number on its product label to ensure you find the right replacement parts.",
+            "image": "shopify://shop_images/3steps.webp",
+            "btn_text": "Find my model number",
+            "btn_url": ""
+          }
+        },
+        "step_AUDrHH": {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "title": "Identify Your Product",
+            "description": "Locate your appliance’s model number on its product label to ensure you find the right replacement parts.",
+            "image": "shopify://shop_images/3steps2.webp",
+            "btn_text": "Find my model number",
+            "btn_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_L7LYXd",
+        "step_DXcQ3f",
+        "step_AUDrHH"
+      ],
+      "settings": {
+        "title_prefix": "Get The Right Part In",
+        "title_highlight": "3 Steps",
+        "show_subtext": false,
+        "subtext": "Fast, simple, and guaranteed fit for your Panasonic model."
+      }
+    },
+    "featured_products": {
+      "type": "homepage-featured-products",
+      "settings": {
+        "title_prefix": "Popular Parts",
+        "title_highlight": "& Accessories",
+        "show_subtext": false,
+        "subtext": "Top-selling official Panasonic replacement components and maintenance parts.",
+        "cta_text": "View All Parts",
+        "cta_link": ""
+      }
+    },
+    "shop_by_space": {
+      "type": "homepage-shop-by-space",
+      "blocks": {
+        "hotspot_TBNnBL": {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Kitchen",
+            "title": "Shaver",
+            "description": "Foils, blades and blade sets.",
+            "thumbnail": "shopify://shop_images/new4.webp",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Shaver Parts",
+            "side_description": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more.",
+            "button_label": "Shop Shaver Parts",
+            "button_link": "",
+            "sublink_1_text": "Inner Blades",
+            "sublink_1_url": "",
+            "sublink_2_text": "Outer Foils",
+            "sublink_2_url": "",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_3_url": "",
+            "sublink_4_text": "Cleaning Accessories",
+            "sublink_4_url": ""
+          }
+        },
+        "space_tab_Yqkfmd": {
+          "type": "space_tab",
+          "settings": {
+            "title": "Personal Care",
+            "image": "shopify://shop_images/new-img_e31b418e-8c06-4112-8bbc-301c8f6f4d6c.avif"
+          }
+        },
+        "space_tab_x6hqif": {
+          "type": "space_tab",
+          "settings": {
+            "title": "Kitchen",
+            "image": "shopify://shop_images/care.webp"
+          }
+        },
+        "hotspot_DkUHrH": {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Shaver",
+            "description": "Foils, blades and blade sets.",
+            "thumbnail": "shopify://shop_images/new-2.webp",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Shaver Parts",
+            "side_description": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more.",
+            "side_image": "shopify://shop_images/detail1.webp",
+            "button_label": "Shop Shaver Parts",
+            "button_link": "",
+            "sublink_1_text": "Inner Blades",
+            "sublink_1_url": "",
+            "sublink_2_text": "Outer Foils",
+            "sublink_2_url": "",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_3_url": "",
+            "sublink_4_text": "Cleaning Accessories",
+            "sublink_4_url": ""
+          }
+        },
+        "hotspot_qYKzzj": {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Trimmer",
+            "description": "Filters, nozzles and parts.",
+            "thumbnail": "shopify://shop_images/new-3.webp",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Trimmer",
+            "side_description": "Keep every reading accurate with genuine Panasonic replacement parts. Find arm cuffs, air tubes, power adapters and more.",
+            "side_image": "shopify://shop_images/detail2.webp",
+            "button_label": "Shop Shaver Parts",
+            "button_link": "",
+            "sublink_1_text": "Inner Blades",
+            "sublink_1_url": "",
+            "sublink_2_text": "Outer Foils",
+            "sublink_2_url": "",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_3_url": "",
+            "sublink_4_text": "Cleaning Accessories",
+            "sublink_4_url": ""
+          }
+        },
+        "hotspot_fWdthL": {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Shaver",
+            "description": "Cuffs, tubes and adapters.",
+            "thumbnail": "shopify://shop_images/new4.webp",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Shaver Parts",
+            "side_description": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more.",
+            "side_image": "shopify://shop_images/detail3.webp",
+            "button_label": "Shop Shaver Parts",
+            "button_link": "",
+            "sublink_1_text": "Inner Blades",
+            "sublink_1_url": "",
+            "sublink_2_text": "Outer Foils",
+            "sublink_2_url": "",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_3_url": "",
+            "sublink_4_text": "Cleaning Accessories",
+            "sublink_4_url": ""
+          }
+        },
+        "hotspot_89QgGU": {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Shaver",
+            "description": "Foils, blades and blade sets.",
+            "thumbnail": "shopify://shop_images/new5.webp",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Shaver Parts",
+            "side_description": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more.",
+            "side_image": "shopify://shop_images/detail1.webp",
+            "button_label": "Shop Shaver Parts",
+            "button_link": "",
+            "sublink_1_text": "Inner Blades",
+            "sublink_1_url": "",
+            "sublink_2_text": "Outer Foils",
+            "sublink_2_url": "",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_3_url": "",
+            "sublink_4_text": "Cleaning Accessories",
+            "sublink_4_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_TBNnBL",
+        "space_tab_Yqkfmd",
+        "space_tab_x6hqif",
+        "hotspot_DkUHrH",
+        "hotspot_qYKzzj",
+        "hotspot_fWdthL",
+        "hotspot_89QgGU"
+      ],
+      "settings": {
+        "title_prefix": "Shop By",
+        "title_highlight": "Space",
+        "subtext": "Explore genuine Panasonic replacement parts tailored for every room in your home.",
+        "image": "shopify://shop_images/new-img.avif"
+      }
+    },
+    "error_code_lookup": {
+      "type": "homepage-error-code-lookup",
+      "settings": {
+        "title_prefix": "Error Code",
+        "title_highlight": "Lookup",
+        "link_text": "Explore All Error Codes",
+        "link_url": ""
+      }
+    },
+    "homepage_parts_slider_M649HV": {
+      "type": "homepage-parts-slider",
+      "blocks": {
+        "slide_fVzqPp": {
+          "type": "slide",
+          "settings": {
+            "title": "Genuine Panasonic Parts",
+            "body": "Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.",
+            "button_label": "Shop Original Parts",
+            "button_link": ""
+          }
+        },
+        "slide_tXh47y": {
+          "type": "slide",
+          "settings": {
+            "title": "Find The Right Part",
+            "body": "Find the right replacement using your appliance model number or part number.",
+            "button_label": "Find Your Part",
+            "button_link": ""
+          }
+        },
+        "slide_9Jh9yr": {
+          "type": "slide",
+          "settings": {
+            "title": "Parts Ready To Ship",
+            "body": "Find stocked replacement parts and get your order moving without unnecessary delays.",
+            "button_label": "Shop In-Stock Parts",
+            "button_link": ""
+          }
+        },
+        "slide_aUGyCe": {
+          "type": "slide",
+          "settings": {
+            "title": "Know It Fits Before You Buy",
+            "body": "Confirm that a part is compatible with your Panasonic appliance before completing your purchase.",
+            "button_label": "Check Compatibility",
+            "button_link": ""
+          }
+        },
+        "slide_6hbJ3Q": {
+          "type": "slide",
+          "settings": {
+            "title": "Easy From Search To Return",
+            "body": "From finding your part to getting it delivered, shop with straightforward ordering and easy returns.",
+            "button_label": "Explore Parts",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_fVzqPp",
+        "slide_tXh47y",
+        "slide_9Jh9yr",
+        "slide_aUGyCe",
+        "slide_6hbJ3Q"
+      ],
+      "name": "Parts Experience Slider",
+      "settings": {
+        "eyebrow": "Made For A Simpler Parts Experience",
+        "title_prefix": "Made For A Simpler",
+        "title_highlight": "Parts Experience"
+      }
+    },
+    "newsletter": {
+      "type": "homepage-newsletter",
+      "settings": {
+        "heading": "Get 10% off on your first order!",
+        "subtext": "Original Panasonic parts and accessories, with 10% off your first purchase.",
+        "btn_text": "Order Now",
+        "btn_link": ""
+      }
+    },
+    "testimonials": {
+      "type": "homepage-testimonials",
+      "settings": {
+        "title_prefix": "Trusted by",
+        "title_highlight": "Panasonic Users",
+        "subtext": "Read what real customers say about repairing their appliances with our OEM parts."
+      }
+    },
+    "homepage_stats_bar_eCwU6R": {
+      "type": "homepage-stats-bar",
+      "blocks": {
+        "stat_VAgmRC": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "custom_svg": "",
+            "title": "10,000+",
+            "subtitle": "Happy Customers",
+            "link": ""
+          }
+        },
+        "stat_qyXdqG": {
+          "type": "stat",
+          "settings": {
+            "icon": "genuine",
+            "custom_svg": "",
+            "title": "Genuine",
+            "subtitle": "Panasonic Parts",
+            "link": ""
+          }
+        },
+        "stat_wfX6iB": {
+          "type": "stat",
+          "settings": {
+            "icon": "truck",
+            "custom_svg": "",
+            "title": "Reliable",
+            "subtitle": "& On-Time Delivery",
+            "link": ""
+          }
+        },
+        "stat_ykYX7j": {
+          "type": "stat",
+          "settings": {
+            "icon": "support",
+            "custom_svg": "",
+            "title": "Dedicated",
+            "subtitle": "Customer Support",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "stat_VAgmRC",
+        "stat_qyXdqG",
+        "stat_wfX6iB",
+        "stat_ykYX7j"
+      ],
+      "name": "Homepage Stats Bar",
+      "settings": {
+        "section_bg": "rgba(0,0,0,0)",
+        "card_bg": "#edf1fb",
+        "icon_bg": "#dce7fb",
+        "icon_color": "#0041c0",
+        "title_color": "#111827",
+        "subtitle_color": "#5a6478",
+        "show_dividers": true,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "faq": {
+      "type": "homepage-faq",
+      "blocks": {
+        "faq_item_Ct8Vey": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": true
+          }
+        },
+        "faq_item_mCJzyP": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_yeFeHT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_pXCAak": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_qYCJQ9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_QjctWD": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_Ct8Vey",
+        "faq_item_mCJzyP",
+        "faq_item_yeFeHT",
+        "faq_item_pXCAak",
+        "faq_item_qYCJQ9",
+        "faq_item_QjctWD"
+      ],
+      "settings": {
+        "bg_image": "shopify://shop_images/faq-img.webp",
+        "title_prefix": "Frequently Asked",
+        "title_highlight": "Questions",
+        "subtext": "Have questions about finding or installing parts? Here are answers to common questions.",
+        "support_card_enable": true,
+        "support_title": "Still have a question?",
+        "support_text": "Our support team is here to help you find the right part or answer any questions.",
+        "support_btn_text": "Contact Support",
+        "support_btn_url": "",
+        "support_hours": "Mon – Fri, 9 AM – 6 PM ET | 1-800-211-7262",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust_bar",
+    "categories",
+    "parts_by_type",
+    "how_it_works",
+    "featured_products",
+    "shop_by_space",
+    "error_code_lookup",
+    "homepage_parts_slider_M649HV",
+    "newsletter",
+    "testimonials",
+    "homepage_stats_bar_eCwU6R",
+    "faq"
+  ]
+}

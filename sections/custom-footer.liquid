@@ -1,0 +1,414 @@
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-footer.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #hp-footer-{{ section.id }} .hp-footer-logo {
+    width: {{ section.settings.logo_width | default: 236 }}px;
+  }
+</style>
+
+<div class="hp-footer-wrapper" id="hp-footer-{{ section.id }}" data-section-id="{{ section.id }}">
+  <footer class="hp-footer">
+    <div class="hp-footer-container">
+      <div class="hp-footer-grid">
+        <!-- Brand & Contact Info Column -->
+        <div class="hp-footer-brand">
+          <div class="hp-footer-logo-wrap">
+            <a href="{{ routes.root_url }}" class="hp-footer-logo-link" aria-label="{{ shop.name }}">
+              {%- if section.settings.logo != blank -%}
+                {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+                {{ section.settings.logo | image_url: width: 500 | image_tag: class: 'hp-footer-logo', alt: logo_alt, loading: 'lazy' }}
+              {%- else -%}
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVoAAACACAYAAABKg6GLAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOmQzNjA4N2NiLTA2MGItNDBlYi1iOGZlLWY2MGU3NDNmY2U3NQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNozZIhp9jkv2txeNceZMinygAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6OWNmMDM4YzItMTVlZC00NTcxLTkzYzUtYWJhMWUwYzMxODBibHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaC+UfyQXB5ewWjUKEwLSZVYAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIAwYzGV/NROylbr4wnDNyHBP3E5+MOikKhSMpEQnVlWtpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2j5xwdCxFzvECMNvAUvWb35AAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggWDAZA//yeUd+KCaKGBPuPLctmb6aptxZqnhrqVOD0b5kbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTpkMzYwODdjYi0wNjBiLTQwZWItYjhmZS1mNjBlNzQzZmNlNzUvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDo5ZjBhNDJjMy1iMDU0LTQ2NDctOTBmNS1jOGY2NDVlZTU2YTFyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggDBjMZX81E7KVuvjCcM3IcE/cTn4w6KQqFIykRCdWVa2iY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIFJsnhne/Rgu8XBRJPEvVJGYtp5slO58PJp0vlVlrWxTomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYINdWsaEnfmnJwGiIVqeGxsX0SZ+NswG5aUR3/Xt5226YdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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"
+                  alt="Panasonic, powered by encompass — A Parts Town unlimited Company"
+                  class="hp-footer-logo"
+                  width="236"
+                  height="64"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </a>
+          </div>
+
+          <!-- Contact items -->
+          <div class="hp-footer-contacts">
+            {%- if section.settings.address != blank -%}
+              <a
+                {% if section.settings.address_url != blank %}href="{{ section.settings.address_url }}" target="_blank" rel="noopener noreferrer"{% else %}href="#"{% endif %}
+                class="hp-footer-contact-item"
+              >
+                <span class="hp-footer-contact-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"></path>
+                    <circle cx="12" cy="10" r="2.4"></circle>
+                  </svg>
+                </span>
+                <span class="hp-footer-contact-text">
+                  {{ section.settings.address | newline_to_br }}
+                </span>
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.phone != blank -%}
+              <a
+                href="{% if section.settings.phone_url != blank %}{{ section.settings.phone_url }}{% else %}tel:{{ section.settings.phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}{% endif %}"
+                class="hp-footer-contact-item"
+              >
+                <span class="hp-footer-contact-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5.2 3.8h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6v3.2a1.7 1.7 0 0 1-1.8 1.7A15.5 15.5 0 0 1 3.5 5.6a1.7 1.7 0 0 1 1.7-1.8Z"></path>
+                  </svg>
+                </span>
+                <span class="hp-footer-contact-text">{{ section.settings.phone }}</span>
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.email != blank -%}
+              <a
+                href="{% if section.settings.email_url != blank %}{{ section.settings.email_url }}{% else %}mailto:{{ section.settings.email }}{% endif %}"
+                class="hp-footer-contact-item"
+              >
+                <span class="hp-footer-contact-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5.5" width="18" height="13" rx="2"></rect>
+                    <path d="m3.6 6.6 8.4 6.4 8.4-6.4"></path>
+                  </svg>
+                </span>
+                <span class="hp-footer-contact-text">{{ section.settings.email }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Column 1: All Parts -->
+        <div class="hp-footer-col">
+          <button type="button" class="hp-footer-acc-btn" aria-expanded="false" aria-controls="hp-footer-menu-1-{{ section.id }}">
+            <span class="hp-footer-col-title">{{ section.settings.menu_1_title | default: 'All Parts' }}</span>
+            <span class="hp-footer-acc-chev" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="hp-footer-links-wrap" id="hp-footer-menu-1-{{ section.id }}">
+            <div class="hp-footer-links-inner">
+              <ul class="hp-footer-links" role="list">
+                {%- if section.settings.menu_1 != blank and linklists[section.settings.menu_1].links.size > 0 -%}
+                  {%- for link in linklists[section.settings.menu_1].links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="hp-footer-link">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  <li><a href="#" class="hp-footer-link">Kitchen</a></li>
+                  <li><a href="#" class="hp-footer-link">Personal Care</a></li>
+                  <li><a href="#" class="hp-footer-link">Telephone &amp; Smart Home</a></li>
+                  <li><a href="#" class="hp-footer-link">Audio &amp; Entertainment</a></li>
+                  <li><a href="#" class="hp-footer-link">Home</a></li>
+                  <li><a href="#" class="hp-footer-link">Heating &amp; Cooling</a></li>
+                  <li><a href="#" class="hp-footer-link">TV &amp; AV</a></li>
+                  <li><a href="#" class="hp-footer-link">Cameras &amp; Camcorders</a></li>
+                  <li><a href="#" class="hp-footer-link">Batteries &amp; Power</a></li>
+                  <li><a href="#" class="hp-footer-link">Other Products</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Information -->
+        <div class="hp-footer-col">
+          <button type="button" class="hp-footer-acc-btn" aria-expanded="false" aria-controls="hp-footer-menu-2-{{ section.id }}">
+            <span class="hp-footer-col-title">{{ section.settings.menu_2_title | default: 'Information' }}</span>
+            <span class="hp-footer-acc-chev" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="hp-footer-links-wrap" id="hp-footer-menu-2-{{ section.id }}">
+            <div class="hp-footer-links-inner">
+              <ul class="hp-footer-links" role="list">
+                {%- if section.settings.menu_2 != blank and linklists[section.settings.menu_2].links.size > 0 -%}
+                  {%- for link in linklists[section.settings.menu_2].links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="hp-footer-link">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  <li><a href="#" class="hp-footer-link">About Us</a></li>
+                  <li><a href="#" class="hp-footer-link">Cancel/Return A Part</a></li>
+                  <li><a href="#" class="hp-footer-link">Contact Us</a></li>
+                  <li><a href="#" class="hp-footer-link">My Account</a></li>
+                  <li><a href="#" class="hp-footer-link">Sitemap</a></li>
+                  <li><a href="#" class="hp-footer-link">Blog</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Legal -->
+        <div class="hp-footer-col">
+          <button type="button" class="hp-footer-acc-btn" aria-expanded="false" aria-controls="hp-footer-menu-3-{{ section.id }}">
+            <span class="hp-footer-col-title">{{ section.settings.menu_3_title | default: 'Legal' }}</span>
+            <span class="hp-footer-acc-chev" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="hp-footer-links-wrap" id="hp-footer-menu-3-{{ section.id }}">
+            <div class="hp-footer-links-inner">
+              <ul class="hp-footer-links" role="list">
+                {%- if section.settings.menu_3 != blank and linklists[section.settings.menu_3].links.size > 0 -%}
+                  {%- for link in linklists[section.settings.menu_3].links -%}
+                    <li>
+                      <a href="{{ link.url }}" class="hp-footer-link">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  <li><a href="#" class="hp-footer-link">Cookie Policy</a></li>
+                  <li><a href="#" class="hp-footer-link">Cookies Settings</a></li>
+                  <li><a href="#" class="hp-footer-link">Privacy Policy</a></li>
+                  <li><a href="#" class="hp-footer-link">Privacy Request</a></li>
+                  <li><a href="#" class="hp-footer-link">Shipping &amp; Delivery Policy</a></li>
+                  <li><a href="#" class="hp-footer-link">Returns &amp; Exchanges Policy</a></li>
+                  <li><a href="#" class="hp-footer-link">Terms &amp; Conditions</a></li>
+                  <li><a href="#" class="hp-footer-link">Terms Of Use</a></li>
+                {%- endif -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Bar -->
+      {%- if section.settings.copyright_text != blank -%}
+        <div class="hp-footer-bottom">
+          <span class="hp-footer-copy">
+            {{ section.settings.copyright_text }}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+  </footer>
+
+  <!-- Globe & Slogan Horizon Band -->
+  {%- if section.settings.show_globe -%}
+    <div class="hp-footer-globe-band">
+      <div class="hp-footer-globe-fx" aria-hidden="true">
+        <canvas class="hp-footer-globe-canvas" id="hp-footer-globe-{{ section.id }}" aria-hidden="true"></canvas>
+        <svg class="hp-footer-globe-svg" viewBox="0 0 2103 748" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+          <defs>
+            <radialGradient id="fgGlow-{{ section.id }}">
+              <stop offset="0" stop-color="#FFFFFF" stop-opacity="1"></stop>
+              <stop offset="0.35" stop-color="#BFDAFF" stop-opacity="0.8"></stop>
+              <stop offset="1" stop-color="#6FA8F0" stop-opacity="0"></stop>
+            </radialGradient>
+          </defs>
+          <!-- Orbit 1 -->
+          <path d="M -40 700 C 600 520, 1500 520, 2143 700" fill="none" stroke="#6FA8F0" stroke-width="1.44" stroke-opacity="0.22"></path>
+          <path d="M -40 700 C 600 520, 1500 520, 2143 700" fill="none" stroke="#4F93EE" stroke-width="2.4" stroke-opacity="0.6" stroke-linecap="round" stroke-dasharray="180 2300">
+            <animate attributeName="stroke-dashoffset" values="2480; 0" dur="7s" repeatCount="indefinite"></animate>
+          </path>
+          <circle r="16" fill="url(#fgGlow-{{ section.id }})">
+            <animateMotion path="M -40 700 C 600 520, 1500 520, 2143 700" dur="7s" repeatCount="indefinite" begin="0s"></animateMotion>
+          </circle>
+
+          <!-- Orbit 2 -->
+          <path d="M -40 640 C 700 560, 1400 700, 2143 612" fill="none" stroke="#6FA8F0" stroke-width="1.2" stroke-opacity="0.22"></path>
+          <path d="M -40 640 C 700 560, 1400 700, 2143 612" fill="none" stroke="#4F93EE" stroke-width="2" stroke-opacity="0.6" stroke-linecap="round" stroke-dasharray="180 2300">
+            <animate attributeName="stroke-dashoffset" values="2480; 0" dur="10s" repeatCount="indefinite"></animate>
+          </path>
+          <circle r="16" fill="url(#fgGlow-{{ section.id }})">
+            <animateMotion path="M -40 640 C 700 560, 1400 700, 2143 612" dur="10s" repeatCount="indefinite" begin="-1.3s"></animateMotion>
+          </circle>
+
+          <!-- Orbit 3 -->
+          <path d="M 160 748 C 680 598, 1420 598, 1940 748" fill="none" stroke="#6FA8F0" stroke-width="1.32" stroke-opacity="0.22"></path>
+          <path d="M 160 748 C 680 598, 1420 598, 1940 748" fill="none" stroke="#4F93EE" stroke-width="2.2" stroke-opacity="0.6" stroke-linecap="round" stroke-dasharray="180 2300">
+            <animate attributeName="stroke-dashoffset" values="2480; 0" dur="8.5s" repeatCount="indefinite"></animate>
+          </path>
+          <circle r="16" fill="url(#fgGlow-{{ section.id }})">
+            <animateMotion path="M 160 748 C 680 598, 1420 598, 1940 748" dur="8.5s" repeatCount="indefinite" begin="-2.6s"></animateMotion>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="hp-footer-slogan-wrap">
+        <span class="hp-footer-slogan">
+          {{ section.settings.slogan_left | default: 'A Better' }}
+          {% if section.settings.slogan_left_highlight != blank %}
+            <span class="hp-text-brand">{{ section.settings.slogan_left_highlight }}</span>
+          {% endif %}
+        </span>
+        <span class="hp-footer-slogan">
+          {{ section.settings.slogan_right | default: 'A Better' }}
+          {% if section.settings.slogan_right_highlight != blank %}
+            <span class="hp-text-brand">{{ section.settings.slogan_right_highlight }}</span>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "tag": "section",
+  "class": "section-custom-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand & Contact"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 150,
+      "max": 350,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 236
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "775 Tipton Industrial Dr Suite F\nLawrenceville, GA 30046"
+    },
+    {
+      "type": "url",
+      "id": "address_url",
+      "label": "Address Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "1-800-211-7262"
+    },
+    {
+      "type": "text",
+      "id": "phone_url",
+      "label": "Phone Link",
+      "default": "tel:18002117262"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "support@panasonicparts.com"
+    },
+    {
+      "type": "text",
+      "id": "email_url",
+      "label": "Email Link",
+      "default": "mailto:support@panasonicparts.com"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Column 1"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Column 1 Heading",
+      "default": "All Parts"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Column 1 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Column 2"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_title",
+      "label": "Column 2 Heading",
+      "default": "Information"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Column 2 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Column 3"
+    },
+    {
+      "type": "text",
+      "id": "menu_3_title",
+      "label": "Column 3 Heading",
+      "default": "Legal"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_3",
+      "label": "Column 3 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Copyright Bar"
+    },
+    {
+      "type": "textarea",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "Copyright © 2026 Encompass Supply Chain Solutions, Inc. All Rights Reserved."
+    },
+    {
+      "type": "header",
+      "content": "Globe & Slogan Horizon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_globe",
+      "label": "Show Globe & Slogan Band",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "slogan_left",
+      "label": "Left Slogan Text",
+      "default": "A Better"
+    },
+    {
+      "type": "text",
+      "id": "slogan_left_highlight",
+      "label": "Left Slogan Highlighted Word",
+      "default": "Life,"
+    },
+    {
+      "type": "text",
+      "id": "slogan_right",
+      "label": "Right Slogan Text",
+      "default": "A Better"
+    },
+    {
+      "type": "text",
+      "id": "slogan_right_highlight",
+      "label": "Right Slogan Highlighted Word",
+      "default": "World!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}

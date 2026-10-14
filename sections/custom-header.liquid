@@ -1,0 +1,802 @@
+{% comment %}
+  Panasonic Custom Header Section
+  Shopify Online Store 2.0 Section
+{% endcomment %}
+
+{{ 'custom-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-header.js' | asset_url }}" defer="defer"></script>
+
+<custom-header class="custom-header-section" id="Header-{{ section.id }}">
+  <!-- Utility Bar -->
+  {%- if section.settings.show_utility_bar -%}
+    <div class="ch-utility-bar">
+      <div class="ch-utility-inner">
+        {%- if section.settings.utility_menu != blank and linklists[section.settings.utility_menu].links.size > 0 -%}
+          {%- for link in linklists[section.settings.utility_menu].links -%}
+            <a href="{{ link.url }}" class="ch-util-link">{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- if section.settings.utility_link_1_text != blank -%}
+            <a href="{{ section.settings.utility_link_1_url | default: '#' }}" class="ch-util-link">
+              {{- section.settings.utility_link_1_text -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.utility_link_2_text != blank -%}
+            <a href="{{ section.settings.utility_link_2_url | default: '#' }}" class="ch-util-link">
+              {{- section.settings.utility_link_2_text -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.utility_link_3_text != blank -%}
+            <a href="{{ section.settings.utility_link_3_url | default: '#' }}" class="ch-util-link">
+              {{- section.settings.utility_link_3_text -}}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Main Desktop Header (isDesk: >=1180px) -->
+  <header class="ch-header-main">
+    <div class="ch-desktop-only ch-desktop-inner">
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="ch-logo-link" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+          {{ section.settings.logo | image_url: width: 600 | image_tag: class: 'header__heading-logo ch-logo-img', alt: logo_alt }}
+        {%- else -%}
+          <span class="ch-logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="ch-desktop-nav" aria-label="Main Navigation">
+        <a href="{{ routes.root_url }}" aria-label="Home" class="ch-nav-home-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.83 2.6a1.25 1.25 0 0 0-1.66 0L3.4 9.52A1.25 1.25 0 0 0 3 10.45v8.3A1.25 1.25 0 0 0 4.25 20h4.1A1.15 1.15 0 0 0 9.5 18.85V14.6h5v4.25A1.15 1.15 0 0 0 15.65 20h4.1A1.25 1.25 0 0 0 21 18.75v-8.3a1.25 1.25 0 0 0-.4-.93z"></path></svg>
+        </a>
+
+        {%- assign main_menu = linklists[section.settings.menu] -%}
+        {%- if section.settings.menu != blank and main_menu.links.size > 0 -%}
+          {%- for link in main_menu.links -%}
+            {%- if forloop.first or link.title == 'Appliances' -%}
+              <div class="ch-nav-item-wrap" data-mega-trigger-wrap>
+                <a href="{{ link.url }}" data-mega-trigger aria-expanded="false" class="ch-nav-link">
+                  <span class="ch-nav-link-text">{{ link.title | escape }}</span>
+                  <span class="ch-nav-link-caret">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg>
+                  </span>
+                </a>
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="ch-nav-link">
+                <span class="ch-nav-link-text">{{ link.title | escape }}</span>
+                {%- if link.links.size > 0 -%}
+                  <span class="ch-nav-link-caret"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg></span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <!-- Default Reference Menu Items -->
+          <div class="ch-nav-item-wrap" data-mega-trigger-wrap>
+            <a href="#" data-mega-trigger aria-expanded="false" class="ch-nav-link">
+              <span class="ch-nav-link-text">Appliances</span>
+              <span class="ch-nav-link-caret"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg></span>
+            </a>
+          </div>
+          <a href="#" class="ch-nav-link">
+            <span class="ch-nav-link-text">Consumer electronics</span>
+            <span class="ch-nav-link-caret"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg></span>
+          </a>
+          <a href="#" class="ch-nav-link">
+            <span class="ch-nav-link-text">Accessories</span>
+            <span class="ch-nav-link-caret"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg></span>
+          </a>
+          <a href="#" class="ch-nav-link">
+            <span class="ch-nav-link-text">Error codes</span>
+            <span class="ch-nav-link-caret"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8.5 7 7 7-7"></path></svg></span>
+          </a>
+        {%- endif -%}
+      </nav>
+
+      <!-- Search, Wishlist, Account, Cart Controls -->
+      <div class="ch-actions-wrap">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="ch-search-input-wrap">
+          <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search by model number or part number" aria-label="Search">
+          <button type="submit" aria-label="Submit Search" class="ch-search-submit-btn">
+            <svg width="19" height="19" viewBox="-0.9 -0.8 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="10.4" cy="10.4" r="6.9"></circle><path d="m15.6 15.6 3.1 3.1"></path></svg>
+          </button>
+        </form>
+
+        {%- if section.settings.show_wishlist -%}
+          <a href="{{ section.settings.wishlist_url | default: '#' }}" aria-label="Wishlist" class="ch-action-btn ch-action-btn--wishlist">
+            <svg width="23" height="23" viewBox="-2 -2.6 28 28" fill="none" stroke="currentColor" stroke-width="2.33" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            {%- if section.settings.wishlist_count != blank -%}
+              <span class="ch-badge ch-badge--wishlist">
+                {{- section.settings.wishlist_count -}}
+              </span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+
+        <a href="{{ routes.account_url }}" aria-label="Account" class="ch-action-btn ch-action-btn--account">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.8" r="3.9"></circle><path d="M5.6 19.2c1.3-2.6 3.6-4.1 6.4-4.1s5.1 1.5 6.4 4.1"></path></svg>
+        </a>
+
+        <a href="{{ routes.cart_url }}" aria-label="Cart" class="ch-action-btn ch-action-btn--cart">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 9.4h14.8a1.8 1.8 0 0 1 1.75 2.22l-1.62 6.8A2.2 2.2 0 0 1 17.38 20H6.62a2.2 2.2 0 0 1-2.13-1.58l-1.62-6.8A1.8 1.8 0 0 1 4.6 9.4z"></path><path d="M12 9.4V4.6"></path></svg>
+          <span class="ch-badge ch-badge--cart">
+            {{ cart.item_count }}
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop Mega Menu Panel -->
+    <div data-mega-panel>
+      <div data-mm="panel" class="ch-mm-card">
+        <!-- Left Category Column -->
+        <div class="ch-mm-cat-col">
+          <a href="#" data-cat-item="kitchen" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="1.6"></rect><path d="M6.5 10.5h6.5v4.5H6.5z"></path><path d="M16.5 10.5v0M16.5 13.2v0M16.5 15.9v0"></path></svg></span>
+            <span class="ch-mm-cat-name">Kitchen</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="personal" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5l-.6 6h-3.8z"></path><rect x="10" y="9.5" width="4" height="11" rx="1.4"></rect></svg></span>
+            <span class="ch-mm-cat-name">Personal Care</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="telephone" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M10 5.5h4"></path><path d="M10 10h.01M12 10h.01M14 10h.01M10 12.5h.01M12 12.5h.01M14 12.5h.01M10 15h.01M12 15h.01M14 15h.01"></path><path d="M11 18.5h2"></path></svg></span>
+            <span class="ch-mm-cat-name">Telephone &amp; Smart Home</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="audio" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="2.5" width="13" height="19" rx="1.8"></rect><circle cx="12" cy="14.5" r="3.4"></circle><circle cx="12" cy="7.2" r="1.2"></circle></svg></span>
+            <span class="ch-mm-cat-name">Audio &amp; Entertainment</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="home" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="1.6"></rect><circle cx="12" cy="13" r="4"></circle><path d="M4.5 8.5h15"></path></svg></span>
+            <span class="ch-mm-cat-name">Home</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="heating" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="7" rx="1.6"></rect><path d="M3.5 12.5h17"></path></svg></span>
+            <span class="ch-mm-cat-name">Heating &amp; Cooling</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="tv" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="1.6"></rect><path d="M8.5 20.5h7"></path></svg></span>
+            <span class="ch-mm-cat-name">TV &amp; AV</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="cameras" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12.5" rx="2"></rect><circle cx="12" cy="13.2" r="3.4"></circle><path d="M8 7l1.4-2.5h5.2L16 7"></path></svg></span>
+            <span class="ch-mm-cat-name">Cameras &amp; Camcorders</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="batteries" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="15" height="8" rx="1.6"></rect><path d="M20.5 11.2v3"></path><path d="M6 11.2v3"></path></svg></span>
+            <span class="ch-mm-cat-name">Batteries &amp; Power</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-cat-item="other" data-mm="item" class="ch-mm-cat-item">
+            <span class="ch-mm-cat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="1.4"></circle><circle cx="12" cy="12" r="1.4"></circle><circle cx="18" cy="12" r="1.4"></circle></svg></span>
+            <span class="ch-mm-cat-name">Other Products</span>
+            <span class="ch-mm-cat-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+        </div>
+
+        <!-- Right Content & Subcategories Column -->
+        <div class="ch-mm-content-col">
+          <!-- Main Default Promo View -->
+          <div data-promo-view="main" data-mm="promo" class="ch-mm-promo-view">
+            <div class="ch-mm-promo-inner">
+              <div class="ch-mm-hero-card">
+                <div class="ch-mm-hero-content">
+                  <div class="ch-mm-eyebrow">Genuine Panasonic Parts</div>
+                  {%- if section.settings.promo_appliances_heading != blank -%}
+                    <h2 class="ch-mm-title">
+                      {{- section.settings.promo_appliances_heading -}}
+                    </h2>
+                  {%- endif -%}
+                  {%- if section.settings.promo_appliances_subtext != blank -%}
+                    <p class="ch-mm-subtext">
+                      {{- section.settings.promo_appliances_subtext -}}
+                    </p>
+                  {%- endif -%}
+                  {%- if section.settings.promo_appliances_btn_text != blank -%}
+                    <a href="{{ section.settings.promo_appliances_btn_url | default: '#' }}" class="ch-mm-btn">
+                      {{- section.settings.promo_appliances_btn_text -}}
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg>
+                    </a>
+                  {%- endif -%}
+                </div>
+                <div class="ch-mm-hero-img-wrap">
+                  {%- if section.settings.promo_appliances_image != blank -%}
+                    {%- assign promo_img_alt = section.settings.promo_appliances_heading | default: 'Kitchen appliance line-up' | escape -%}
+                    {{ section.settings.promo_appliances_image | image_url: width: 800 | image_tag: class: 'ch-mm-hero-img', alt: promo_img_alt }}
+                  {%- else -%}
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&auto=format&fit=crop" alt="Kitchen appliance line-up" class="ch-mm-hero-img">
+                  {%- endif -%}
+                </div>
+              </div>
+
+              <!-- Feature Badges -->
+              <div class="ch-mm-badges">
+                <div class="ch-mm-badge-item">
+                  <span class="ch-mm-badge-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 5.8v5.4c0 4 2.8 7.2 7 8.6 4.2-1.4 7-4.6 7-8.6V5.8z"></path><path d="m9.2 12 2 2 3.6-3.8"></path></svg></span>
+                  <span class="ch-mm-badge-texts">
+                    <span class="ch-mm-badge-title">Genuine Panasonic Parts</span>
+                    <span class="ch-mm-badge-desc">Quality you can trust</span>
+                  </span>
+                </div>
+                <div class="ch-mm-badge-item ch-mm-badge-item--border">
+                  <span class="ch-mm-badge-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.2h9.6v8.6H3z"></path><path d="M12.6 10.4h3.8L19.8 13v2.8h-7.2z"></path><circle cx="6.8" cy="17.8" r="1.7"></circle><circle cx="16.4" cy="17.8" r="1.7"></circle></svg></span>
+                  <span class="ch-mm-badge-texts">
+                    <span class="ch-mm-badge-title">Fast &amp; Reliable Shipping</span>
+                    <span class="ch-mm-badge-desc">Get your parts, faster</span>
+                  </span>
+                </div>
+                <div class="ch-mm-badge-item ch-mm-badge-item--border">
+                  <span class="ch-mm-badge-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 15.5v-3.2a7.4 7.4 0 0 1 14.8 0v3.2"></path><rect x="2.8" y="13.4" width="3.6" height="5.4" rx="1.6"></rect><rect x="17.6" y="13.4" width="3.6" height="5.4" rx="1.6"></rect><path d="M19.4 18.8a3.4 3.4 0 0 1-3.4 2.6h-1.6"></path></svg></span>
+                  <span class="ch-mm-badge-texts">
+                    <span class="ch-mm-badge-title">Need Help?</span>
+                    <span class="ch-mm-badge-desc">Our team is here for you</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kitchen Category View -->
+          <div data-cat-view="kitchen" class="ch-mm-cat-view">
+            <div class="ch-mm-subcat-nav">
+              <div class="ch-mm-col-heading">Kitchen</div>
+              <a href="#" data-subcat-item="microwave" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Microwave</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Toaster</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Cooker</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Coffee Maker</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Juicer</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+            </div>
+
+            <!-- Microwave Details Sub-Panel -->
+            <div data-subcat-view="microwave" class="ch-mm-subcat-view">
+              <div class="ch-mm-leaf-col">
+                <div class="ch-mm-col-subheading">Microwave</div>
+                <div class="ch-mm-leaf-links">
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Models</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Parts &amp; Components</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Accessories</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Promo Card for Microwave -->
+              <div class="ch-mm-side-promo">
+                <div class="ch-mm-side-promo-img-wrap">
+                  {%- if section.settings.promo_microwave_image != blank -%}
+                    {%- assign micro_img_alt = section.settings.promo_microwave_heading | default: 'Microwave' | escape -%}
+                    {{ section.settings.promo_microwave_image | image_url: width: 600 | image_tag: class: 'ch-mm-side-promo-img', alt: micro_img_alt }}
+                  {%- else -%}
+                    <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop" alt="Microwave" class="ch-mm-side-promo-img">
+                  {%- endif -%}
+                </div>
+                {%- if section.settings.promo_microwave_heading != blank -%}
+                  <div class="ch-mm-side-promo-title">
+                    {{- section.settings.promo_microwave_heading -}}
+                  </div>
+                {%- endif -%}
+                {%- if section.settings.promo_microwave_subtext != blank -%}
+                  <p class="ch-mm-side-promo-desc">
+                    {{- section.settings.promo_microwave_subtext -}}
+                  </p>
+                {%- endif -%}
+                {%- if section.settings.promo_microwave_btn_text != blank -%}
+                  <a href="{{ section.settings.promo_microwave_btn_url | default: '#' }}" class="ch-mm-side-promo-btn">
+                    {{- section.settings.promo_microwave_btn_text -}}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg>
+                  </a>
+                {%- endif -%}
+                <div class="ch-mm-side-support-links">
+                  <a href="#" class="ch-mm-support-link">
+                    <span class="ch-mm-support-icon"><svg width="22" height="22" viewBox="0 -1.2 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5.5h6a2.5 2.5 0 0 1 2.5 2.5v11a2 2 0 0 0-2-2h-6.5z"></path><path d="M20.5 5.5h-6A2.5 2.5 0 0 0 12 8v11a2 2 0 0 1 2-2h6.5z"></path></svg></span>
+                    <span class="ch-mm-support-text">Find Your Model Number</span>
+                    <span class="ch-mm-support-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                  <a href="#" class="ch-mm-support-link">
+                    <span class="ch-mm-support-icon"><svg width="22" height="22" viewBox="0 -1.2 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M9.8 9.6a2.3 2.3 0 1 1 3.4 2.2c-.8.5-1.2 1-1.2 1.9"></path><path d="M12 16.6v0"></path></svg></span>
+                    <span class="ch-mm-support-text">Need Help? Contact Support</span>
+                    <span class="ch-mm-support-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Care Category View -->
+          <div data-cat-view="personal" class="ch-mm-cat-view">
+            <div class="ch-mm-subcat-nav">
+              <div class="ch-mm-col-heading">Personal Care</div>
+              <a href="#" data-subcat-item="shaver" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Electric Shavers</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Beard Trimmers</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Hair Dryers</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Electric Toothbrushes</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+              <a href="#" class="ch-mm-subcat-link">
+                <span class="ch-mm-subcat-text">Body Groomers</span>
+                <span class="ch-mm-subcat-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+              </a>
+            </div>
+
+            <!-- Electric Shaver Details Sub-Panel -->
+            <div data-subcat-view="shaver" class="ch-mm-subcat-view">
+              <div class="ch-mm-leaf-col">
+                <div class="ch-mm-col-subheading">Electric Shavers</div>
+                <div class="ch-mm-leaf-links">
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Models</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Parts &amp; Components</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                  <a href="#" class="ch-mm-leaf-link">
+                    <span class="ch-mm-leaf-link-text">Accessories</span>
+                    <span class="ch-mm-leaf-link-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg></span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Promo Card for Electric Shaver -->
+              <div class="ch-mm-side-promo">
+                <div class="ch-mm-side-promo-img-wrap">
+                  {%- if section.settings.promo_shaver_image != blank -%}
+                    {%- assign shaver_img_alt = section.settings.promo_shaver_heading | default: 'Electric shaver' | escape -%}
+                    {{ section.settings.promo_shaver_image | image_url: width: 600 | image_tag: class: 'ch-mm-side-promo-img', alt: shaver_img_alt }}
+                  {%- else -%}
+                    <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop" alt="Electric shaver" class="ch-mm-side-promo-img">
+                  {%- endif -%}
+                </div>
+                {%- if section.settings.promo_shaver_heading != blank -%}
+                  <div class="ch-mm-side-promo-title">
+                    {{- section.settings.promo_shaver_heading -}}
+                  </div>
+                {%- endif -%}
+                {%- if section.settings.promo_shaver_subtext != blank -%}
+                  <p class="ch-mm-side-promo-desc">
+                    {{- section.settings.promo_shaver_subtext -}}
+                  </p>
+                {%- endif -%}
+                {%- if section.settings.promo_shaver_btn_text != blank -%}
+                  <a href="{{ section.settings.promo_shaver_btn_url | default: '#' }}" class="ch-mm-side-promo-btn">
+                    {{- section.settings.promo_shaver_btn_text -}}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile / Tablet Navigation Header (isSmall: <1180px) -->
+  <div class="ch-mobile-only ch-mobile-bar">
+    <button data-mobile-nav-toggle aria-label="Toggle navigation menu" aria-expanded="false" class="ch-mobile-icon-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path class="burg-line-top" d="M3.5 7h17"></path>
+        <path class="burg-line-mid" d="M3.5 12h17"></path>
+        <path class="burg-line-bot" d="M3.5 17h17"></path>
+      </svg>
+    </button>
+
+    <a href="{{ routes.root_url }}" class="ch-mobile-logo-wrap" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {%- assign logo_alt = section.settings.logo.alt | default: shop.name | escape -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: class: 'header__heading-logo ch-mobile-logo-img', alt: logo_alt }}
+      {%- else -%}
+        <span class="ch-mobile-logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <button data-mobile-search-toggle aria-label="Search" class="ch-mobile-icon-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.4" cy="10.4" r="6.9"></circle><path d="m15.6 15.6 3.1 3.1"></path></svg>
+    </button>
+
+    {%- if section.settings.show_wishlist -%}
+      <a href="{{ section.settings.wishlist_url | default: '#' }}" aria-label="Wishlist" class="ch-mobile-icon-btn">
+        <svg width="24" height="24" viewBox="-2 -2.6 28 28" fill="none" stroke="currentColor" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        {%- if section.settings.wishlist_count != blank -%}
+          <span class="ch-mobile-badge">
+            {{- section.settings.wishlist_count -}}
+          </span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+
+    <a href="{{ routes.cart_url }}" aria-label="Cart" class="ch-mobile-icon-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 9.4h14.8a1.8 1.8 0 0 1 1.75 2.22l-1.62 6.8A2.2 2.2 0 0 1 17.38 20H6.62a2.2 2.2 0 0 1-2.13-1.58l-1.62-6.8A1.8 1.8 0 0 1 4.6 9.4z"></path><path d="M12 9.4V4.6"></path></svg>
+      <span class="ch-mobile-badge">
+        {{ cart.item_count }}
+      </span>
+    </a>
+  </div>
+
+  <!-- Mobile Search Slide-down Bar -->
+  <div data-mobile-search-bar class="ch-mobile-search-dropdown">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="ch-mobile-search-form">
+      <input data-mobile-search-input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search by model or part number" class="ch-mobile-search-input">
+      <button type="submit" aria-label="Search" class="ch-mobile-search-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="10.4" cy="10.4" r="6.9"></circle><path d="m15.6 15.6 3.1 3.1"></path></svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- Mobile Drawer Drill-Down Navigation -->
+  <div data-mobile-nav-drawer class="ch-mobile-drawer">
+    <div class="ch-mobile-drawer-body">
+      <!-- Search Input inside Mobile Nav -->
+      <form action="{{ routes.search_url }}" method="get" role="search" class="ch-mobile-drawer-search">
+        <input type="search" name="q" placeholder="Search by model or part number" class="ch-mobile-drawer-search-input">
+        <button type="submit" aria-label="Search" class="ch-mobile-drawer-search-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="10.4" cy="10.4" r="6.9"></circle><path d="m15.6 15.6 3.1 3.1"></path></svg>
+        </button>
+      </form>
+
+      <div class="ch-mobile-levels-wrap">
+        <!-- Level 0: Main Menu Categories -->
+        <div data-mobile-lvl="0">
+          <a href="#" data-mobile-drill="1" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Appliances</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Consumer electronics</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Accessories</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Error codes</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+        </div>
+
+        <!-- Level 1: Appliances Subcategories -->
+        <div data-mobile-lvl="1">
+          <button type="button" data-mobile-back="0" class="ch-mobile-back-btn">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="l" d="m15 5-7 7 7 7"></path><path data-shaft="l" d="M4.5 12H19"></path></svg></span>
+            <span>All Appliances</span>
+          </button>
+
+          <a href="#" data-mobile-drill="2" data-mobile-cat="kitchen" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="1.6"></rect><path d="M6.5 10.5h6.5v4.5H6.5z"></path><path d="M16.5 10.5v0M16.5 13.2v0M16.5 15.9v0"></path></svg></span>
+            <span class="ch-mobile-link-text">Kitchen</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" data-mobile-drill="2" data-mobile-cat="personal" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5l-.6 6h-3.8z"></path><rect x="10" y="9.5" width="4" height="11" rx="1.4"></rect></svg></span>
+            <span class="ch-mobile-link-text">Personal Care</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M10 5.5h4"></path><path d="M10 10h.01M12 10h.01M14 10h.01M10 12.5h.01M12 12.5h.01M14 12.5h.01M10 15h.01M12 15h.01M14 15h.01"></path><path d="M11 18.5h2"></path></svg></span>
+            <span class="ch-mobile-link-text">Telephone &amp; Smart Home</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="2.5" width="13" height="19" rx="1.8"></rect><circle cx="12" cy="14.5" r="3.4"></circle><circle cx="12" cy="7.2" r="1.2"></circle></svg></span>
+            <span class="ch-mobile-link-text">Audio &amp; Entertainment</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="1.6"></rect><circle cx="12" cy="13" r="4"></circle><path d="M4.5 8.5h15"></path></svg></span>
+            <span class="ch-mobile-link-text">Home</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="7" rx="1.6"></rect><path d="M3.5 12.5h17"></path></svg></span>
+            <span class="ch-mobile-link-text">Heating &amp; Cooling</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="1.6"></rect><path d="M8.5 20.5h7"></path></svg></span>
+            <span class="ch-mobile-link-text">TV &amp; AV</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+        </div>
+
+        <!-- Level 2: Kitchen / Subcategory Level -->
+        <div data-mobile-lvl="2">
+          <div class="ch-mobile-level-header">
+            <button type="button" data-mobile-back="1" class="ch-mobile-back-btn">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="l" d="m15 5-7 7 7 7"></path><path data-shaft="l" d="M4.5 12H19"></path></svg></span>
+              <span>Kitchen</span>
+            </button>
+            <a href="#" class="ch-mobile-view-all-link">
+              <span>View All</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path><path d="M19.5 12H5"></path></svg>
+            </a>
+          </div>
+
+          <a href="#" data-mobile-drill="3" data-mobile-subcat="microwave" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Microwave</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Toaster</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Cooker</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+        </div>
+
+        <!-- Level 3: Microwave Level -->
+        <div data-mobile-lvl="3">
+          <div class="ch-mobile-level-header">
+            <button type="button" data-mobile-back="2" class="ch-mobile-back-btn">
+              <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="l" d="m15 5-7 7 7 7"></path><path data-shaft="l" d="M4.5 12H19"></path></svg></span>
+              <span>Microwave</span>
+            </button>
+            <a href="#" class="ch-mobile-view-all-link">
+              <span>View All</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"></path><path d="M19.5 12H5"></path></svg>
+            </a>
+          </div>
+
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Models</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Parts &amp; Components</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+          <a href="#" class="ch-mobile-link-item">
+            <span class="ch-mobile-link-text">Accessories</span>
+            <span class="ch-mobile-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</custom-header>
+
+{% schema %}
+{
+  "name": "Custom Header",
+  "class": "section-custom-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Desktop & Mobile Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 350,
+      "step": 10,
+      "default": 180,
+      "unit": "px",
+      "label": "Custom Logo Width"
+    },
+    {
+      "type": "header",
+      "content": "Navigation & Utility Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Main Navigation Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_utility_bar",
+      "default": true,
+      "label": "Show Top Utility Bar"
+    },
+    {
+      "type": "link_list",
+      "id": "utility_menu",
+      "label": "Utility Bar Navigation Menu (Optional override)"
+    },
+    {
+      "type": "text",
+      "id": "utility_link_1_text",
+      "default": "Find My Model & Serial Number",
+      "label": "Utility Link 1 Text"
+    },
+    {
+      "type": "url",
+      "id": "utility_link_1_url",
+      "label": "Utility Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "utility_link_2_text",
+      "default": "Track Order",
+      "label": "Utility Link 2 Text"
+    },
+    {
+      "type": "url",
+      "id": "utility_link_2_url",
+      "label": "Utility Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "utility_link_3_text",
+      "default": "Contact Support",
+      "label": "Utility Link 3 Text"
+    },
+    {
+      "type": "url",
+      "id": "utility_link_3_url",
+      "label": "Utility Link 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Wishlist Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "default": true,
+      "label": "Show Wishlist Icon Button"
+    },
+    {
+      "type": "text",
+      "id": "wishlist_count",
+      "default": "0",
+      "label": "Wishlist Initial Count"
+    },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Wishlist Page Link"
+    },
+    {
+      "type": "header",
+      "content": "Mega Menu Promos & Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_appliances_image",
+      "label": "Main Promo Card Image"
+    },
+    {
+      "type": "text",
+      "id": "promo_appliances_heading",
+      "default": "Parts For Every Panasonic Appliance",
+      "label": "Main Promo Heading"
+    },
+    {
+      "type": "text",
+      "id": "promo_appliances_subtext",
+      "default": "Kitchen, home, heating, personal care and more. Find the right part for any Panasonic appliance.",
+      "label": "Main Promo Subtext"
+    },
+    {
+      "type": "text",
+      "id": "promo_appliances_btn_text",
+      "default": "Browse All Appliances",
+      "label": "Main Promo Button Label"
+    },
+    {
+      "type": "url",
+      "id": "promo_appliances_btn_url",
+      "label": "Main Promo Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_microwave_image",
+      "label": "Microwave Promo Card Image"
+    },
+    {
+      "type": "text",
+      "id": "promo_microwave_heading",
+      "default": "Microwave Parts",
+      "label": "Microwave Promo Heading"
+    },
+    {
+      "type": "text",
+      "id": "promo_microwave_subtext",
+      "default": "Keep your Panasonic microwave running like new.",
+      "label": "Microwave Promo Subtext"
+    },
+    {
+      "type": "text",
+      "id": "promo_microwave_btn_text",
+      "default": "View All Microwave Parts",
+      "label": "Microwave Promo Button Label"
+    },
+    {
+      "type": "url",
+      "id": "promo_microwave_btn_url",
+      "label": "Microwave Promo Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_shaver_image",
+      "label": "Electric Shaver Promo Card Image"
+    },
+    {
+      "type": "text",
+      "id": "promo_shaver_heading",
+      "default": "Electric Shaver Parts",
+      "label": "Electric Shaver Promo Heading"
+    },
+    {
+      "type": "text",
+      "id": "promo_shaver_subtext",
+      "default": "Keep your Panasonic shaver running like new.",
+      "label": "Electric Shaver Promo Subtext"
+    },
+    {
+      "type": "text",
+      "id": "promo_shaver_btn_text",
+      "default": "View All Electric Shaver Parts",
+      "label": "Electric Shaver Promo Button Label"
+    },
+    {
+      "type": "url",
+      "id": "promo_shaver_btn_url",
+      "label": "Electric Shaver Promo Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header"
+    }
+  ]
+}
+{% endschema %}

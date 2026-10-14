@@ -1,0 +1,326 @@
+{% comment %}
+  Homepage FAQ Section - Panasonic Shopify OS 2.0 Theme
+  Matches Figma UI specifications for Desktop & Mobile
+{% endcomment %}
+
+{{ 'homepage-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage-faq.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  #hp-faq-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | default: 64 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;
+  }
+{%- endstyle -%}
+
+<section
+  class="hp-section hp-faq hp-faq-section"
+  id="hp-faq-{{ section.id }}"
+  aria-label="Frequently Asked Questions"
+>
+  {%- if section.settings.bg_image != blank -%}
+    <div class="hp-faq-bg-wrap" aria-hidden="true">
+      {{
+        section.settings.bg_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'hp-faq-bg-img',
+          loading: 'lazy',
+          alt: ''
+      }}
+      <div class="hp-faq-bg-scrim"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="hp-faq-container">
+    {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank or section.settings.subtext != blank -%}
+      <div class="hp-faq-header">
+        {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
+          <h2 class="hp-faq-title">
+            {{ section.settings.title_prefix | escape }}
+            {%- if section.settings.title_highlight != blank -%}
+              <span class="hp-text-brand">{{ section.settings.title_highlight | escape }}</span>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtext != blank -%}
+          <p class="hp-faq-subtext">
+            {{ section.settings.subtext | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hp-faq-card-wrap">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank -%}
+            {%- assign is_open = false -%}
+            {%- if block.settings.open_by_default -%}
+              {%- assign is_open = true -%}
+            {%- endif -%}
+
+            <div
+              class="hp-faq-item{% if is_open %} is-open{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <button
+                type="button"
+                data-faq-toggle
+                class="hp-faq-btn"
+                aria-expanded="{% if is_open %}true{% else %}false{% endif %}"
+              >
+                <span class="hp-faq-question">{{ block.settings.question | escape }}</span>
+                <span class="hp-faq-icon-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </span>
+              </button>
+
+              {%- if block.settings.answer != blank -%}
+                <div class="hp-faq-answer">
+                  <div class="hp-faq-answer-inner">
+                    <p>{{ block.settings.answer | escape }}</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.support_card_enable -%}
+      {%- if section.settings.support_title != blank or section.settings.support_text != blank or section.settings.support_btn_text != blank -%}
+        <div class="hp-faq-help-card">
+          <div class="hp-faq-help-left">
+            <span class="hp-faq-help-icon" aria-hidden="true">
+              <svg viewBox="0 1.05 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.6 15.4v-3.2a7.4 7.4 0 0 1 14.8 0v3.2"></path>
+                <rect x="2.8" y="13.3" width="3.6" height="5.4" rx="1.6"></rect>
+                <rect x="17.6" y="13.3" width="3.6" height="5.4" rx="1.6"></rect>
+                <path d="M19.4 18.7a3.4 3.4 0 0 1-3.4 2.6h-1.6"></path>
+              </svg>
+            </span>
+            <div class="hp-faq-help-text-group">
+              {%- if section.settings.support_title != blank -%}
+                <h3 class="hp-faq-help-title">{{ section.settings.support_title | escape }}</h3>
+              {%- endif -%}
+              {%- if section.settings.support_text != blank -%}
+                <p class="hp-faq-help-text">{{ section.settings.support_text | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if section.settings.support_btn_text != blank or section.settings.support_hours != blank -%}
+            <div class="hp-faq-help-cta-group">
+              {%- if section.settings.support_btn_text != blank -%}
+                <a
+                  href="{{ section.settings.support_btn_url | default: '#' }}"
+                  class="hp-faq-help-btn"
+                >
+                  <span>{{ section.settings.support_btn_text | escape }}</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 12h15"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </a>
+              {%- endif -%}
+              {%- if section.settings.support_hours != blank -%}
+                <span class="hp-faq-help-hours">{{ section.settings.support_hours | escape }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage FAQ",
+  "tag": "section",
+  "class": "section-homepage-faq",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Frequently Asked",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Questions",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Find quick answers to common questions about Panasonic parts, orders, compatibility and more.",
+      "label": "Subtext"
+    },
+    {
+      "type": "header",
+      "content": "Support Card"
+    },
+    {
+      "type": "checkbox",
+      "id": "support_card_enable",
+      "default": true,
+      "label": "Show Support Card"
+    },
+    {
+      "type": "text",
+      "id": "support_title",
+      "default": "Still have a question?",
+      "label": "Support Title"
+    },
+    {
+      "type": "textarea",
+      "id": "support_text",
+      "default": "Our support team is here to help you find the right part or answer any questions.",
+      "label": "Support Subtext"
+    },
+    {
+      "type": "text",
+      "id": "support_btn_text",
+      "default": "Contact Support",
+      "label": "Support Button Label"
+    },
+    {
+      "type": "url",
+      "id": "support_btn_url",
+      "label": "Support Button Link"
+    },
+    {
+      "type": "text",
+      "id": "support_hours",
+      "default": "Mon – Fri, 9 AM – 6 PM ET | 1-800-211-7262",
+      "label": "Support Hours / Phone"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "default": "How do I find the right part for my product?",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "default": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+          "label": "Answer"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": false,
+          "label": "Open by Default"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are these genuine Panasonic parts?",
+            "answer": "Yes. All parts available on our website are genuine Panasonic parts, ensuring the best fit, performance and durability for your product.",
+            "open_by_default": true
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I search for parts using my model number?",
+            "answer": "Yes. Enter your model number in the search bar and we will show only the parts that match your product.",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long will it take to receive my order?",
+            "answer": "Orders ship within 2 business days. Standard delivery takes 3 to 7 business days depending on your state; expedited options are shown at checkout.",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship across the United States?",
+            "answer": "Yes. We ship to all 50 states, including Alaska and Hawaii, as well as APO and FPO addresses.",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "Unused parts in their original packaging can be returned within 30 days of delivery. Start a return from your order history to get a prepaid shipping label.",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer installation support?",
+            "answer": "Yes. Our support team can walk you through fitting most replacement parts, and can connect you with an authorized Panasonic service center when installation is required.",
+            "open_by_default": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,125 @@
+/**
+ * Homepage Newsletter / Offer Promo Banner Styles
+ * Matches Figma Desktop and Mobile UI specifications
+ */
+
+.hp-newsletter {
+  width: 100%;
+  background: #000000;
+  padding: 60px 0;
+  box-sizing: border-box;
+}
+
+.hp-newsletter .hp-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.hp-newsletter-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hp-newsletter-title {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  text-align: center;
+}
+
+.hp-newsletter-subtext {
+  margin: 14px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #e7e9ee;
+  text-align: center;
+  max-width: 680px;
+}
+
+.hp-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px;
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 380ms ease,
+    color 380ms ease,
+    box-shadow 380ms ease;
+}
+
+.hp-newsletter-btn:hover {
+  background: #0041c0;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 65, 192, 0.3);
+}
+
+/* Tablet adjustments */
+@media screen and (max-width: 991px) {
+  .hp-newsletter {
+    padding: 48px 0;
+  }
+
+  .hp-newsletter-title {
+    font-size: 28px;
+  }
+
+  .hp-newsletter-subtext {
+    font-size: 16px;
+    margin-top: 12px;
+  }
+
+  .hp-newsletter-btn {
+    margin-top: 22px;
+  }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 767px) {
+  .hp-newsletter {
+    padding: 36px 0;
+  }
+
+  .hp-newsletter .hp-container {
+    padding: 0 16px;
+  }
+
+  .hp-newsletter-title {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  .hp-newsletter-subtext {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+  .hp-newsletter-btn {
+    height: 48px;
+    padding: 0 26px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}

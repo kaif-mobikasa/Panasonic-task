@@ -1,0 +1,223 @@
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage-sections.js' | asset_url }}" defer="defer"></script>
+
+<div class="hp-section hp-parts-type">
+  <div class="hp-container">
+    <div class="hp-header-row">
+      <div class="hp-header-text">
+        {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
+          <h2 class="hp-title-lg">
+            {{ section.settings.title_prefix | escape }}
+            {%- if section.settings.title_highlight != blank -%}
+              <span class="hp-text-brand">{{ section.settings.title_highlight | escape }}</span>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.show_subtext and section.settings.subtext != blank -%}
+          <p class="hp-subtext">{{ section.settings.subtext | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="hp-link-more">
+          <span>{{ section.settings.cta_text | escape }}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="hp-type-grid" data-hp-type-grid>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign card_idx = forloop.index -%}
+          <a href="{{ block.settings.url | default: '#' }}" class="hp-type-card hp-type-card--pos-{{ card_idx }}" {{ block.shopify_attributes }}>
+            <div class="hp-type-card-media">
+              {%- if block.settings.image != blank -%}
+                {%- assign card_alt = block.settings.image.alt | default: block.settings.title | escape -%}
+                {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hp-type-card-bg', loading: 'lazy', alt: card_alt }}
+              {%- endif -%}
+              <span class="hp-type-card-scrim" aria-hidden="true"></span>
+            </div>
+
+            <div class="hp-type-card-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="hp-type-card-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="hp-type-card-desc">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+            </div>
+
+            <span class="hp-type-card-arrow" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hp-type-dots" aria-hidden="true">
+        <button type="button" class="hp-type-dot is-active" data-hp-type-dot data-index="0" aria-label="Slide 1"></button>
+        <button type="button" class="hp-type-dot" data-hp-type-dot data-index="1" aria-label="Slide 2"></button>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Parts By Type",
+  "class": "section-homepage-parts-by-type",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Shop Panasonic Parts",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "By Type",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtext",
+      "default": false,
+      "label": "Show Subtext"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Browse by part category to quickly replace worn foils, trays, filters, and attachments.",
+      "label": "Subtext"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "Explore All Types",
+      "label": "CTA Link Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link Destination"
+    },
+    {
+      "type": "header",
+      "content": "Default Card Images (When No Blocks Added)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Card 1: Microwave Glass Trays"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Card 2: Shaver Blades & Foils"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Card 3: Vacuum Filters"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Card 4: Refrigerator Shelves"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Card 5: Toaster Racks"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Card 6: Toothbrush Heads"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "part_type",
+      "name": "Part Type Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Microwave Glass Trays",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "default": "Keep your microwave performing like new.",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link Destination"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parts By Type",
+      "blocks": [
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Microwave Glass Trays",
+            "description": "Keep your microwave performing like new."
+          }
+        },
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Shaver Blades & Foils",
+            "description": "A close, comfortable shave — like new."
+          }
+        },
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Vacuum Filters",
+            "description": "Clean filters for a stronger clean."
+          }
+        },
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Refrigerator Shelves",
+            "description": "Organize your fridge with ease."
+          }
+        },
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Toaster Racks",
+            "description": "Durable replacement racks for your toaster."
+          }
+        },
+        {
+          "type": "part_type",
+          "settings": {
+            "title": "Toothbrush Heads",
+            "description": "Fresh brush heads for a cleaner you."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

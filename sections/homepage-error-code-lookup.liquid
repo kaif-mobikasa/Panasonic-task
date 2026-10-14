@@ -1,0 +1,318 @@
+{{ 'homepage-error-code.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-error-code" id="ErrorCodeLookup-{{ section.id }}">
+  <div class="hp-container">
+    <div class="hp-ec-header">
+      {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
+        <h2 class="hp-ec-title">
+          {{ section.settings.title_prefix | default: 'Error Code' }}
+          {%- if section.settings.title_highlight != blank -%}
+            <span class="hp-text-brand">{{ section.settings.title_highlight }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.link_text != blank -%}
+        <a href="{{ section.settings.link_url | default: '#' }}" class="hp-ec-cta">
+          <span>{{ section.settings.link_text }}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="hp-ec-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign b_title = block.settings.title | default: 'Appliance'
+            assign b_link = block.settings.link
+            assign b_label = block.settings.codes_label | default: 'Common codes:'
+            assign b_codes = block.settings.codes
+          -%}
+          {%- if b_link != blank -%}
+            <a href="{{ b_link }}" class="hp-ec-card" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="hp-ec-card" {{ block.shopify_attributes }}>
+          {%- endif -%}
+
+            <div class="hp-ec-media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 160 | image_tag: class: 'hp-ec-img', alt: b_title }}
+              {%- else -%}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6B7588" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              {%- endif -%}
+            </div>
+
+            <div class="hp-ec-info">
+              <div class="hp-ec-title-row">
+                {%- if b_title != blank -%}
+                  <h3 class="hp-ec-card-title">{{ b_title }}</h3>
+                {%- endif -%}
+                <span class="hp-ec-arrow">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12h15"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+              </div>
+
+              {%- if b_label != blank -%}
+                <span class="hp-ec-sub">{{ b_label }}</span>
+              {%- endif -%}
+
+              {%- if b_codes != blank -%}
+                <div class="hp-ec-chips">
+                  {%- assign code_list = b_codes | split: ',' -%}
+                  {%- for code_item in code_list -%}
+                    {%- assign trimmed_code = code_item | strip -%}
+                    {%- if trimmed_code != blank -%}
+                      <span class="hp-ec-chip">{{ trimmed_code }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+          {%- if b_link != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {% comment %} Default 4 Appliance Cards from Figma {% endcomment %}
+        <a href="#" class="hp-ec-card">
+          <div class="hp-ec-media">
+            {%- if images['hero-microwave.jpg'] != blank -%}
+              {{ images['hero-microwave.jpg'] | image_url: width: 160 | image_tag: class: 'hp-ec-img', alt: 'Microwave' }}
+            {%- else -%}
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2B3340" stroke-width="1.8">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <rect x="5" y="7" width="10" height="10" rx="1"></rect>
+                <line x1="18" y1="8" x2="18.01" y2="8"></line>
+                <line x1="18" y1="12" x2="18.01" y2="12"></line>
+                <line x1="18" y1="16" x2="18.01" y2="16"></line>
+              </svg>
+            {%- endif -%}
+          </div>
+          <div class="hp-ec-info">
+            <div class="hp-ec-title-row">
+              <h3 class="hp-ec-card-title">Microwave</h3>
+              <span class="hp-ec-arrow">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12h15"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </span>
+            </div>
+            <span class="hp-ec-sub">Common codes:</span>
+            <div class="hp-ec-chips">
+              <span class="hp-ec-chip">H97</span>
+              <span class="hp-ec-chip">H98</span>
+              <span class="hp-ec-chip">H99</span>
+              <span class="hp-ec-chip">U50</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="hp-ec-card">
+          <div class="hp-ec-media">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2B3340" stroke-width="1.8">
+              <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+              <line x1="5" y1="10" x2="19" y2="10"></line>
+              <line x1="8" y1="6" x2="8" y2="8"></line>
+              <line x1="8" y1="13" x2="8" y2="16"></line>
+            </svg>
+          </div>
+          <div class="hp-ec-info">
+            <div class="hp-ec-title-row">
+              <h3 class="hp-ec-card-title">Refrigerator</h3>
+              <span class="hp-ec-arrow">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12h15"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </span>
+            </div>
+            <span class="hp-ec-sub">Common codes:</span>
+            <div class="hp-ec-chips">
+              <span class="hp-ec-chip">E5</span>
+              <span class="hp-ec-chip">E6</span>
+              <span class="hp-ec-chip">E9</span>
+              <span class="hp-ec-chip">EL</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="hp-ec-card">
+          <div class="hp-ec-media">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2B3340" stroke-width="1.8">
+              <rect x="2" y="6" width="20" height="10" rx="2"></rect>
+              <line x1="5" y1="13" x2="19" y2="13"></line>
+              <line x1="7" y1="10" x2="7.01" y2="10"></line>
+            </svg>
+          </div>
+          <div class="hp-ec-info">
+            <div class="hp-ec-title-row">
+              <h3 class="hp-ec-card-title">HVAC (Air Conditioner)</h3>
+              <span class="hp-ec-arrow">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12h15"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </span>
+            </div>
+            <span class="hp-ec-sub">Common codes:</span>
+            <div class="hp-ec-chips">
+              <span class="hp-ec-chip">H11</span>
+              <span class="hp-ec-chip">H14</span>
+              <span class="hp-ec-chip">H19</span>
+              <span class="hp-ec-chip">H23</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="hp-ec-card">
+          <div class="hp-ec-media">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2B3340" stroke-width="1.8">
+              <path d="M4 11V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v4"></path>
+              <rect x="2" y="11" width="20" height="9" rx="2"></rect>
+              <circle cx="17" cy="15" r="1"></circle>
+            </svg>
+          </div>
+          <div class="hp-ec-info">
+            <div class="hp-ec-title-row">
+              <h3 class="hp-ec-card-title">Toaster</h3>
+              <span class="hp-ec-arrow">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12h15"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </span>
+            </div>
+            <span class="hp-ec-sub">Common codes:</span>
+            <div class="hp-ec-chips">
+              <span class="hp-ec-chip">E1</span>
+              <span class="hp-ec-chip">E2</span>
+              <span class="hp-ec-chip">E3</span>
+              <span class="hp-ec-chip">E6</span>
+            </div>
+          </div>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Error Code Lookup",
+  "class": "section-homepage-error-code-lookup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Error Code",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Lookup",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "default": "Explore All Error Codes",
+      "label": "Header Link Text"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Header Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "appliance",
+      "name": "Appliance Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Appliance Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Microwave",
+          "label": "Appliance Name"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card Link"
+        },
+        {
+          "type": "text",
+          "id": "codes_label",
+          "default": "Common codes:",
+          "label": "Codes Label"
+        },
+        {
+          "type": "text",
+          "id": "codes",
+          "default": "H97, H98, H99, U50",
+          "label": "Common Codes (comma-separated)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Error Code Lookup",
+      "blocks": [
+        {
+          "type": "appliance",
+          "settings": {
+            "title": "Microwave",
+            "codes_label": "Common codes:",
+            "codes": "H97, H98, H99, U50"
+          }
+        },
+        {
+          "type": "appliance",
+          "settings": {
+            "title": "Refrigerator",
+            "codes_label": "Common codes:",
+            "codes": "E5, E6, E9, EL"
+          }
+        },
+        {
+          "type": "appliance",
+          "settings": {
+            "title": "HVAC (Air Conditioner)",
+            "codes_label": "Common codes:",
+            "codes": "H11, H14, H19, H23"
+          }
+        },
+        {
+          "type": "appliance",
+          "settings": {
+            "title": "Toaster",
+            "codes_label": "Common codes:",
+            "codes": "E1, E2, E3, E6"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

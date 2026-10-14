@@ -1,0 +1,1727 @@
+/* ==========================================================================
+   Homepage Sections Stylesheet - Panasonic Shopify OS 2.0 Theme
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Common & Section Container Base
+   -------------------------------------------------------------------------- */
+.hp-section {
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  color: #111827;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hp-section *,
+.hp-section *::before,
+.hp-section *::after {
+  box-sizing: border-box;
+}
+
+.hp-container {
+  width: 100%;
+  max-width: min(1376px, 100%);
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media screen and (max-width: 1179px) {
+  .hp-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .hp-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Typography & Links */
+.hp-title-xl {
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111827;
+  margin: 0;
+}
+
+.hp-title-lg {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #111827;
+  margin: 0;
+}
+
+.hp-title-md {
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111827;
+  margin: 0;
+}
+
+.hp-text-brand {
+  color: #0041c0;
+  font-weight: 700;
+}
+
+.hp-subtext {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4a5567;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 759px) {
+  .hp-subtext {
+    font-size: 14px;
+  }
+}
+
+.hp-link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333c4b;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.hp-link-more:hover {
+  color: #0041c0;
+  text-decoration: none;
+}
+
+.hp-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 24px;
+  font-family: "Barlow", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #0041c0;
+  border: 0;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.hp-btn-primary:hover {
+  background: #00309a;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. Homepage Hero Section
+   -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   1. Homepage Hero Section (Figma UI Specification)
+   -------------------------------------------------------------------------- */
+.hp-hero {
+  position: relative;
+  background: #f1f4f8;
+  overflow: hidden;
+  padding: 0;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f1f4f8;
+  }
+}
+
+.hp-hero-container {
+  width: 100%;
+  max-width: min(1376px, 100%);
+  margin: 0 auto;
+  padding-top: 68px;
+  padding-bottom: 76px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 1179px) {
+  .hp-hero-container {
+    padding-top: 52px;
+    padding-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-container {
+    padding-top: 24px;
+    padding-bottom: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    pointer-events: auto;
+  }
+}
+
+.hp-hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  pointer-events: auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-content {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.hp-hero-title {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (max-width: 1179px) {
+  .hp-hero-title {
+    font-size: 36px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .hp-hero-title {
+    order: 2;
+    font-size: 28px;
+    line-height: 1.25;
+    text-align: center;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 639px) {
+  .hp-hero-title {
+    font-size: 26px;
+  }
+}
+
+.hp-hero-title .hp-text-brand {
+  color: #0041c0;
+  font-weight: 700;
+}
+
+.hp-hero-appliance-target {
+  display: inline-block;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.hp-hero-subtext {
+  margin: 18px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: #64748b;
+  max-width: 440px;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-subtext {
+    order: 3;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 360px;
+    margin: 12px auto 0;
+  }
+}
+
+/* Search Capsule Bar */
+.hp-hero-search-capsule {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  width: 100%;
+  max-width: 480px;
+  height: 60px;
+  padding: 6px 6px 6px 20px;
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+.hp-hero-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0f172a;
+}
+
+.hp-hero-search-input::placeholder {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+.hp-hero-search-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 28px;
+  background: #0f172a;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    transform 150ms ease,
+    box-shadow 200ms ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.hp-hero-search-btn:hover {
+  background: #1e293b;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+}
+
+.hp-hero-search-btn:active {
+  transform: scale(0.98);
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-search-capsule {
+    order: 4;
+    margin: 22px auto 0;
+    max-width: 400px;
+    height: 56px;
+    padding: 5px 6px 5px 18px;
+  }
+
+  .hp-hero-search-btn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  .hp-hero-search-btn span {
+    display: none;
+  }
+}
+
+.hp-hero-search-icon {
+  flex: none;
+  display: block;
+}
+
+/* Where's my model number link */
+.hp-hero-link-wrapper {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-link-wrapper {
+    order: 5;
+    margin-top: 16px;
+    text-align: center;
+  }
+}
+
+.hp-hero-model-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #475569;
+  text-decoration: underline;
+  text-decoration-color: #cbd5e1;
+  text-underline-offset: 4px;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.hp-hero-model-link:hover {
+  color: #0041c0;
+  text-decoration-color: #0041c0;
+}
+
+/* Slider Controls (Prev / Next Arrows + Dots) */
+.hp-hero-slider-ctrls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-slider-ctrls {
+    order: 1;
+    margin-top: 0;
+    margin-bottom: 24px;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .hp-hero-arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.hp-hero-arrow {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 150ms ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.hp-hero-arrow:hover {
+  background: #0041c0;
+  border-color: #0041c0;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 65, 192, 0.25);
+}
+
+.hp-hero-arrow:active {
+  transform: scale(0.95);
+}
+
+.hp-hero-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-hero-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition:
+    width 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 300ms ease;
+}
+
+.hp-hero-dot:hover {
+  background: #94a3b8;
+}
+
+.hp-hero-dot.is-active {
+  width: 32px;
+  background: #0f172a;
+}
+
+/* Right Media Column & Interactive Hotspots */
+.hp-hero-media-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 58%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-hero-media-wrapper {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    height: clamp(340px, 85vw, 440px);
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .hp-hero-media-wrapper {
+    height: clamp(320px, 88vw, 420px);
+  }
+}
+
+.hp-hero-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.hp-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 500ms ease,
+    visibility 500ms ease;
+}
+
+.hp-hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hp-hero-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: inherit;
+  display: block;
+}
+
+/* Hotspot Pins (+) */
+/* --------------------------------------------------------------------------
+   Product Hotspot Pins & Popover Cards (Figma UI Specification)
+   -------------------------------------------------------------------------- */
+.hp-hotspot {
+  position: absolute;
+  z-index: 25;
+  transform: translate(-50%, -50%);
+}
+
+.hp-hotspot-pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e293b;
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hp-hotspot-icon-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hp-hotspot-icon-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover & Active Pin State: Solid Blue Circle with White Close Icon */
+.hp-hotspot:hover .hp-hotspot-pin,
+.hp-hotspot.is-active .hp-hotspot-pin {
+  background: #0041c0;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 65, 192, 0.42);
+  transform: scale(1.18);
+}
+
+.hp-hotspot:hover .hp-hotspot-icon-plus,
+.hp-hotspot.is-active .hp-hotspot-icon-plus {
+  display: none;
+}
+
+.hp-hotspot:hover .hp-hotspot-icon-close,
+.hp-hotspot.is-active .hp-hotspot-icon-close {
+  display: flex;
+}
+
+/* Hotspot Card Tooltip Popover */
+.hp-hotspot-card {
+  position: absolute;
+  top: 50%;
+  width: 330px;
+  max-width: calc(100vw - 32px);
+  padding: 22px 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow:
+    0 20px 48px -6px rgba(15, 23, 42, 0.2),
+    0 8px 18px -4px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 220ms ease;
+  z-index: 50;
+}
+
+/* Position Right: Card opens to the right of the pin */
+.hp-hotspot--pos-right .hp-hotspot-card {
+  left: calc(100% + 18px);
+  right: auto;
+  transform: translateY(-50%) scale(0.96);
+  transform-origin: left center;
+}
+
+.hp-hotspot--pos-right .hp-hotspot-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  width: 24px;
+}
+
+/* Position Left: Card opens to the left of the pin */
+.hp-hotspot--pos-left .hp-hotspot-card {
+  right: calc(100% + 18px);
+  left: auto;
+  transform: translateY(-50%) scale(0.96);
+  transform-origin: right center;
+}
+
+.hp-hotspot--pos-left .hp-hotspot-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 24px;
+}
+
+/* Visible States */
+.hp-hotspot:hover .hp-hotspot-card,
+.hp-hotspot.is-active .hp-hotspot-card {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hp-hotspot--pos-right:hover .hp-hotspot-card,
+.hp-hotspot--pos-right.is-active .hp-hotspot-card {
+  transform: translateY(-50%) scale(1);
+}
+
+.hp-hotspot--pos-left:hover .hp-hotspot-card,
+.hp-hotspot--pos-left.is-active .hp-hotspot-card {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Card Content Structure */
+.hp-hotspot-card-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hp-hotspot-thumb-wrap {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.hp-hotspot-thumb {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.hp-hotspot-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.hp-hotspot-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0 0 5px 0;
+  word-break: break-word;
+}
+
+.hp-hotspot-desc {
+  font-size: 15px;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.hp-hotspot-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 46px;
+  margin-top: 18px;
+  background: #0041c0;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  transition:
+    background 180ms ease,
+    transform 120ms ease;
+  cursor: pointer;
+}
+
+.hp-hotspot-btn:hover {
+  background: #00309a;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .hp-hotspot-pin {
+    width: 34px;
+    height: 34px;
+    box-shadow:
+      0 3px 12px rgba(15, 23, 42, 0.16),
+      0 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+
+  .hp-hotspot-card {
+    width: 280px;
+    padding: 16px 18px;
+    border-radius: 14px;
+  }
+
+  .hp-hotspot-thumb-wrap {
+    width: 60px;
+    height: 60px;
+  }
+
+  .hp-hotspot-title {
+    font-size: 16px;
+  }
+
+  .hp-hotspot-desc {
+    font-size: 13px;
+  }
+
+  .hp-hotspot-btn {
+    height: 40px;
+    font-size: 14px;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hp-hotspot-card {
+    left: 50% !important;
+    right: auto !important;
+    top: calc(100% + 12px) !important;
+    transform: translateX(-50%) scale(0.96) !important;
+    transform-origin: top center !important;
+  }
+
+  .hp-hotspot:hover .hp-hotspot-card,
+  .hp-hotspot.is-active .hp-hotspot-card {
+    transform: translateX(-50%) scale(1) !important;
+  }
+
+  .hp-hotspot-card::before {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Trust Bar Section (Figma UI Specification)
+   -------------------------------------------------------------------------- */
+.hp-trust-bar {
+  background: #ffffff;
+  border-top: 1px solid #e8effc;
+  border-bottom: 1px solid #e8effc;
+  padding: 26px 0;
+}
+
+.hp-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+}
+
+.hp-trust-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 4px 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease;
+}
+
+a.hp-trust-item:hover {
+  transform: translateY(-1px);
+}
+
+/* Vertical dividers on desktop */
+.hp-trust-item + .hp-trust-item {
+  border-left: 1px solid #e2e6ee;
+}
+
+.hp-trust-bar--no-dividers .hp-trust-item {
+  border-left: none !important;
+}
+
+/* Circular Icon Badge */
+.hp-trust-icon-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  background: #e8effc;
+  color: #0041c0;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+a.hp-trust-item:hover .hp-trust-icon-badge {
+  background: #0041c0;
+  color: #ffffff;
+}
+
+.hp-trust-svg,
+.hp-trust-icon-badge svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.hp-trust-custom-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Text Group */
+.hp-trust-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.hp-trust-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.hp-trust-desc {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7588;
+  margin-top: 1px;
+}
+
+/* Mobile & Tablet Trust Bar: Horizontal Swipeable Row with Dividers (Matches Figma) */
+@media screen and (max-width: 1023px) {
+  .hp-trust-bar {
+    padding: 16px 0;
+  }
+
+  .hp-trust-bar .hp-container {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  .hp-trust-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none !important;
+    padding: 0 16px !important;
+    gap: 0 !important;
+  }
+
+  .hp-trust-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .hp-trust-item {
+    flex: 0 0 auto !important;
+    scroll-snap-align: start;
+    padding: 2px 20px !important;
+    gap: 12px !important;
+  }
+
+  .hp-trust-item + .hp-trust-item {
+    border-left: 1px solid #e2e6ee !important;
+  }
+
+  .hp-trust-icon-badge {
+    width: 42px !important;
+    height: 42px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .hp-trust-svg,
+  .hp-trust-icon-badge svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .hp-trust-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+
+  .hp-trust-desc {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    color: #64748b !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Shop Parts By Appliances (Category Grid)
+   -------------------------------------------------------------------------- */
+.hp-categories {
+  padding: 56px 0;
+  background: #ffffff;
+}
+
+@media screen and (max-width: 1023px) {
+  .hp-categories {
+    padding: 36px 0;
+  }
+}
+
+.hp-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .hp-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+}
+
+.hp-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hp-categories .hp-title-lg {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: #0f172a;
+}
+
+.hp-categories .hp-title-lg .hp-text-brand {
+  color: #0041c0;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  .hp-categories .hp-title-lg {
+    font-size: 24px;
+  }
+}
+
+.hp-categories .hp-subtext {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.hp-link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333c4b;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.hp-link-more:hover {
+  color: #0041c0;
+  text-decoration: none;
+}
+
+.hp-link-more svg {
+  display: block;
+  transition: transform 200ms ease;
+}
+
+.hp-link-more:hover svg {
+  transform: translateX(3px);
+}
+
+/* Desktop Grid: Exactly 8 columns in 1 single row */
+.hp-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 769px) {
+  .hp-categories-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Card Design (Desktop) */
+.hp-cat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 175px;
+  padding: 16px 8px 14px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hp-cat-card:hover {
+  border-color: #0041c0;
+  box-shadow: 0 8px 22px rgba(0, 65, 192, 0.09);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* Soft Pale Blue Circular Backdrop & Media */
+.hp-cat-media {
+  position: relative;
+  width: 100%;
+  height: 107px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.hp-cat-blob {
+    position: absolute;
+    top: -48px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 239px;
+    height: 119px;
+    border-radius: 50%;
+    background: #eef3fe;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform .3s ease;
+}
+
+.hp-cat-card:hover .hp-cat-blob {
+  transform: translateX(-50%) scale(1.06);
+}
+
+.hp-cat-img {
+  position: relative;
+  z-index: 1;
+  max-width: 78%;
+  max-height: 64px;
+  object-fit: contain;
+  display: block;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hp-cat-card:hover .hp-cat-img {
+  transform: scale(1.05);
+}
+
+.hp-cat-placeholder {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0041c0;
+}
+
+.hp-cat-placeholder svg {
+  display: block;
+}
+
+.hp-cat-name {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #111827;
+  text-align: center;
+  line-height: 1.25;
+  margin-top: auto;
+  /* white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
+  overflow: hidden;
+}
+
+/* Mobile Layout: 2-column grid, horizontal cards (Matches Figma Screenshot 2) */
+@media screen and (max-width: 768px) {
+  .hp-categories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .hp-cat-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 68px;
+    padding: 10px 12px;
+    gap: 12px;
+    border-radius: 12px;
+  }
+
+  .hp-cat-media {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .hp-cat-blob {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+  }
+
+  .hp-cat-card:hover .hp-cat-blob {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .hp-cat-img {
+    max-width: 44px;
+    max-height: 44px;
+  }
+
+  .hp-cat-placeholder svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hp-cat-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    text-align: left;
+    margin-top: 0;
+    flex: 1;
+    line-height: 1.25;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Shop Parts By Type Section
+   -------------------------------------------------------------------------- */
+.hp-parts-type {
+  padding: 56px 0 64px;
+  background: #f7f9fd;
+}
+
+.hp-parts-type .hp-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.hp-parts-type .hp-header-text {
+  flex: 1;
+}
+
+.hp-parts-type .hp-title-lg {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.hp-parts-type .hp-link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333c4b;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.hp-parts-type .hp-link-more:hover {
+  color: #0041c0;
+}
+
+.hp-parts-type .hp-link-more svg {
+  flex: none;
+  display: block;
+  transition: transform 200ms ease;
+}
+
+.hp-parts-type .hp-link-more:hover svg {
+  transform: translateX(3px);
+}
+
+.hp-type-grid {
+  display: grid;
+  grid-template-columns: 1.18fr 1fr 1fr 1.18fr;
+  grid-template-rows: repeat(2, minmax(178px, 192px));
+  gap: 16px;
+}
+
+.hp-type-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #eceff3;
+  text-decoration: none;
+  transition: box-shadow 220ms ease, transform 220ms ease;
+  min-height: 178px;
+}
+
+.hp-type-card:hover {
+  text-decoration: none;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.12);
+}
+
+/* Desktop Grid Bento Placement */
+@media screen and (min-width: 990px) {
+  .hp-type-card--pos-1,
+  .hp-type-card:nth-child(6n + 1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    min-height: 372px;
+  }
+
+  .hp-type-card--pos-2,
+  .hp-type-card:nth-child(6n + 2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .hp-type-card--pos-3,
+  .hp-type-card:nth-child(6n + 3) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .hp-type-card--pos-4,
+  .hp-type-card:nth-child(6n + 4) {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    min-height: 372px;
+  }
+
+  .hp-type-card--pos-5,
+  .hp-type-card:nth-child(6n + 5) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .hp-type-card--pos-6,
+  .hp-type-card:nth-child(6n + 6) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+
+.hp-type-card-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hp-type-card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  transition: transform 400ms ease;
+}
+
+.hp-type-card:hover .hp-type-card-bg {
+  transform: scale(1.04);
+}
+
+.hp-type-card-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(236, 239, 243, 0.99) 0%,
+    rgba(236, 239, 243, 0.95) calc(32% + 8px),
+    rgba(236, 239, 243, 0.15) calc(76% + 8px),
+    rgba(236, 239, 243, 0) calc(84% + 8px)
+  );
+  pointer-events: none;
+}
+
+.hp-type-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 18px 20px 60px 22px;
+  max-width: 58%;
+  box-sizing: content-box;
+  pointer-events: none;
+}
+
+.hp-type-card-title {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111827;
+}
+
+.hp-type-card-desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: #343e4e;
+  text-wrap: balance;
+  max-width: 160px;
+}
+
+.hp-type-card-arrow {
+  position: absolute;
+  z-index: 2;
+  left: 22px;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1.5px solid #d6e0f7;
+  color: #0041c0;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.05);
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.hp-type-card:hover .hp-type-card-arrow {
+  background: #0041c0;
+  color: #ffffff;
+  border-color: #0041c0;
+  transform: scale(1.05);
+}
+
+.hp-type-dots {
+  display: none;
+}
+
+/* Mobile & Tablet Styles matching Figma Screenshot 2 */
+@media screen and (max-width: 989px) {
+  .hp-parts-type {
+    padding: 32px 0 36px;
+  }
+
+  .hp-parts-type .hp-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .hp-parts-type .hp-title-lg {
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  .hp-parts-type .hp-link-more {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hp-type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, calc(50% - 6px));
+    grid-template-rows: repeat(2, 150px);
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 4px;
+  }
+
+  .hp-type-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hp-type-card {
+    min-height: 150px;
+    border-radius: 10px;
+  }
+
+  /* Mobile Grid Placement: Page 1 (cols 1-2) & Page 2 (cols 3-4) */
+  .hp-type-card--pos-1,
+  .hp-type-card:nth-child(6n + 1) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    scroll-snap-align: start;
+    min-height: 150px;
+  }
+
+  .hp-type-card--pos-2,
+  .hp-type-card:nth-child(6n + 2) {
+    grid-column: 1;
+    grid-row: 2;
+    scroll-snap-align: start;
+    min-height: 150px;
+  }
+
+  .hp-type-card--pos-3,
+  .hp-type-card:nth-child(6n + 3) {
+    grid-column: 2;
+    grid-row: 2;
+    scroll-snap-align: none;
+    min-height: 150px;
+  }
+
+  .hp-type-card--pos-4,
+  .hp-type-card:nth-child(6n + 4) {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+    scroll-snap-align: start;
+    min-height: 150px;
+  }
+
+  .hp-type-card--pos-5,
+  .hp-type-card:nth-child(6n + 5) {
+    grid-column: 3;
+    grid-row: 2;
+    scroll-snap-align: start;
+    min-height: 150px;
+  }
+
+  .hp-type-card--pos-6,
+  .hp-type-card:nth-child(6n + 6) {
+    grid-column: 4;
+    grid-row: 2;
+    scroll-snap-align: none;
+    min-height: 150px;
+  }
+
+  .hp-type-card-content {
+    padding: 14px 14px 14px 16px;
+    max-width: 60%;
+  }
+
+  .hp-type-card-title {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .hp-type-card-desc {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 6px;
+    max-width: 140px;
+  }
+
+  .hp-type-card--pos-1 .hp-type-card-desc,
+  .hp-type-card--pos-4 .hp-type-card-desc {
+    max-width: 180px;
+  }
+
+  /* Chevron position at bottom right on mobile as in Screenshot 2 */
+  .hp-type-card-arrow {
+    left: auto;
+    right: 12px;
+    bottom: 12px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .hp-type-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .hp-type-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #d4d9e2;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: width 260ms ease, background 260ms ease;
+  }
+
+  .hp-type-dot.is-active {
+    width: 22px;
+    background: #111827;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. How It Works Section (3 Steps)
+   Moved to dedicated stylesheet: assets/homepage-steps.css
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   6. Popular Products Section & Cards
+   Moved to dedicated stylesheet: assets/homepage-products.css
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   7. Shop By Space Section (Styles moved to dedicated assets/homepage-space.css)
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   8. Error Code Lookup Section (Styles moved to dedicated assets/homepage-error-code.css)
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   9. Made For A Simpler Parts Experience Section
+   -------------------------------------------------------------------------- */
+.hp-features {
+  padding: 64px 0;
+}
+
+.hp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 1179px) {
+  .hp-features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .hp-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hp-feature-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 12px;
+}
+
+.hp-feature-icon {
+  display: inline-flex;
+  color: #0041c0;
+  margin-bottom: 16px;
+}
+
+.hp-feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.hp-feature-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6b7588;
+}
+
+/* --------------------------------------------------------------------------
+   10. Newsletter Discount Banner (Styles moved to homepage-newsletter.css)
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   11. Testimonials Section
+   -------------------------------------------------------------------------- */
+.hp-testimonials {
+  padding: 64px 0;
+  background: #fafbfc;
+}
+
+.hp-tst-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 1179px) {
+  .hp-tst-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hp-tst-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hp-tst-stars {
+  display: flex;
+  gap: 4px;
+  color: #f59e0b;
+  margin-bottom: 12px;
+}
+
+.hp-tst-quote {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333c4b;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.hp-tst-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.hp-tst-verified {
+  font-size: 12px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   12. FAQ Section (Styles moved to homepage-faq.css)
+   -------------------------------------------------------------------------- */

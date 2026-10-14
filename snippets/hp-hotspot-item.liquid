@@ -1,0 +1,65 @@
+{% comment %}
+  Hotspot Item Snippet - Matches Figma Reference UI
+  - Inactive: Round white pin with plus icon (+) and translucent halo
+  - Hover / Active: Solid blue pin (#0041C0) with white close icon (×)
+  - Popover Card: Thumbnail on left, title + short description on right, full-width "View Parts" button below
+{% endcomment %}
+
+{%- assign hs_top = hs_top | default: 50 -%}
+{%- assign hs_left = hs_left | default: 50 -%}
+{%- assign hs_title = hs_title | default: 'Vacuum Cleaner' -%}
+{%- assign hs_desc = hs_desc | default: 'Home' -%}
+{%- assign hs_btn_label = hs_btn_label | default: 'View Parts' -%}
+{%- assign hs_btn_url = hs_btn_url | default: '#' -%}
+
+{%- assign pos_class = 'hp-hotspot--pos-right' -%}
+{%- assign left_num = hs_left | plus: 0 -%}
+{%- if left_num > 50 -%}
+  {%- assign pos_class = 'hp-hotspot--pos-left' -%}
+{%- endif -%}
+
+<div class="hp-hotspot {{ pos_class }}" style="top: {{ hs_top }}%; left: {{ hs_left }}%;" {{ shopify_attributes }}>
+  <button type="button" class="hp-hotspot-pin" aria-label="Toggle {{ hs_title | escape }}">
+    <span class="hp-hotspot-icon-plus" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </span>
+    <span class="hp-hotspot-icon-close" aria-hidden="true">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </span>
+  </button>
+
+  <div class="hp-hotspot-card" role="tooltip">
+    <div class="hp-hotspot-card-top">
+      {%- if hs_image != blank -%}
+        <div class="hp-hotspot-thumb-wrap">
+          {{ hs_image | image_url: width: 240 | image_tag: class: 'hp-hotspot-thumb', alt: hs_title, loading: 'lazy' }}
+        </div>
+      {%- elsif hs_fallback_image != blank -%}
+        <div class="hp-hotspot-thumb-wrap">
+          <img src="{{ hs_fallback_image }}" alt="{{ hs_title | escape }}" class="hp-hotspot-thumb" loading="lazy">
+        </div>
+      {%- endif -%}
+
+      <div class="hp-hotspot-info">
+        {%- if hs_title != blank -%}
+          <div class="hp-hotspot-title">{{ hs_title | escape }}</div>
+        {%- endif -%}
+        {%- if hs_desc != blank -%}
+          <div class="hp-hotspot-desc">{{ hs_desc | escape }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if hs_btn_label != blank -%}
+      <a href="{{ hs_btn_url }}" class="hp-hotspot-btn">
+        {{ hs_btn_label | escape }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>

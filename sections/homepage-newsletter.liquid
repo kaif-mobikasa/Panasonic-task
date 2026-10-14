@@ -1,0 +1,158 @@
+{% comment %}
+  Homepage Newsletter / Offer Banner Section - Panasonic Shopify OS 2.0 Theme
+{% endcomment %}
+
+{{ 'homepage-newsletter.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-newsletter" id="hp-newsletter-{{ section.id }}">
+  <div class="hp-container">
+    <div class="hp-newsletter-content">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'heading' -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="hp-newsletter-title" {{ block.shopify_attributes }}>
+                  {{ block.settings.heading }}
+                </h2>
+              {%- endif -%}
+
+            {%- when 'text' -%}
+              {%- if block.settings.subtext != blank -%}
+                <p class="hp-newsletter-subtext" {{ block.shopify_attributes }}>
+                  {{ block.settings.subtext }}
+                </p>
+              {%- endif -%}
+
+            {%- when 'button' -%}
+              {%- if block.settings.btn_text != blank -%}
+                <a
+                  href="{{ block.settings.btn_link | default: '#' }}"
+                  class="hp-newsletter-btn"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.btn_text }}
+                </a>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hp-newsletter-title">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtext != blank -%}
+          <p class="hp-newsletter-subtext">
+            {{ section.settings.subtext }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.btn_text != blank -%}
+          <a
+            href="{{ section.settings.btn_link | default: '#' }}"
+            class="hp-newsletter-btn"
+          >
+            {{ section.settings.btn_text }}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Newsletter",
+  "tag": "section",
+  "class": "section-homepage-newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Get 10% off on your first order!",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Original Panasonic parts and accessories, with 10% off your first purchase.",
+      "label": "Subtext"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "default": "Order Now",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Get 10% off on your first order!",
+          "label": "Heading"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Subtext",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "default": "Original Panasonic parts and accessories, with 10% off your first purchase.",
+          "label": "Subtext"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "btn_text",
+          "default": "Order Now",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Newsletter",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

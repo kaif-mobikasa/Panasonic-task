@@ -1,0 +1,135 @@
+{% comment %}
+  Homepage Trust Bar Section - Panasonic Shopify OS 2.0 Theme
+  Matches Figma UI specification with 4 trust badges, light blue circular icon backgrounds,
+  vertical dividing borders, custom icon image picker, and custom SVG code support.
+{% endcomment %}
+
+{{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
+
+<div class="hp-section hp-trust-bar{% if section.settings.show_dividers == false %} hp-trust-bar--no-dividers{% endif %}">
+  <div class="hp-container">
+    <div class="hp-trust-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title != blank or block.settings.subtitle != blank or block.settings.custom_icon != blank or block.settings.svg_code != blank -%}
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="hp-trust-item" {{ block.shopify_attributes }}>
+            {%- else -%}
+              <div class="hp-trust-item" {{ block.shopify_attributes }}>
+            {%- endif -%}
+
+              {%- if block.settings.svg_code != blank or block.settings.custom_icon != blank -%}
+                <span class="hp-trust-icon-badge" aria-hidden="true">
+                  {%- if block.settings.svg_code != blank -%}
+                    {{ block.settings.svg_code }}
+                  {%- elsif block.settings.custom_icon != blank -%}
+                    {{ block.settings.custom_icon | image_url: width: 64 | image_tag: class: 'hp-trust-custom-img', loading: 'lazy', alt: block.settings.title | escape }}
+                  {%- endif -%}
+                </span>
+              {%- endif -%}
+
+              <span class="hp-trust-text-group">
+                {%- if block.settings.title != blank -%}
+                  <span class="hp-trust-title">{{ block.settings.title | escape }}</span>
+                {%- endif -%}
+                {%- if block.settings.subtitle != blank -%}
+                  <span class="hp-trust-desc">{{ block.settings.subtitle | escape }}</span>
+                {%- endif -%}
+              </span>
+
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage Trust Bar",
+  "class": "section-homepage-trust-bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "default": true,
+      "label": "Show Vertical Dividers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Icon Image"
+        },
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "SVG Code (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Brand Warranty",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "default": "guaranteed to fit",
+          "label": "Subtitle"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Trust Bar",
+      "blocks": [
+        {
+          "type": "trust_item",
+          "settings": {
+            "title": "Brand Warranty",
+            "subtitle": "guaranteed to fit"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "title": "Fast Shipping",
+            "subtitle": "on stocked parts"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "title": "Secure Payment",
+            "subtitle": "encrypted checkout"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "title": "Easy Returns",
+            "subtitle": "30-day return policy"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

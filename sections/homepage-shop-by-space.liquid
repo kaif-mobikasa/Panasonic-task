@@ -1,0 +1,836 @@
+{{ 'homepage-space.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage-space.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign tab_blocks = section.blocks | where: 'type', 'space_tab'
+  assign hotspot_blocks = section.blocks | where: 'type', 'hotspot'
+
+  # Derive space names if no space_tab blocks exist but hotspots exist
+  if tab_blocks.size == 0 and hotspot_blocks.size > 0
+    assign space_names_str = ''
+    for h_block in hotspot_blocks
+      assign s_name = h_block.settings.space_name | default: 'Personal Care'
+      unless space_names_str contains s_name
+        assign space_names_str = space_names_str | append: s_name | append: '|||'
+      endunless
+    endfor
+    assign spaces_arr = space_names_str | split: '|||'
+  endif
+-%}
+
+<div class="hp-section hp-space" id="ShopBySpace-{{ section.id }}">
+  <div class="hp-container">
+    <div class="hp-space-header">
+      {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
+        <h2 class="hp-space-title">
+          {{ section.settings.title_prefix | escape }}
+          {%- if section.settings.title_highlight != blank -%}
+            <span class="hp-text-brand">{{ section.settings.title_highlight | escape }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if tab_blocks.size > 0 -%}
+        <div class="hp-space-tabs" role="tablist" aria-label="Spaces">
+          {%- for t_block in tab_blocks -%}
+            {%- assign t_id = t_block.settings.title | handleize -%}
+            <button
+              type="button"
+              class="hp-space-tab{% if forloop.first %} is-active{% endif %}"
+              data-space-tab="{{ t_id }}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              {{ t_block.shopify_attributes }}
+            >
+              {{ t_block.settings.title | escape }}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- elsif spaces_arr.size > 0 -%}
+        <div class="hp-space-tabs" role="tablist" aria-label="Spaces">
+          {%- for s_name in spaces_arr -%}
+            {%- if s_name != blank -%}
+              {%- assign t_id = s_name | handleize -%}
+              <button
+                type="button"
+                class="hp-space-tab{% if forloop.first %} is-active{% endif %}"
+                data-space-tab="{{ t_id }}"
+                role="tab"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                {{ s_name | escape }}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if tab_blocks.size > 0 -%}
+      {%- for t_block in tab_blocks -%}
+        {%- assign t_title = t_block.settings.title | default: 'Personal Care' -%}
+        {%- assign t_id = t_title | handleize -%}
+        {%- assign t_image = t_block.settings.image | default: section.settings.image -%}
+        {%- assign is_first_tab = forloop.first -%}
+
+        <div class="hp-space-panel{% if is_first_tab %} is-active{% endif %}" data-space-panel="{{ t_id }}">
+          <div class="hp-space-grid">
+            <div class="hp-space-left">
+              <div class="hp-space-stage">
+                {%- if t_image != blank -%}
+                  {{ t_image | image_url: width: 1400 | image_tag: class: 'hp-space-bg', alt: t_title }}
+                {%- endif -%}
+
+                {%- assign pin_idx = 0 -%}
+                {%- for block in hotspot_blocks -%}
+                  {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                  {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                    {%- liquid
+                      assign p_left = block.settings.pin_left | default: 50
+                      assign p_top = block.settings.pin_top | default: 50
+                      assign p_left_mob = block.settings.pin_left_mob | default: p_left
+                      assign p_top_mob = block.settings.pin_top_mob | default: p_top
+                      assign b_title = block.settings.title | default: 'Part Category'
+                      assign b_desc = block.settings.description | default: ''
+                      assign s_title = block.settings.side_title | default: b_title
+                      assign s_desc = block.settings.side_description | default: b_desc
+                      assign s_cta = block.settings.button_label | default: 'Shop Parts'
+                      assign s_url = block.settings.button_link | default: '#'
+                      assign s_img = ''
+                      if block.settings.side_image != blank
+                        assign s_img = block.settings.side_image | image_url: width: 800
+                      elsif block.settings.thumbnail != blank
+                        assign s_img = block.settings.thumbnail | image_url: width: 800
+                      endif
+                    -%}
+                    <button
+                      type="button"
+                      class="hp-space-pin{% if pin_idx == 0 %} is-active{% endif %}"
+                      style="--pin-left: {{ p_left }}%; --pin-top: {{ p_top }}%; --pin-left-mob: {{ p_left_mob }}%; --pin-top-mob: {{ p_top_mob }}%;"
+                      data-space-index="{{ pin_idx }}"
+                      data-side-title="{{ s_title | escape }}"
+                      data-side-desc="{{ s_desc | escape }}"
+                      data-side-img="{{ s_img }}"
+                      data-side-cta="{{ s_cta | escape }}"
+                      data-side-cta-url="{{ s_url | escape }}"
+                      aria-label="{{ b_title | escape }} Pin"
+                      tabindex="0"
+                      {{ block.shopify_attributes }}
+                    >
+                      <span class="hp-space-pin-dot"></span>
+                      <span class="hp-space-pin-label">{{ b_title | escape }}</span>
+                    </button>
+                    {%- assign pin_idx = pin_idx | plus: 1 -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+              <!-- Mini-Cards Rail -->
+              <div class="hp-space-rail-wrap">
+                <div class="hp-space-rail">
+                  {%- assign card_idx = 0 -%}
+                  {%- for block in hotspot_blocks -%}
+                    {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                    {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                      {%- liquid
+                        assign b_title = block.settings.title | default: 'Part Category'
+                        assign b_desc = block.settings.description | default: ''
+                        assign s_title = block.settings.side_title | default: b_title
+                        assign s_desc = block.settings.side_description | default: b_desc
+                        assign s_cta = block.settings.button_label | default: 'Shop Parts'
+                        assign s_url = block.settings.button_link | default: '#'
+                        assign s_img = ''
+                        if block.settings.side_image != blank
+                          assign s_img = block.settings.side_image | image_url: width: 800
+                        elsif block.settings.thumbnail != blank
+                          assign s_img = block.settings.thumbnail | image_url: width: 800
+                        endif
+                      -%}
+                      <div
+                        class="hp-space-mini-card{% if card_idx == 0 %} is-active{% endif %}"
+                        data-space-index="{{ card_idx }}"
+                        data-side-title="{{ s_title | escape }}"
+                        data-side-desc="{{ s_desc | escape }}"
+                        data-side-img="{{ s_img }}"
+                        data-side-cta="{{ s_cta | escape }}"
+                        data-side-cta-url="{{ s_url | escape }}"
+                        role="button"
+                        tabindex="0"
+                        {{ block.shopify_attributes }}
+                      >
+                        <div class="hp-space-mini-media">
+                          {%- if block.settings.thumbnail != blank -%}
+                            {{ block.settings.thumbnail | image_url: width: 120 | image_tag: class: 'hp-space-mini-img', alt: b_title }}
+                          {%- endif -%}
+                        </div>
+                        <div class="hp-space-mini-info">
+                          <div class="hp-space-mini-title-row">
+                            <span class="hp-space-mini-title">{{ b_title | escape }}</span>
+                            <span class="hp-space-mini-arrow">
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </span>
+                          </div>
+                          {%- if b_desc != blank -%}
+                            <span class="hp-space-mini-desc">{{ b_desc | escape }}</span>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                      {%- assign card_idx = card_idx | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+                <button type="button" class="hp-space-rail-arrow hp-space-rail-arrow--prev" style="display: none;" aria-label="Previous parts">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="hp-space-rail-arrow hp-space-rail-arrow--next" aria-label="Next parts">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Detail Sidebar Card -->
+            <div class="hp-space-sidebar">
+              <!-- Floating Navigation Arrows for Mobile View -->
+              <button type="button" class="hp-space-side-nav-arrow hp-space-side-nav-arrow--prev" aria-label="Previous product">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="hp-space-side-nav-arrow hp-space-side-nav-arrow--next" aria-label="Next product">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+
+              {%- liquid
+                assign first_h = null
+                for block in hotspot_blocks
+                  assign b_space = block.settings.space_name | default: 'Personal Care'
+                  if b_space == t_title or is_first_tab and block.settings.space_name == blank
+                    assign first_h = block
+                    break
+                  endif
+                endfor
+
+                if first_h != blank
+                  assign init_side_title = first_h.settings.side_title | default: first_h.settings.title | default: 'Parts'
+                  assign init_side_desc = first_h.settings.side_description | default: first_h.settings.description
+                  assign init_side_cta = first_h.settings.button_label | default: 'Shop Parts'
+                  assign init_side_url = first_h.settings.button_link | default: '#'
+                else
+                  assign init_side_title = 'Parts'
+                  assign init_side_desc = ''
+                  assign init_side_cta = 'Shop Parts'
+                  assign init_side_url = '#'
+                endif
+              -%}
+
+              <div class="hp-space-side-media">
+                {%- if first_h.settings.side_image != blank -%}
+                  {{ first_h.settings.side_image | image_url: width: 800 | image_tag: class: 'hp-space-side-img', alt: init_side_title }}
+                {%- elsif first_h.settings.thumbnail != blank -%}
+                  {{ first_h.settings.thumbnail | image_url: width: 800 | image_tag: class: 'hp-space-side-img', alt: init_side_title }}
+                {%- endif -%}
+              </div>
+
+              {%- if init_side_title != blank -%}
+                <h3 class="hp-space-side-title">{{ init_side_title | escape }}</h3>
+              {%- endif -%}
+              {%- if init_side_desc != blank -%}
+                <p class="hp-space-side-desc">{{ init_side_desc | escape }}</p>
+              {%- endif -%}
+
+              {%- if init_side_cta != blank -%}
+                <a href="{{ init_side_url }}" class="hp-space-side-cta">
+                  {{ init_side_cta | escape }}
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 12h15"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </a>
+              {%- endif -%}
+
+              <!-- Sublinks Group -->
+              <div class="hp-space-side-links">
+                {%- assign sub_idx = 0 -%}
+                {%- for block in hotspot_blocks -%}
+                  {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                  {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                    <div
+                      class="hp-space-side-links-group"
+                      data-space-links-index="{{ sub_idx }}"
+                      style="display: {% if sub_idx == 0 %}flex{% else %}none{% endif %};"
+                    >
+                      {%- if block.settings.sublink_1_text != blank -%}
+                        <a href="{{ block.settings.sublink_1_url | default: '#' }}" class="hp-space-side-link">
+                          <span>{{ block.settings.sublink_1_text | escape }}</span>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                      {%- endif -%}
+                      {%- if block.settings.sublink_2_text != blank -%}
+                        <a href="{{ block.settings.sublink_2_url | default: '#' }}" class="hp-space-side-link">
+                          <span>{{ block.settings.sublink_2_text | escape }}</span>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                      {%- endif -%}
+                      {%- if block.settings.sublink_3_text != blank -%}
+                        <a href="{{ block.settings.sublink_3_url | default: '#' }}" class="hp-space-side-link">
+                          <span>{{ block.settings.sublink_3_text | escape }}</span>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                      {%- endif -%}
+                      {%- if block.settings.sublink_4_text != blank -%}
+                        <a href="{{ block.settings.sublink_4_url | default: '#' }}" class="hp-space-side-link">
+                          <span>{{ block.settings.sublink_4_text | escape }}</span>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                        </a>
+                      {%- endif -%}
+                    </div>
+                    {%- assign sub_idx = sub_idx | plus: 1 -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- elsif spaces_arr.size > 0 -%}
+      {%- for s_name in spaces_arr -%}
+        {%- if s_name != blank -%}
+          {%- assign t_title = s_name -%}
+          {%- assign t_id = t_title | handleize -%}
+          {%- assign t_image = section.settings.image -%}
+          {%- assign is_first_tab = forloop.first -%}
+
+          <div class="hp-space-panel{% if is_first_tab %} is-active{% endif %}" data-space-panel="{{ t_id }}">
+            <div class="hp-space-grid">
+              <div class="hp-space-left">
+                <div class="hp-space-stage">
+                  {%- if t_image != blank -%}
+                    {{ t_image | image_url: width: 1400 | image_tag: class: 'hp-space-bg', alt: t_title }}
+                  {%- endif -%}
+
+                  {%- assign pin_idx = 0 -%}
+                  {%- for block in hotspot_blocks -%}
+                    {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                    {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                      {%- liquid
+                        assign p_left = block.settings.pin_left | default: 50
+                        assign p_top = block.settings.pin_top | default: 50
+                        assign p_left_mob = block.settings.pin_left_mob | default: p_left
+                        assign p_top_mob = block.settings.pin_top_mob | default: p_top
+                        assign b_title = block.settings.title | default: 'Part Category'
+                        assign b_desc = block.settings.description | default: ''
+                        assign s_title = block.settings.side_title | default: b_title
+                        assign s_desc = block.settings.side_description | default: b_desc
+                        assign s_cta = block.settings.button_label | default: 'Shop Parts'
+                        assign s_url = block.settings.button_link | default: '#'
+                        assign s_img = ''
+                        if block.settings.side_image != blank
+                          assign s_img = block.settings.side_image | image_url: width: 800
+                        elsif block.settings.thumbnail != blank
+                          assign s_img = block.settings.thumbnail | image_url: width: 800
+                        endif
+                      -%}
+                      <button
+                        type="button"
+                        class="hp-space-pin{% if pin_idx == 0 %} is-active{% endif %}"
+                        style="--pin-left: {{ p_left }}%; --pin-top: {{ p_top }}%; --pin-left-mob: {{ p_left_mob }}%; --pin-top-mob: {{ p_top_mob }}%;"
+                        data-space-index="{{ pin_idx }}"
+                        data-side-title="{{ s_title | escape }}"
+                        data-side-desc="{{ s_desc | escape }}"
+                        data-side-img="{{ s_img }}"
+                        data-side-cta="{{ s_cta | escape }}"
+                        data-side-cta-url="{{ s_url | escape }}"
+                        aria-label="{{ b_title | escape }} Pin"
+                        tabindex="0"
+                        {{ block.shopify_attributes }}
+                      >
+                        <span class="hp-space-pin-dot"></span>
+                        <span class="hp-space-pin-label">{{ b_title | escape }}</span>
+                      </button>
+                      {%- assign pin_idx = pin_idx | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+                <!-- Mini-Cards Rail -->
+                <div class="hp-space-rail-wrap">
+                  <div class="hp-space-rail">
+                    {%- assign card_idx = 0 -%}
+                    {%- for block in hotspot_blocks -%}
+                      {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                      {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                        {%- liquid
+                          assign b_title = block.settings.title | default: 'Part Category'
+                          assign b_desc = block.settings.description | default: ''
+                          assign s_title = block.settings.side_title | default: b_title
+                          assign s_desc = block.settings.side_description | default: b_desc
+                          assign s_cta = block.settings.button_label | default: 'Shop Parts'
+                          assign s_url = block.settings.button_link | default: '#'
+                          assign s_img = ''
+                          if block.settings.side_image != blank
+                            assign s_img = block.settings.side_image | image_url: width: 800
+                          elsif block.settings.thumbnail != blank
+                            assign s_img = block.settings.thumbnail | image_url: width: 800
+                          endif
+                        -%}
+                        <div
+                          class="hp-space-mini-card{% if card_idx == 0 %} is-active{% endif %}"
+                          data-space-index="{{ card_idx }}"
+                          data-side-title="{{ s_title | escape }}"
+                          data-side-desc="{{ s_desc | escape }}"
+                          data-side-img="{{ s_img }}"
+                          data-side-cta="{{ s_cta | escape }}"
+                          data-side-cta-url="{{ s_url | escape }}"
+                          role="button"
+                          tabindex="0"
+                          {{ block.shopify_attributes }}
+                        >
+                          <div class="hp-space-mini-media">
+                            {%- if block.settings.thumbnail != blank -%}
+                              {{ block.settings.thumbnail | image_url: width: 120 | image_tag: class: 'hp-space-mini-img', alt: b_title }}
+                            {%- endif -%}
+                          </div>
+                          <div class="hp-space-mini-info">
+                            <div class="hp-space-mini-title-row">
+                              <span class="hp-space-mini-title">{{ b_title | escape }}</span>
+                              <span class="hp-space-mini-arrow">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                              </span>
+                            </div>
+                            {%- if b_desc != blank -%}
+                              <span class="hp-space-mini-desc">{{ b_desc | escape }}</span>
+                            {%- endif -%}
+                          </div>
+                        </div>
+                        {%- assign card_idx = card_idx | plus: 1 -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+
+                  <button type="button" class="hp-space-rail-arrow hp-space-rail-arrow--prev" style="display: none;" aria-label="Previous parts">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+                  </button>
+                  <button type="button" class="hp-space-rail-arrow hp-space-rail-arrow--next" aria-label="Next parts">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right Detail Sidebar Card -->
+              <div class="hp-space-sidebar">
+                <!-- Floating Navigation Arrows for Mobile View -->
+                <button type="button" class="hp-space-side-nav-arrow hp-space-side-nav-arrow--prev" aria-label="Previous product">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="hp-space-side-nav-arrow hp-space-side-nav-arrow--next" aria-label="Next product">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+                {%- liquid
+                  assign first_h = null
+                  for block in hotspot_blocks
+                    assign b_space = block.settings.space_name | default: 'Personal Care'
+                    if b_space == t_title or is_first_tab and block.settings.space_name == blank
+                      assign first_h = block
+                      break
+                    endif
+                  endfor
+
+                  if first_h != blank
+                    assign init_side_title = first_h.settings.side_title | default: first_h.settings.title | default: 'Parts'
+                    assign init_side_desc = first_h.settings.side_description | default: first_h.settings.description
+                    assign init_side_cta = first_h.settings.button_label | default: 'Shop Parts'
+                    assign init_side_url = first_h.settings.button_link | default: '#'
+                  else
+                    assign init_side_title = 'Parts'
+                    assign init_side_desc = ''
+                    assign init_side_cta = 'Shop Parts'
+                    assign init_side_url = '#'
+                  endif
+                -%}
+
+                <div class="hp-space-side-media">
+                  {%- if first_h.settings.side_image != blank -%}
+                    {{ first_h.settings.side_image | image_url: width: 800 | image_tag: class: 'hp-space-side-img', alt: init_side_title }}
+                  {%- elsif first_h.settings.thumbnail != blank -%}
+                    {{ first_h.settings.thumbnail | image_url: width: 800 | image_tag: class: 'hp-space-side-img', alt: init_side_title }}
+                  {%- endif -%}
+                </div>
+
+                {%- if init_side_title != blank -%}
+                  <h3 class="hp-space-side-title">{{ init_side_title | escape }}</h3>
+                {%- endif -%}
+                {%- if init_side_desc != blank -%}
+                  <p class="hp-space-side-desc">{{ init_side_desc | escape }}</p>
+                {%- endif -%}
+
+                {%- if init_side_cta != blank -%}
+                  <a href="{{ init_side_url }}" class="hp-space-side-cta">
+                    {{ init_side_cta | escape }}
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 12h15"></path>
+                      <path d="m13 6 6 6-6 6"></path>
+                    </svg>
+                  </a>
+                {%- endif -%}
+
+                <!-- Sublinks Group -->
+                <div class="hp-space-side-links">
+                  {%- assign sub_idx = 0 -%}
+                  {%- for block in hotspot_blocks -%}
+                    {%- assign b_space = block.settings.space_name | default: 'Personal Care' -%}
+                    {%- if b_space == t_title or is_first_tab and block.settings.space_name == blank -%}
+                      <div
+                        class="hp-space-side-links-group"
+                        data-space-links-index="{{ sub_idx }}"
+                        style="display: {% if sub_idx == 0 %}flex{% else %}none{% endif %};"
+                      >
+                        {%- if block.settings.sublink_1_text != blank -%}
+                          <a href="{{ block.settings.sublink_1_url | default: '#' }}" class="hp-space-side-link">
+                            <span>{{ block.settings.sublink_1_text | escape }}</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                          </a>
+                        {%- endif -%}
+                        {%- if block.settings.sublink_2_text != blank -%}
+                          <a href="{{ block.settings.sublink_2_url | default: '#' }}" class="hp-space-side-link">
+                            <span>{{ block.settings.sublink_2_text | escape }}</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                          </a>
+                        {%- endif -%}
+                        {%- if block.settings.sublink_3_text != blank -%}
+                          <a href="{{ block.settings.sublink_3_url | default: '#' }}" class="hp-space-side-link">
+                            <span>{{ block.settings.sublink_3_text | escape }}</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                          </a>
+                        {%- endif -%}
+                        {%- if block.settings.sublink_4_text != blank -%}
+                          <a href="{{ block.settings.sublink_4_url | default: '#' }}" class="hp-space-side-link">
+                            <span>{{ block.settings.sublink_4_text | escape }}</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                          </a>
+                        {%- endif -%}
+                      </div>
+                      {%- assign sub_idx = sub_idx | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop By Space",
+  "class": "section-homepage-shop-by-space",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_prefix",
+      "default": "Shop By",
+      "label": "Title Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Space",
+      "label": "Title Highlight"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Explore genuine Panasonic replacement parts tailored for every room in your home.",
+      "label": "Subtext"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Default Room Background Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "space_tab",
+      "name": "Space / Room Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Space / Tab Name",
+          "default": "Personal Care"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Room Background Image"
+        }
+      ]
+    },
+    {
+      "type": "hotspot",
+      "name": "Hotspot & Part",
+      "settings": [
+        {
+          "type": "text",
+          "id": "space_name",
+          "label": "Space / Tab Name",
+          "default": "Personal Care",
+          "info": "Matches the Space Tab Name (e.g. Personal Care, Kitchen, Living Room)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Shaver"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Foils, blades and blade sets."
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Mini Card Icon / Image"
+        },
+        {
+          "type": "header",
+          "content": "Hotspot Pin Positions"
+        },
+        {
+          "type": "range",
+          "id": "pin_left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop Pin Left (%)",
+          "default": 63
+        },
+        {
+          "type": "range",
+          "id": "pin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Desktop Pin Top (%)",
+          "default": 29
+        },
+        {
+          "type": "range",
+          "id": "pin_left_mob",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile Pin Left (%)",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "pin_top_mob",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Mobile Pin Top (%)",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Right Detail Card Content"
+        },
+        {
+          "type": "text",
+          "id": "side_title",
+          "label": "Detail Card Title",
+          "default": "Shaver Parts"
+        },
+        {
+          "type": "textarea",
+          "id": "side_description",
+          "label": "Detail Card Description",
+          "default": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more."
+        },
+        {
+          "type": "image_picker",
+          "id": "side_image",
+          "label": "Detail Card Image"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "CTA Button Label",
+          "default": "Shop Shaver Parts"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "CTA Button Link"
+        },
+        {
+          "type": "header",
+          "content": "Detail Card Sub-links"
+        },
+        {
+          "type": "text",
+          "id": "sublink_1_text",
+          "label": "Sub-link 1 Text",
+          "default": "Inner Blades"
+        },
+        {
+          "type": "url",
+          "id": "sublink_1_url",
+          "label": "Sub-link 1 Link"
+        },
+        {
+          "type": "text",
+          "id": "sublink_2_text",
+          "label": "Sub-link 2 Text",
+          "default": "Outer Foils"
+        },
+        {
+          "type": "url",
+          "id": "sublink_2_url",
+          "label": "Sub-link 2 Link"
+        },
+        {
+          "type": "text",
+          "id": "sublink_3_text",
+          "label": "Sub-link 3 Text",
+          "default": "Blade & Foil Sets"
+        },
+        {
+          "type": "url",
+          "id": "sublink_3_url",
+          "label": "Sub-link 3 Link"
+        },
+        {
+          "type": "text",
+          "id": "sublink_4_text",
+          "label": "Sub-link 4 Text",
+          "default": "Cleaning Accessories"
+        },
+        {
+          "type": "url",
+          "id": "sublink_4_url",
+          "label": "Sub-link 4 Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Space",
+      "blocks": [
+        {
+          "type": "space_tab",
+          "settings": {
+            "title": "Personal Care"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Shaver",
+            "description": "Foils, blades and blade sets.",
+            "pin_left": 63,
+            "pin_top": 29,
+            "pin_left_mob": 52,
+            "pin_top_mob": 24,
+            "side_title": "Shaver Parts",
+            "side_description": "Keep your shave smooth and comfortable with genuine Panasonic replacement parts. Find foils, inner blades, blade sets and more.",
+            "button_label": "Shop Shaver Parts",
+            "sublink_1_text": "Inner Blades",
+            "sublink_2_text": "Outer Foils",
+            "sublink_3_text": "Blade & Foil Sets",
+            "sublink_4_text": "Cleaning Accessories"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Toothbrush",
+            "description": "Brush heads and chargers.",
+            "pin_left": 53,
+            "pin_top": 33,
+            "pin_left_mob": 55,
+            "pin_top_mob": 28,
+            "side_title": "Toothbrush Parts",
+            "side_description": "Keep every clean feeling fresh with genuine Panasonic replacement parts. Find brush heads, chargers, travel cases and more.",
+            "button_label": "Shop Toothbrush Parts",
+            "sublink_1_text": "Brush Heads",
+            "sublink_2_text": "Charging Bases",
+            "sublink_3_text": "Travel Cases",
+            "sublink_4_text": "Replacement Caps"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Hair Dryer",
+            "description": "Filters, nozzles and parts.",
+            "pin_left": 46,
+            "pin_top": 71,
+            "pin_left_mob": 38,
+            "pin_top_mob": 43,
+            "side_title": "Hair Dryer Parts",
+            "side_description": "Keep airflow strong and styling consistent with genuine Panasonic replacement parts. Find filters, nozzles, diffusers and more.",
+            "button_label": "Shop Hair Dryer Parts",
+            "sublink_1_text": "Air Filters",
+            "sublink_2_text": "Nozzles",
+            "sublink_3_text": "Diffusers",
+            "sublink_4_text": "Power Cords"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Blood Pressure Monitor",
+            "description": "Cuffs, tubes and adapters.",
+            "pin_left": 77,
+            "pin_top": 39,
+            "pin_left_mob": 26,
+            "pin_top_mob": 25,
+            "side_title": "Blood Pressure Monitor Parts",
+            "side_description": "Keep every reading accurate with genuine Panasonic replacement parts. Find arm cuffs, air tubes, power adapters and more.",
+            "button_label": "Shop BP Monitor Parts",
+            "sublink_1_text": "Arm Cuffs",
+            "sublink_2_text": "Air Tubes",
+            "sublink_3_text": "Power Adapters",
+            "sublink_4_text": "Battery Covers"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "space_name": "Personal Care",
+            "title": "Women's Beauty",
+            "description": "Blades, combs and attachments.",
+            "pin_left": 79,
+            "pin_top": 68,
+            "pin_left_mob": 79,
+            "pin_top_mob": 41,
+            "side_title": "Women's Beauty Parts",
+            "side_description": "Keep every routine gentle and precise with genuine Panasonic replacement parts. Find trimmer heads, foils, attachments and more.",
+            "button_label": "Shop Women's Beauty Parts",
+            "sublink_1_text": "Trimmer Heads",
+            "sublink_2_text": "Outer Foils",
+            "sublink_3_text": "Styling Attachments",
+            "sublink_4_text": "Charging Parts"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
