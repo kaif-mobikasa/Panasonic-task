@@ -1,0 +1,182 @@
+{{ 'about-hero.css' | asset_url | stylesheet_tag }}
+
+<div class="about-hero" id="AboutHero-{{ section.id }}">
+  {%- if section.settings.show_breadcrumbs -%}
+    <div class="about-hero-breadcrumb-wrap">
+      <div class="about-hero-container">
+        <nav class="about-hero-breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}" class="about-hero-crumb-link">
+            {{ section.settings.breadcrumb_home_label | default: 'Home' | escape }}
+          </a>
+          <span class="about-hero-crumb-sep" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </span>
+          <span class="about-hero-crumb-current" aria-current="page">
+            {%- if section.settings.breadcrumb_current_label != blank -%}
+              {{ section.settings.breadcrumb_current_label | escape }}
+            {%- endif -%}
+            {%- if section.settings.breadcrumb_current_label == blank and page.title != blank -%}
+              {{ page.title | escape }}
+            {%- endif -%}
+            {%- if section.settings.breadcrumb_current_label == blank and page.title == blank -%}
+              About Us
+            {%- endif -%}
+          </span>
+        </nav>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div
+    class="about-hero-banner"
+    style="--hero-height-desktop: {{ section.settings.banner_height_desktop | default: 420 }}px; --hero-height-mobile: {{ section.settings.banner_height_mobile | default: 260 }}px; --scrim-opacity: {{ section.settings.overlay_opacity | default: 100 | divided_by: 100.0 }};"
+  >
+    <div class="about-hero-media">
+      {%- if section.settings.image != blank -%}
+        {%- assign desktop_alt = section.settings.image.alt | default: section.settings.heading | default: 'About Panasonic Appliance Parts' | escape -%}
+        {%- if section.settings.image_mobile != blank -%}
+          {%- assign mobile_alt = section.settings.image_mobile.alt | default: desktop_alt | escape -%}
+          {{ section.settings.image_mobile | image_url: width: 800 | image_tag: class: 'about-hero-img about-hero-img--mobile', loading: 'eager', alt: mobile_alt }}
+          {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'about-hero-img about-hero-img--desktop', loading: 'eager', alt: desktop_alt }}
+        {%- endif -%}
+        {%- if section.settings.image_mobile == blank -%}
+          {{ section.settings.image | image_url: width: 2000 | image_tag: class: 'about-hero-img', loading: 'eager', alt: desktop_alt }}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <div class="about-hero-scrim" aria-hidden="true"></div>
+
+    <div class="about-hero-overlay-content">
+      <div class="about-hero-container">
+        <div class="about-hero-text-box">
+          {%- if section.settings.heading != blank -%}
+            <h1 class="about-hero-heading">{{ section.settings.heading | escape }}</h1>
+          {%- endif -%}
+          {%- if section.settings.subtext != blank -%}
+            <p class="about-hero-subtext">{{ section.settings.subtext | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-hero-mobile-content">
+    <div class="about-hero-container">
+      <div class="about-hero-mobile-box">
+        {%- if section.settings.heading != blank -%}
+          <h1 class="about-hero-mobile-heading">{{ section.settings.heading | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.subtext != blank -%}
+          <p class="about-hero-mobile-subtext">{{ section.settings.subtext | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Hero Banner",
+  "tag": "section",
+  "class": "section-about-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Breadcrumb Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "default": true,
+      "label": "Show Breadcrumb Navigation"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_home_label",
+      "default": "Home",
+      "label": "Home Link Label"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_current_label",
+      "default": "About Us",
+      "label": "Current Page Label"
+    },
+    {
+      "type": "header",
+      "content": "Banner Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Banner Image (Optional)"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 320,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 420,
+      "label": "Desktop Banner Height"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 200,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "default": 260,
+      "label": "Mobile Image Height"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "label": "Desktop Dark Overlay Opacity"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Keeping Panasonic Appliances Going",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "default": "Genuine Panasonic replacement parts that help your appliances work like new.",
+      "label": "Subtext"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Hero Banner",
+      "settings": {
+        "show_breadcrumbs": true,
+        "breadcrumb_home_label": "Home",
+        "breadcrumb_current_label": "About Us",
+        "heading": "Keeping Panasonic Appliances Going",
+        "subtext": "Genuine Panasonic replacement parts that help your appliances work like new."
+      }
+    }
+  ]
+}
+{% endschema %}

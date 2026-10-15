@@ -4,7 +4,6 @@
 {%- assign slide_blocks = section.blocks | where: 'type', 'slide' -%}
 
 <div class="hp-section hp-hero" data-hero-slider>
-  {% comment %} Right Media Stage (Full-bleed on desktop: touches top, bottom, and right edge) {% endcomment %}
   <div class="hp-hero-media-wrapper">
     <div class="hp-hero-stage">
       {%- if slide_blocks.size > 0 -%}
@@ -20,7 +19,6 @@
               {{ block.settings.image | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: img_loading, alt: img_alt }}
             {%- endif -%}
 
-            {% comment %} Hotspot from slide block settings {% endcomment %}
             {%- if block.settings.hotspot_enable and block.settings.hotspot_title != blank -%}
               {% render 'hp-hotspot-item',
                 hs_top: block.settings.hotspot_top,
@@ -33,7 +31,6 @@
               %}
             {%- endif -%}
 
-            {% comment %} Additional standalone hotspot blocks {% endcomment %}
             {%- for hs in section.blocks -%}
               {%- if hs.type == 'hotspot' -%}
                 {%- assign hs_slide_idx = hs.settings.slide | plus: 0 -%}
@@ -54,7 +51,6 @@
           </div>
         {%- endfor -%}
       {%- else -%}
-        {% comment %} Fallback for index.json prior to adding slide blocks {% endcomment %}
         <div class="hp-hero-slide is-active" data-hero-slide="0" data-appliance-label="{{ section.settings.label_1 | default: 'Appliances.' | escape }}">
           {%- if section.settings.image_1 != blank -%}
             {{ section.settings.image_1 | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: 'eager', alt: 'Panasonic Genuine OEM Appliance Parts' }}
@@ -96,7 +92,6 @@
     </div>
   </div>
 
-  {% comment %} Left Content Column inside standard Container {% endcomment %}
   <div class="hp-container hp-hero-container">
     <div class="hp-hero-content">
       {%- assign first_slide_label = '' -%}
@@ -131,7 +126,6 @@
         </p>
       {%- endif -%}
 
-      {% comment %} Search Capsule {% endcomment %}
       <form action="{{ routes.search_url }}" method="get" role="search" class="hp-hero-search-capsule">
         <input type="search" name="q" class="hp-hero-search-input" value="{{ search.terms | escape }}"
           {% if section.settings.search_placeholder != blank %}placeholder="{{ section.settings.search_placeholder | escape }}"{% endif %}
@@ -148,7 +142,6 @@
         </button>
       </form>
 
-      {% comment %} Model Number Link {% endcomment %}
       {%- if section.settings.model_link_text != blank -%}
         <div class="hp-hero-link-wrapper">
           <a href="{{ section.settings.model_link_url | default: '#' }}" class="hp-hero-model-link">
@@ -157,7 +150,6 @@
         </div>
       {%- endif -%}
 
-      {% comment %} Slider Navigation Controls {% endcomment %}
       <div class="hp-hero-slider-ctrls">
         <button type="button" class="hp-hero-arrow hp-hero-arrow-prev" data-hero-prev aria-label="Previous Hero Slide">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"

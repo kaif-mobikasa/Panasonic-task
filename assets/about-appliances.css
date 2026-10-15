@@ -1,0 +1,235 @@
+.about-appliances {
+  width: 100%;
+  position: relative;
+  background-color: var(--ap-bg-color, #ffffff);
+  padding-top: var(--ap-padding-top, 56px);
+  padding-bottom: var(--ap-padding-bottom, 64px);
+}
+
+.about-appliances-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.about-appliances-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.about-appliances-title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #111827;
+}
+
+.about-appliances-title-prefix {
+  color: #111827;
+}
+
+.about-appliances-title-highlight {
+  color: var(--ap-highlight-color, #0041c0);
+}
+
+.about-appliances-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.about-appliances-cta:hover {
+  color: #0041c0;
+  text-decoration: none;
+}
+
+.about-appliances-cta svg {
+  display: block;
+  transition: transform 200ms ease;
+}
+
+.about-appliances-cta:hover svg {
+  transform: translateX(3px);
+}
+
+.about-appliances-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.about-appliances-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 150px;
+  padding: 20px 10px;
+  background-color: #ffffff;
+  border: 1px solid #e2e6ee;
+  border-radius: 8px;
+  text-decoration: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+}
+
+.about-appliances-card:hover {
+  border-color: #0041c0;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 65, 192, 0.08);
+}
+
+.about-appliances-icon-wrap {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 50%;
+  background-color: var(--ap-icon-bg, #ebf3ff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 260ms ease;
+}
+
+.about-appliances-card:hover .about-appliances-icon-wrap {
+  transform: scale(1.05);
+}
+
+.about-appliances-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.about-appliances-icon-svg {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ap-highlight-color, #0041c0);
+}
+
+.about-appliances-icon-svg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.about-appliances-name {
+  font-size: 14.5px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: #111827;
+  text-align: center;
+  word-break: break-word;
+  transition: color 200ms ease;
+}
+
+.about-appliances-card:hover .about-appliances-name {
+  color: #0041c0;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-appliances-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-appliances {
+    padding-top: var(--ap-padding-top-mobile, 36px);
+    padding-bottom: var(--ap-padding-bottom-mobile, 48px);
+  }
+
+  .about-appliances-container {
+    padding: 0 16px;
+  }
+
+  .about-appliances-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .about-appliances-title {
+    font-size: 26px;
+  }
+
+  .about-appliances-cta {
+    font-size: 14px;
+  }
+
+  .about-appliances-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .about-appliances-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    min-height: auto;
+    padding: 14px 14px;
+    border-radius: 8px;
+  }
+
+  .about-appliances-icon-wrap {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  .about-appliances-icon-img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .about-appliances-icon-svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .about-appliances-name {
+    font-size: 14px;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-appliances-card {
+    padding: 12px 10px;
+    gap: 10px;
+  }
+
+  .about-appliances-icon-wrap {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .about-appliances-name {
+    font-size: 13px;
+  }
+}

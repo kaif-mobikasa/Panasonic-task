@@ -17,7 +17,6 @@
           <p class="hp-subtext">{{ section.settings.subtext | escape }}</p>
         {%- endif -%}
       </div>
-
       {%- if section.settings.cta_text != blank -%}
         <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="hp-link-more">
           <span>{{ section.settings.cta_text | escape }}</span>

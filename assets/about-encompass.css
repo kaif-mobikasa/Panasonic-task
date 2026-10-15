@@ -1,0 +1,226 @@
+.about-encompass {
+  width: 100%;
+  position: relative;
+  background-color: var(--encompass-bg-color, #ffffff);
+  padding-top: var(--encompass-padding-top, 72px);
+  padding-bottom: var(--encompass-padding-bottom, 72px);
+}
+
+.about-encompass-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.about-encompass-mobile-head {
+  display: none;
+}
+
+.about-encompass-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.about-encompass-grid--reverse {
+  flex-direction: row-reverse;
+}
+
+.about-encompass-text-col {
+  flex: 1 1 50%;
+  max-width: 560px;
+  min-width: 0;
+}
+
+.about-encompass-heading {
+  margin: 0 0 24px;
+  font-size: 38px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.about-encompass-heading-prefix {
+  color: #111827;
+}
+
+.about-encompass-heading-highlight {
+  color: var(--encompass-highlight-color, #0041c0);
+}
+
+.about-encompass-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about-encompass-p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 400;
+  color: #5b6b79;
+}
+
+.about-encompass-card-col {
+  flex: 1 1 50%;
+  max-width: 600px;
+  min-width: 0;
+  width: 100%;
+}
+
+.about-encompass-card {
+  width: 100%;
+  min-height: 320px;
+  background-color: var(--encompass-card-bg, #ffffff);
+  border: 1px solid var(--encompass-card-border, #e8eef5);
+  border-radius: var(--encompass-card-radius, 20px);
+  padding: 48px 36px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.about-encompass-card:hover {
+  border-color: #d0e0f8;
+  box-shadow: 0 10px 28px rgba(0, 65, 192, 0.06);
+}
+
+.about-encompass-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.about-encompass-logo-img {
+  width: var(--encompass-logo-width, 280px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.about-encompass-logo-svg {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-encompass-logo-svg svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-encompass {
+    padding-top: calc(var(--encompass-padding-top, 72px) * 0.75);
+    padding-bottom: calc(var(--encompass-padding-bottom, 72px) * 0.75);
+  }
+
+  .about-encompass-grid {
+    gap: 40px;
+  }
+
+  .about-encompass-heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .about-encompass-card {
+    min-height: 280px;
+    padding: 36px 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-encompass {
+    padding-top: var(--encompass-padding-top-mobile, 36px);
+    padding-bottom: var(--encompass-padding-bottom-mobile, 48px);
+  }
+
+  .about-encompass-container {
+    padding: 0 16px;
+  }
+
+  .about-encompass-mobile-head {
+    display: block;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .about-encompass-mobile-head .about-encompass-heading {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .about-encompass-desktop-head {
+    display: none;
+  }
+
+  .about-encompass-grid,
+  .about-encompass-grid--reverse {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .about-encompass-card-col {
+    order: 1;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .about-encompass-card {
+    min-height: 240px;
+    border-radius: 16px;
+    padding: 36px 20px;
+  }
+
+  .about-encompass-logo-img {
+    width: min(var(--encompass-logo-width, 280px), 240px);
+  }
+
+  .about-encompass-text-col {
+    order: 2;
+    flex: 1 1 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .about-encompass-body {
+    max-width: 480px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+
+  .about-encompass-p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4a5568;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-encompass-mobile-head .about-encompass-heading {
+    font-size: 25px;
+  }
+
+  .about-encompass-card {
+    min-height: 210px;
+    padding: 28px 16px;
+  }
+
+  .about-encompass-p {
+    font-size: 14.5px;
+  }
+}

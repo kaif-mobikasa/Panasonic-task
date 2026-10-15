@@ -1,8 +1,3 @@
-/**
- * Homepage Error Code Lookup Section Styles
- * Matches Figma Desktop and Mobile UI specifications
- */
-
 .hp-error-code {
   padding: 56px 0 64px;
   background: #f7f9fd;
@@ -16,7 +11,6 @@
   padding: 0 20px;
 }
 
-/* Header: Title and Top-Right Link */
 .hp-ec-header {
   display: flex;
   align-items: center;
@@ -58,6 +52,7 @@
 
 .hp-ec-cta svg {
   flex: none;
+  display: block;
   transition: transform 200ms ease;
 }
 
@@ -65,7 +60,6 @@
   transform: translateX(3px);
 }
 
-/* Cards Grid */
 .hp-ec-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -186,9 +180,6 @@
   letter-spacing: -0.01em;
 }
 
-/* --------------------------------------------------------------------------
-   Tablet and Mobile Responsive (Matches Figma Screenshot 2)
-   -------------------------------------------------------------------------- */
 @media screen and (max-width: 1024px) {
   .hp-ec-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

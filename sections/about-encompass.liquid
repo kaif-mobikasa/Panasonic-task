@@ -1,0 +1,267 @@
+{{ 'about-encompass.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="about-encompass"
+  id="AboutEncompass-{{ section.id }}"
+  style="
+    --encompass-bg-color: {{ section.settings.background_color | default: '#ffffff' }};
+    --encompass-highlight-color: {{ section.settings.highlight_color | default: '#0041c0' }};
+    --encompass-card-bg: {{ section.settings.card_bg_color | default: '#ffffff' }};
+    --encompass-card-border: {{ section.settings.card_border_color | default: '#e8eef5' }};
+    --encompass-card-radius: {{ section.settings.card_radius | default: 20 }}px;
+    --encompass-logo-width: {{ section.settings.logo_width | default: 280 }}px;
+    --encompass-padding-top: {{ section.settings.padding_top | default: 72 }}px;
+    --encompass-padding-bottom: {{ section.settings.padding_bottom | default: 72 }}px;
+    --encompass-padding-top-mobile: {{ section.settings.padding_top_mobile | default: 36 }}px;
+    --encompass-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile | default: 48 }}px;
+  "
+>
+  <div class="about-encompass-container">
+    {%- if section.settings.heading_prefix != blank or section.settings.heading_highlight != blank -%}
+      <div class="about-encompass-mobile-head">
+        <h2 class="about-encompass-heading">
+          {%- if section.settings.heading_prefix != blank -%}
+            <span class="about-encompass-heading-prefix">{{ section.settings.heading_prefix | escape }} </span>
+          {%- endif -%}
+          {%- if section.settings.heading_highlight != blank -%}
+            <span class="about-encompass-heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+          {%- endif -%}
+        </h2>
+      </div>
+    {%- endif -%}
+
+    <div class="about-encompass-grid{% if section.settings.card_position == 'left' %} about-encompass-grid--reverse{% endif %}">
+      {%- if section.settings.heading_prefix != blank or section.settings.heading_highlight != blank or section.settings.paragraph_1 != blank or section.settings.paragraph_2 != blank -%}
+        <div class="about-encompass-text-col">
+          {%- if section.settings.heading_prefix != blank or section.settings.heading_highlight != blank -%}
+            <div class="about-encompass-desktop-head">
+              <h2 class="about-encompass-heading">
+                {%- if section.settings.heading_prefix != blank -%}
+                  <span class="about-encompass-heading-prefix">{{ section.settings.heading_prefix | escape }} </span>
+                {%- endif -%}
+                {%- if section.settings.heading_highlight != blank -%}
+                  <span class="about-encompass-heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+                {%- endif -%}
+              </h2>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.paragraph_1 != blank or section.settings.paragraph_2 != blank -%}
+            <div class="about-encompass-body">
+              {%- if section.settings.paragraph_1 != blank -%}
+                <p class="about-encompass-p">{{ section.settings.paragraph_1 | escape }}</p>
+              {%- endif -%}
+              {%- if section.settings.paragraph_2 != blank -%}
+                <p class="about-encompass-p">{{ section.settings.paragraph_2 | escape }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="about-encompass-card-col">
+        <div class="about-encompass-card">
+          <div class="about-encompass-logo-wrap">
+            {%- assign logo_alt_text = section.settings.logo_alt | default: 'Encompass - A Parts Town unlimited Company' | escape -%}
+
+            {%- if section.settings.logo_image != blank -%}
+              {{ section.settings.logo_image | image_url: width: 600 | image_tag: class: 'about-encompass-logo-img', alt: logo_alt_text, loading: 'lazy' }}
+            {%- endif -%}
+
+            {%- if section.settings.logo_image == blank and section.settings.logo_svg != blank -%}
+              <div class="about-encompass-logo-svg">
+                {{ section.settings.logo_svg }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Powered by Encompass",
+  "tag": "section",
+  "class": "section-about-encompass",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Prefix",
+      "default": "Powered by"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Encompass"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#0041C0"
+    },
+    {
+      "type": "header",
+      "content": "Paragraphs"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "While there may be other distributors in the market, none can match the experience, comprehensive inventory and value-added services Encompass provides."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "State-of-the-art warehouse management and automated backorder sourcing keep genuine parts available, with next day and 2-day ground shipping to keep repairs moving."
+    },
+    {
+      "type": "header",
+      "content": "Partner Card & Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Partner Logo Image"
+    },
+    {
+      "type": "html",
+      "id": "logo_svg",
+      "label": "Custom Logo SVG (Optional)",
+      "info": "Used when Partner Logo Image is empty"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Logo Alt Text",
+      "default": "Encompass - A Parts Town unlimited Company"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 140,
+      "max": 420,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Max Width",
+      "default": 280
+    },
+    {
+      "type": "select",
+      "id": "card_position",
+      "label": "Desktop Card Position",
+      "options": [
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#E8EEF5"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Corner Radius",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Powered by Encompass",
+      "settings": {
+        "heading_prefix": "Powered by",
+        "heading_highlight": "Encompass",
+        "highlight_color": "#0041C0",
+        "paragraph_1": "While there may be other distributors in the market, none can match the experience, comprehensive inventory and value-added services Encompass provides.",
+        "paragraph_2": "State-of-the-art warehouse management and automated backorder sourcing keep genuine parts available, with next day and 2-day ground shipping to keep repairs moving.",
+        "card_position": "right",
+        "card_radius": 20,
+        "logo_width": 280,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 48
+      }
+    }
+  ]
+}
+{% endschema %}

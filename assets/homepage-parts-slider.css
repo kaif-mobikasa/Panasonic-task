@@ -1,8 +1,3 @@
-/**
- * Homepage Parts Experience Slider Section Styles
- * Matches Figma Desktop and Mobile UI specifications
- */
-
 .hp-parts-slider {
   padding: 64px 0 72px;
   background: #ffffff;
@@ -17,7 +12,6 @@
   padding: 0 20px;
 }
 
-/* Mobile Section Header (Centered on Mobile) */
 .hp-ps-mobile-header {
   display: none;
   width: 100%;
@@ -39,7 +33,6 @@
   font-weight: 700;
 }
 
-/* Main Grid Layout */
 .hp-ps-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
@@ -47,7 +40,6 @@
   align-items: center;
 }
 
-/* Left: 3D Stack Deck */
 .hp-ps-deck-wrap {
   width: 100%;
   max-width: 520px;
@@ -128,7 +120,6 @@
   box-sizing: border-box;
 }
 
-/* Right: Content Column */
 .hp-ps-content {
   display: flex;
   flex-direction: column;
@@ -234,9 +225,6 @@
   display: block;
 }
 
-/* --------------------------------------------------------------------------
-   Mobile & Tablet Responsive (Matches Figma Screenshot 2)
-   -------------------------------------------------------------------------- */
 @media screen and (max-width: 989px) {
   .hp-parts-slider {
     padding: 36px 0 44px;

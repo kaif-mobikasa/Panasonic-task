@@ -1,12 +1,3 @@
-{% comment %}
-  Homepage Popular Parts & Accessories Section - Panasonic Shopify OS 2.0 Theme
-  Matches Figma Desktop and Mobile UI specification:
-  - Category tabs filter (All Parts, Microwave, Personal Care, Vacuum, Refrigerator, Toaster Oven)
-  - Horizontal swipeable carousel with floating next/prev navigation
-  - Uses blocks following Shopify best practices
-  - Modular CSS & JS (homepage-products.css, homepage-products.js)
-{% endcomment %}
-
 {{ 'homepage-products.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'homepage-products.js' | asset_url }}" defer="defer"></script>
 
@@ -29,7 +20,6 @@
       </a>
     </div>
 
-    <!-- Category Tabs Filter Pills -->
     <div class="hp-products-tabs" role="tablist">
       <button type="button" class="hp-prod-tab is-active" data-prod-tab="all">All Parts</button>
       <button type="button" class="hp-prod-tab" data-prod-tab="microwave">Microwave</button>
@@ -39,7 +29,6 @@
       <button type="button" class="hp-prod-tab" data-prod-tab="toaster_oven">Toaster Oven</button>
     </div>
 
-    <!-- Products Track Wrapper with Floating Navigation -->
     <div class="hp-products-carousel-wrap">
       <button type="button" class="hp-prod-arrow hp-prod-arrow--prev" data-prod-prev aria-label="Previous parts" style="display: none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="m15 19-7-7 7-7"></path></svg>
@@ -50,7 +39,6 @@
           {%- for block in section.blocks -%}
             {%- assign prod = block.settings.product -%}
 
-            {% comment %} Determine values with product fallback {% endcomment %}
             {%- assign card_title = block.settings.title -%}
             {%- if card_title == blank and prod != blank -%}
               {%- assign card_title = prod.title -%}
@@ -88,13 +76,11 @@
                   {{ block.settings.image | image_url: width: 600 | image_tag: class: 'hp-product-img', loading: 'lazy', alt: card_title }}
                 {%- elsif prod != blank and prod.featured_media != blank -%}
                   {{ prod.featured_media | image_url: width: 600 | image_tag: class: 'hp-product-img', loading: 'lazy', alt: card_title }}
-                {%- else -%}
-                  <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop" class="hp-product-img" alt="{{ card_title }}" loading="lazy">
                 {%- endif -%}
 
                 <button type="button" class="hp-product-quickview" aria-label="Quick view">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
+                    <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
                     <circle cx="12" cy="12" r="2.9"></circle>
                   </svg>
                 </button>
@@ -105,158 +91,34 @@
                   <div class="hp-product-part-no">{{ card_sku }}</div>
                 {%- endif -%}
 
-                <a href="{{ card_url | default: '#' }}" class="hp-product-title">{{ card_title | escape }}</a>
+                {%- if card_title != blank -%}
+                  <a href="{{ card_url | default: '#' }}" class="hp-product-title">{{ card_title | escape }}</a>
+                {%- endif -%}
 
-                <a href="{{ block.settings.compatible_models_url | default: '#' }}" class="hp-product-compatible">
-                  <span>{{ block.settings.compatible_models_text | default: 'View Compatible Models' }}</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
-                </a>
+                {%- if block.settings.compatible_models_text != blank -%}
+                  <a href="{{ block.settings.compatible_models_url | default: '#' }}" class="hp-product-compatible">
+                    <span>{{ block.settings.compatible_models_text }}</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
+                  </a>
+                {%- endif -%}
 
                 <div class="hp-product-bottom">
                   <div class="hp-product-prices">
-                    <span class="hp-product-price">{{ card_price | default: '$24.99' }}</span>
+                    {%- if card_price != blank -%}
+                      <span class="hp-product-price">{{ card_price }}</span>
+                    {%- endif -%}
                     {%- if card_compare != blank -%}
                       <span class="hp-product-compare-price">{{ card_compare }}</span>
                     {%- endif -%}
                   </div>
 
-                  <a href="{{ card_url | default: '#' }}" class="hp-product-cart-btn">{{ block.settings.button_text | default: 'Add to Cart' }}</a>
+                  {%- if block.settings.button_text != blank -%}
+                    <a href="{{ card_url | default: '#' }}" class="hp-product-cart-btn">{{ block.settings.button_text }}</a>
+                  {%- endif -%}
                 </div>
               </div>
             </div>
           {%- endfor -%}
-        {%- else -%}
-          <!-- Default Figma Prototype Parts Cards -->
-
-          <!-- Card 1: Microwave Glass Turntable Tray -->
-          <div class="hp-product-card" data-category="microwave">
-            <div class="hp-product-media">
-              <button type="button" class="hp-product-wishlist" data-wishlist-btn aria-label="Add to wishlist">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </button>
-              <img src="https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=600&auto=format&fit=crop" class="hp-product-img" alt="Microwave Glass Turntable Tray" loading="lazy">
-              <button type="button" class="hp-product-quickview" aria-label="Quick view">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
-                  <circle cx="12" cy="12" r="2.9"></circle>
-                </svg>
-              </button>
-            </div>
-            <div class="hp-product-body">
-              <div class="hp-product-part-no">Part No. A0601Y00AP</div>
-              <a href="#" class="hp-product-title">Microwave Glass Turntable Tray</a>
-              <a href="#" class="hp-product-compatible">
-                <span>View Compatible Models</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
-              </a>
-              <div class="hp-product-bottom">
-                <div class="hp-product-prices">
-                  <span class="hp-product-price">$24.99</span>
-                  <span class="hp-product-compare-price">$32.99</span>
-                </div>
-                <a href="#" class="hp-product-cart-btn">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: ARC5 Outer Foil & Blade Set -->
-          <div class="hp-product-card" data-category="personal_care">
-            <div class="hp-product-media">
-              <button type="button" class="hp-product-wishlist" data-wishlist-btn aria-label="Add to wishlist">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </button>
-              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=600&auto=format&fit=crop" class="hp-product-img" alt="ARC5 Outer Foil &amp; Blade Set" loading="lazy">
-              <button type="button" class="hp-product-quickview" aria-label="Quick view">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
-                  <circle cx="12" cy="12" r="2.9"></circle>
-                </svg>
-              </button>
-            </div>
-            <div class="hp-product-body">
-              <div class="hp-product-part-no">Part No. WES9032P</div>
-              <a href="#" class="hp-product-title">ARC5 Outer Foil &amp; Blade Set</a>
-              <a href="#" class="hp-product-compatible">
-                <span>View Compatible Models</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
-              </a>
-              <div class="hp-product-bottom">
-                <div class="hp-product-prices">
-                  <span class="hp-product-price">$39.50</span>
-                </div>
-                <a href="#" class="hp-product-cart-btn">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Vacuum HEPA Exhaust Filter -->
-          <div class="hp-product-card" data-category="vacuum">
-            <div class="hp-product-media">
-              <button type="button" class="hp-product-wishlist" data-wishlist-btn aria-label="Add to wishlist">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </button>
-              <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=600&auto=format&fit=crop" class="hp-product-img" alt="Vacuum HEPA Exhaust Filter" loading="lazy">
-              <button type="button" class="hp-product-quickview" aria-label="Quick view">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
-                  <circle cx="12" cy="12" r="2.9"></circle>
-                </svg>
-              </button>
-            </div>
-            <div class="hp-product-body">
-              <div class="hp-product-part-no">Part No. AMC99K-KM0P</div>
-              <a href="#" class="hp-product-title">Vacuum HEPA Exhaust Filter</a>
-              <a href="#" class="hp-product-compatible">
-                <span>View Compatible Models</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
-              </a>
-              <div class="hp-product-bottom">
-                <div class="hp-product-prices">
-                  <span class="hp-product-price">$18.75</span>
-                  <span class="hp-product-compare-price">$23.50</span>
-                </div>
-                <a href="#" class="hp-product-cart-btn">Add to Cart</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: Toothbrush Heads -->
-          <div class="hp-product-card" data-category="personal_care">
-            <div class="hp-product-media">
-              <button type="button" class="hp-product-wishlist" data-wishlist-btn aria-label="Add to wishlist">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-              </button>
-              <img src="https://images.unsplash.com/photo-1559620192-032c4bc46ee8?w=600&auto=format&fit=crop" class="hp-product-img" alt="Toothbrush Heads" loading="lazy">
-              <button type="button" class="hp-product-quickview" aria-label="Quick view">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2.2 12s3.6-6.6 9.8-6.6 9.8 6.6-3.6 6.6-9.8 6.6S2.2 12 2.2 12Z"></path>
-                  <circle cx="12" cy="12" r="2.9"></circle>
-                </svg>
-              </button>
-            </div>
-            <div class="hp-product-body">
-              <div class="hp-product-part-no">Part No. WEW0929W</div>
-              <a href="#" class="hp-product-title">Toothbrush Heads</a>
-              <a href="#" class="hp-product-compatible">
-                <span>View Compatible Models</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m9 5 7 7-7 7"></path></svg>
-              </a>
-              <div class="hp-product-bottom">
-                <div class="hp-product-prices">
-                  <span class="hp-product-price">$21.00</span>
-                </div>
-                <a href="#" class="hp-product-cart-btn">Add to Cart</a>
-              </div>
-            </div>
-          </div>
         {%- endif -%}
       </div>
 

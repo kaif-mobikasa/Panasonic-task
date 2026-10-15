@@ -1,0 +1,231 @@
+{{ 'about-brand-story.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="about-brand-story"
+  id="AboutBrandStory-{{ section.id }}"
+  style="
+    --story-bg-color: {{ section.settings.background_color | default: '#ffffff' }};
+    --story-highlight-color: {{ section.settings.highlight_color | default: '#0041c0' }};
+    --story-radius: {{ section.settings.corner_radius | default: 20 }}px;
+    --story-radius-mobile: {{ section.settings.corner_radius_mobile | default: 16 }}px;
+    --story-padding-top: {{ section.settings.padding_top | default: 72 }}px;
+    --story-padding-bottom: {{ section.settings.padding_bottom | default: 72 }}px;
+    --story-padding-top-mobile: {{ section.settings.padding_top_mobile | default: 40 }}px;
+    --story-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile | default: 48 }}px;
+  "
+>
+  <div class="about-brand-story-container">
+    <div class="about-brand-story-grid{% if section.settings.image_position == 'right' %} about-brand-story-grid--reverse{% endif %}">
+      {%- if section.settings.image != blank -%}
+        <div class="about-brand-story-media-col">
+          <div class="about-brand-story-media-wrap">
+            {%- assign image_alt = section.settings.image.alt | default: section.settings.heading_prefix | default: 'Panasonic Engineering' | escape -%}
+            {%- if section.settings.image_mobile != blank -%}
+              {%- assign mobile_alt = section.settings.image_mobile.alt | default: image_alt | escape -%}
+              {{ section.settings.image_mobile | image_url: width: 800 | image_tag: class: 'about-brand-story-img about-brand-story-img--mobile', loading: 'lazy', alt: mobile_alt }}
+              {{ section.settings.image | image_url: width: 1400 | image_tag: class: 'about-brand-story-img about-brand-story-img--desktop', loading: 'lazy', alt: image_alt }}
+            {%- endif -%}
+            {%- if section.settings.image_mobile == blank -%}
+              {{ section.settings.image | image_url: width: 1400 | image_tag: class: 'about-brand-story-img', loading: 'lazy', alt: image_alt }}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading_prefix != blank or section.settings.heading_highlight != blank or section.settings.paragraph_1 != blank or section.settings.paragraph_2 != blank -%}
+        <div class="about-brand-story-content-col">
+          <div class="about-brand-story-content-wrap">
+            {%- if section.settings.heading_prefix != blank or section.settings.heading_highlight != blank -%}
+              <h2 class="about-brand-story-heading">
+                {%- if section.settings.heading_prefix != blank -%}
+                  <span class="about-brand-story-heading-prefix">{{ section.settings.heading_prefix | escape }}</span>
+                {%- endif -%}
+                {%- if section.settings.heading_highlight != blank -%}
+                  <span class="about-brand-story-heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+                {%- endif -%}
+              </h2>
+            {%- endif -%}
+
+            {%- if section.settings.paragraph_1 != blank or section.settings.paragraph_2 != blank -%}
+              <div class="about-brand-story-body">
+                {%- if section.settings.paragraph_1 != blank -%}
+                  <p class="about-brand-story-p">{{ section.settings.paragraph_1 | escape }}</p>
+                {%- endif -%}
+                {%- if section.settings.paragraph_2 != blank -%}
+                  <p class="about-brand-story-p">{{ section.settings.paragraph_2 | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Brand Story",
+  "tag": "section",
+  "class": "section-about-brand-story",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Image (Optional)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Desktop Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Corner Radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "corner_radius_mobile",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Corner Radius",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading_prefix",
+      "label": "Heading Text",
+      "default": "Over a Century of"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Heading Text",
+      "default": "Panasonic Engineering"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#0041C0"
+    },
+    {
+      "type": "header",
+      "content": "Paragraphs"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "For more than a century, Panasonic has built appliances that pair thoughtful design with everyday reliability."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "Our genuine replacement parts carry that same commitment, giving you the fit, quality and precision your appliance was designed for."
+    },
+    {
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Brand Story",
+      "settings": {
+        "heading_prefix": "Over a Century of",
+        "heading_highlight": "Panasonic Engineering",
+        "highlight_color": "#0041C0",
+        "paragraph_1": "For more than a century, Panasonic has built appliances that pair thoughtful design with everyday reliability.",
+        "paragraph_2": "Our genuine replacement parts carry that same commitment, giving you the fit, quality and precision your appliance was designed for.",
+        "image_position": "left",
+        "corner_radius": 20,
+        "corner_radius_mobile": 16,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 48
+      }
+    }
+  ]
+}
+{% endschema %}

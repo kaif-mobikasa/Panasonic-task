@@ -1,9 +1,3 @@
-{% comment %}
-  Homepage Trust Bar Section - Panasonic Shopify OS 2.0 Theme
-  Matches Figma UI specification with 4 trust badges, light blue circular icon backgrounds,
-  vertical dividing borders, custom icon image picker, and custom SVG code support.
-{% endcomment %}
-
 {{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
 
 <div class="hp-section hp-trust-bar{% if section.settings.show_dividers == false %} hp-trust-bar--no-dividers{% endif %}">

@@ -1,8 +1,3 @@
-/**
- * Homepage Shop By Space Section JavaScript
- * Handles tab switching, hotspot pins, mini-cards rail, and sidebar card updates.
- */
-
 (function () {
   'use strict';
 
@@ -24,7 +19,6 @@
         const sideNavPrevBtn = panel.querySelector('.hp-space-side-nav-arrow--prev');
         const sideNavNextBtn = panel.querySelector('.hp-space-side-nav-arrow--next');
 
-        // Sidebar target elements
         const sideMedia = panel.querySelector('.hp-space-side-media');
         const sideTitle = panel.querySelector('.hp-space-side-title');
         const sideDesc = panel.querySelector('.hp-space-side-desc');
@@ -38,14 +32,12 @@
           if (itemsCount === 0) return;
           currentIndex = (index + itemsCount) % itemsCount;
 
-          // 1. Update Hotspot Pins
           pins.forEach((pin, i) => {
             const isActive = i === currentIndex;
             pin.classList.toggle('is-active', isActive);
             pin.setAttribute('aria-pressed', isActive ? 'true' : 'false');
           });
 
-          // 2. Update Mini Cards
           miniCards.forEach((card, i) => {
             const isActive = i === currentIndex;
             card.classList.toggle('is-active', isActive);
@@ -59,7 +51,6 @@
             }
           });
 
-          // 3. Update Rail Nav Arrows Display
           if (railPrevBtn) {
             railPrevBtn.style.display = currentIndex > 0 ? 'inline-flex' : 'none';
           }
@@ -67,20 +58,26 @@
             railNextBtn.style.display = currentIndex < itemsCount - 1 ? 'inline-flex' : 'none';
           }
 
-          // 4. Update Sidebar Card Content
           const activeSource = miniCards[currentIndex] || pins[currentIndex];
           if (!activeSource) return;
 
-          // Detail Card Image update (User Request 2)
-          const newImgSrc = activeSource.dataset.sideImg;
+          const matchingMiniCard = miniCards[currentIndex];
+          const miniImg = (activeSource.querySelector && activeSource.querySelector('.hp-space-mini-img')) || (matchingMiniCard && matchingMiniCard.querySelector('.hp-space-mini-img'));
+          const fallbackImgSrc = miniImg ? (miniImg.currentSrc || miniImg.src || miniImg.getAttribute('src')) : '';
+          const newImgSrc = (activeSource.dataset && activeSource.dataset.sideImg && activeSource.dataset.sideImg.trim() !== '')
+            ? activeSource.dataset.sideImg
+            : fallbackImgSrc;
+
           if (sideMedia) {
-            let sideImg = sideMedia.querySelector('.hp-space-side-img');
+            let sideImg = sideMedia.querySelector('.hp-space-side-img, img');
             if (newImgSrc) {
               if (!sideImg) {
                 sideImg = document.createElement('img');
                 sideImg.className = 'hp-space-side-img';
                 sideMedia.appendChild(sideImg);
               }
+              sideImg.removeAttribute('srcset');
+              sideImg.removeAttribute('sizes');
               sideImg.src = newImgSrc;
               sideImg.alt = activeSource.dataset.sideTitle || 'Panasonic Replacement Part';
               sideImg.style.display = 'block';
@@ -89,19 +86,16 @@
             }
           }
 
-          // Title
           const newTitle = activeSource.dataset.sideTitle;
           if (newTitle && sideTitle) {
             sideTitle.textContent = newTitle;
           }
 
-          // Description
           const newDesc = activeSource.dataset.sideDesc;
           if (newDesc && sideDesc) {
             sideDesc.textContent = newDesc;
           }
 
-          // CTA
           const newCtaText = activeSource.dataset.sideCta;
           const newCtaUrl = activeSource.dataset.sideCtaUrl;
           if (sideCta) {
@@ -119,7 +113,6 @@
             }
           }
 
-          // Sublinks
           if (sideLinksWrap) {
             const allLinkGroups = panel.querySelectorAll('.hp-space-side-links-group');
             if (allLinkGroups.length) {
@@ -130,7 +123,6 @@
           }
         }
 
-        // Event listeners for Pins
         pins.forEach((pin, i) => {
           pin.addEventListener('click', (e) => {
             e.preventDefault();
@@ -145,7 +137,6 @@
           });
         });
 
-        // Event listeners for Mini-Cards
         miniCards.forEach((card, i) => {
           card.addEventListener('click', (e) => {
             e.preventDefault();
@@ -153,7 +144,6 @@
           });
         });
 
-        // Rail horizontal scroll buttons: update active item (User Request 1)
         if (railNextBtn) {
           railNextBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -168,7 +158,6 @@
           });
         }
 
-        // Mobile floating arrows (User Request 4)
         if (sideNavNextBtn) {
           sideNavNextBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -183,18 +172,17 @@
           });
         }
 
-        // Initialize default active item
+        panel._updateActiveItem = updateActiveItem;
+
         updateActiveItem(0);
       }
 
-      // If panels exist, init each panel. Otherwise, init the section as single panel.
       if (panels.length) {
         panels.forEach((panel) => initPanel(panel));
       } else {
         initPanel(section);
       }
 
-      // Space tabs switching (User Request 3)
       tabs.forEach((tab) => {
         tab.addEventListener('click', (e) => {
           e.preventDefault();
@@ -212,6 +200,11 @@
               const isMatch = p.dataset.spacePanel === spaceCategory;
               p.classList.toggle('is-active', isMatch);
               if (isMatch) {
+                if (typeof p._updateActiveItem === 'function') {
+                  const activeCard = p.querySelector('.hp-space-mini-card.is-active');
+                  const activeIdx = activeCard ? parseInt(activeCard.dataset.spaceIndex || '0', 10) : 0;
+                  p._updateActiveItem(activeIdx);
+                }
                 const activeCard = p.querySelector('.hp-space-mini-card.is-active');
                 const rail = p.querySelector('.hp-space-rail');
                 if (activeCard && rail) {
@@ -225,14 +218,12 @@
     });
   }
 
-  // Run on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initShopBySpace);
   } else {
     initShopBySpace();
   }
 
-  // Shopify Theme Editor support
   document.addEventListener('shopify:section:load', (e) => {
     if (e.target.classList.contains('section-homepage-shop-by-space') || e.target.querySelector('.hp-space')) {
       initShopBySpace();

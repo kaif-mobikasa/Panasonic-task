@@ -1,8 +1,3 @@
-{% comment %}
-  Homepage Parts Experience Slider Section - Panasonic Shopify OS 2.0 Theme
-  Matches Figma Desktop & Mobile UI specifications
-{% endcomment %}
-
 {{ 'homepage-parts-slider.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'homepage-parts-slider.js' | asset_url }}" defer="defer"></script>
 
@@ -20,15 +15,14 @@
     {%- endif -%}
 
     <div class="hp-ps-grid">
-      <!-- Left: 3D Stack Deck -->
       <div class="hp-ps-deck-wrap">
         <div class="hp-ps-deck" role="region" aria-label="Parts Experience Deck">
           {%- if section.blocks.size > 0 -%}
             {%- for block in section.blocks -%}
               {%- liquid
-                assign s_title = block.settings.title | default: 'Genuine Panasonic Parts'
-                assign s_body = block.settings.body | default: 'Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.'
-                assign s_cta = block.settings.button_label | default: 'Shop Original Parts'
+                assign s_title = block.settings.title
+                assign s_body = block.settings.body
+                assign s_cta = block.settings.button_label
                 assign s_url = block.settings.button_link | default: '#'
               -%}
               <div
@@ -44,132 +38,15 @@
               >
                 {%- if block.settings.image != blank -%}
                   {{ block.settings.image | image_url: width: 900 | image_tag: class: 'hp-ps-card-img', alt: s_title }}
-                {%- else -%}
-                  <img
-                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&auto=format&fit=crop"
-                    alt="{{ s_title }}"
-                    class="hp-ps-card-img"
-                  >
                 {%- endif -%}
               </div>
             {%- endfor -%}
-          {%- else -%}
-            {% comment %} Default 5 Slides matching Figma and Homepage 01-dc.html {% endcomment %}
-            <div
-              class="hp-ps-card is-active"
-              data-index="0"
-              data-title="Genuine Panasonic Parts"
-              data-body="Shop genuine Panasonic replacement parts made specifically for Panasonic appliances."
-              data-cta="Shop Original Parts"
-              data-url="#"
-              role="group"
-              aria-label="Genuine Panasonic Parts"
-            >
-              {%- if images['hero-multi-appliances.jpg'] != blank -%}
-                {{ images['hero-multi-appliances.jpg'] | image_url: width: 900 | image_tag: class: 'hp-ps-card-img', alt: 'Genuine Panasonic Parts' }}
-              {%- else -%}
-                <img
-                  src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&auto=format&fit=crop"
-                  alt="Genuine Panasonic Parts"
-                  class="hp-ps-card-img"
-                >
-              {%- endif -%}
-            </div>
-
-            <div
-              class="hp-ps-card"
-              data-index="1"
-              data-title="Find The Right Part"
-              data-body="Find the right replacement using your appliance model number or part number."
-              data-cta="Find Your Part"
-              data-url="#"
-              role="group"
-              aria-label="Find The Right Part"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=900&auto=format&fit=crop"
-                alt="Find The Right Part"
-                class="hp-ps-card-img"
-              >
-            </div>
-
-            <div
-              class="hp-ps-card"
-              data-index="2"
-              data-title="Parts Ready To Ship"
-              data-body="Find stocked replacement parts and get your order moving without unnecessary delays."
-              data-cta="Shop In-Stock Parts"
-              data-url="#"
-              role="group"
-              aria-label="Parts Ready To Ship"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=900&auto=format&fit=crop"
-                alt="Parts Ready To Ship"
-                class="hp-ps-card-img"
-              >
-            </div>
-
-            <div
-              class="hp-ps-card"
-              data-index="3"
-              data-title="Know It Fits Before You Buy"
-              data-body="Confirm that a part is compatible with your Panasonic appliance before completing your purchase."
-              data-cta="Check Compatibility"
-              data-url="#"
-              role="group"
-              aria-label="Know It Fits Before You Buy"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=900&auto=format&fit=crop"
-                alt="Know It Fits Before You Buy"
-                class="hp-ps-card-img"
-              >
-            </div>
-
-            <div
-              class="hp-ps-card"
-              data-index="4"
-              data-title="Easy From Search To Return"
-              data-body="From finding your part to getting it delivered, shop with straightforward ordering and easy returns."
-              data-cta="Explore Parts"
-              data-url="#"
-              role="group"
-              aria-label="Easy From Search To Return"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&auto=format&fit=crop"
-                alt="Easy From Search To Return"
-                class="hp-ps-card-img"
-              >
-            </div>
           {%- endif -%}
         </div>
 
-        <!-- Desktop Pagination Dots Below Deck -->
-        <div class="hp-ps-dots hp-ps-dots--desktop" role="tablist" aria-label="Slides">
-          {%- assign slide_count = section.blocks.size -%}
-          {%- if slide_count == 0 -%}{%- assign slide_count = 5 -%}{%- endif -%}
-          {%- for i in (1..slide_count) -%}
-            <button
-              type="button"
-              class="hp-ps-dot{% if forloop.first %} is-active{% endif %}"
-              role="tab"
-              aria-label="Go to slide {{ forloop.index }}"
-            ></button>
-          {%- endfor -%}
-        </div>
-
-        <!-- Mobile Controls Bar (Arrows + Dots) -->
-        <div class="hp-ps-mobile-controls">
-          <button type="button" class="hp-ps-arrow hp-ps-arrow--prev" aria-label="Previous slide">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m15 18-6-6 6-6"></path>
-            </svg>
-          </button>
-
-          <div class="hp-ps-dots" role="tablist" aria-label="Mobile Slides">
-            {%- for i in (1..slide_count) -%}
+        {%- if section.blocks.size > 0 -%}
+          <div class="hp-ps-dots hp-ps-dots--desktop" role="tablist" aria-label="Slides">
+            {%- for block in section.blocks -%}
               <button
                 type="button"
                 class="hp-ps-dot{% if forloop.first %} is-active{% endif %}"
@@ -179,15 +56,33 @@
             {%- endfor -%}
           </div>
 
-          <button type="button" class="hp-ps-arrow hp-ps-arrow--next" aria-label="Next slide">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m9 18 6-6-6-6"></path>
-            </svg>
-          </button>
-        </div>
+          <div class="hp-ps-mobile-controls">
+            <button type="button" class="hp-ps-arrow hp-ps-arrow--prev" aria-label="Previous slide">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+
+            <div class="hp-ps-dots" role="tablist" aria-label="Mobile Slides">
+              {%- for block in section.blocks -%}
+                <button
+                  type="button"
+                  class="hp-ps-dot{% if forloop.first %} is-active{% endif %}"
+                  role="tab"
+                  aria-label="Go to slide {{ forloop.index }}"
+                ></button>
+              {%- endfor -%}
+            </div>
+
+            <button type="button" class="hp-ps-arrow hp-ps-arrow--next" aria-label="Next slide">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          </div>
+        {%- endif -%}
       </div>
 
-      <!-- Right: Content Column -->
       <div class="hp-ps-content">
         {%- if section.settings.eyebrow != blank -%}
           <div class="hp-ps-eyebrow">{{ section.settings.eyebrow }}</div>
@@ -196,30 +91,30 @@
         {%- liquid
           assign first_block = section.blocks | first
           if first_block != blank
-            assign init_title = first_block.settings.title | default: 'Genuine Panasonic Parts'
-            assign init_body = first_block.settings.body | default: 'Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.'
-            assign init_cta = first_block.settings.button_label | default: 'Shop Original Parts'
+            assign init_title = first_block.settings.title
+            assign init_body = first_block.settings.body
+            assign init_cta = first_block.settings.button_label
             assign init_url = first_block.settings.button_link | default: '#'
-          else
-            assign init_title = 'Genuine Panasonic Parts'
-            assign init_body = 'Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.'
-            assign init_cta = 'Shop Original Parts'
-            assign init_url = '#'
           endif
         -%}
 
-        <h2 class="hp-ps-title">{{ init_title }}</h2>
-        <p class="hp-ps-body">{{ init_body }}</p>
+        {%- if init_title != blank -%}
+          <h2 class="hp-ps-title">{{ init_title | escape }}</h2>
+        {%- endif -%}
+        {%- if init_body != blank -%}
+          <p class="hp-ps-body">{{ init_body | escape }}</p>
+        {%- endif -%}
 
-        <a href="{{ init_url }}" class="hp-ps-cta">
-          {{ init_cta }}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 12h15"></path>
-            <path d="m13 6 6 6-6 6"></path>
-          </svg>
-        </a>
+        {%- if init_cta != blank -%}
+          <a href="{{ init_url }}" class="hp-ps-cta">
+            {{ init_cta | escape }}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h15"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </a>
+        {%- endif -%}
 
-        <!-- Desktop Navigation Arrows -->
         <div class="hp-ps-arrows hp-ps-arrows--desktop">
           <button type="button" class="hp-ps-arrow hp-ps-arrow--prev" aria-label="Previous slide">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="./site-links.js"></script>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0041C0"></rect><text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-family="Barlow, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">PP</text></svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+@keyframes encIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes encFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes encGlow { 0%, 100% { opacity: 0.6; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes encShine { 0% { background-position: 150% 0; } 45%, 100% { background-position: -50% 0; } }
+@media (prefers-reduced-motion: reduce) { [style*="encFloat"], [style*="encGlow"], [style*="encShine"] { animation: none !important; } }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [data-trunc]::placeholder { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  @keyframes mmPanel { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  @keyframes mmIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  [data-mm="panel"] { animation: mmPanel 380ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  [data-mm="item"] { animation: mmIn 460ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes mmDissolve { from { opacity: 0; } to { opacity: 1; } }
+  [data-mm="promo"] { animation: mmDissolve 360ms ease-out 180ms both; }
+  [data-chev] { transition: transform 680ms cubic-bezier(0.22, 1, 0.36, 1); }
+  [data-shaft] { stroke-dasharray: 15; stroke-dashoffset: 15; opacity: 0; transition: stroke-dashoffset 680ms cubic-bezier(0.22, 1, 0.36, 1) 60ms, opacity 300ms ease 60ms; }
+  a:hover [data-shaft], button:hover [data-shaft] { stroke-dashoffset: 0; opacity: 1; }
+  a:hover [data-chev="r"], button:hover [data-chev="r"] { transform: translateX(3.5px); }
+  a:hover [data-chev="l"], button:hover [data-chev="l"] { transform: translateX(-3.5px); }
+  @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  @keyframes sheetFade { from { opacity: 0; } to { opacity: 1; } }
+  body { margin: 0; background: #FFFFFF; font-family: Barlow; -webkit-font-smoothing: antialiased; color: #111827; }
+  button, input, select, textarea { font-family: inherit; }
+  a { color: #0041C0; text-decoration: none; }
+  a:hover { color: #00309A; text-decoration: underline; }
+@keyframes qvFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes qvUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes qvPop { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="position: sticky; z-index: 9000; top: 0; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; background: #111827;">
+  <button onClick="{{ vpSetD }}" style="display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; background: {{ vpBgD }}; color: {{ vpFgD }}; font-family: Barlow; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 200ms ease, color 200ms ease;">Desktop<span style="font-weight: 400; opacity: 0.7;">1440</span></button>
+  <button onClick="{{ vpSetT }}" style="display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; background: {{ vpBgT }}; color: {{ vpFgT }}; font-family: Barlow; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 200ms ease, color 200ms ease;">Tablet<span style="font-weight: 400; opacity: 0.7;">768</span></button>
+  <button onClick="{{ vpSetM }}" style="display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; background: {{ vpBgM }}; color: {{ vpFgM }}; font-family: Barlow; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 200ms ease, color 200ms ease;">Mobile<span style="font-weight: 400; opacity: 0.7;">390</span></button></div>
+<div style="width: {{ frameW }}; min-width: 0px; max-width: {{ frameMaxW }}; margin: 0 auto; box-shadow: {{ frameShadow }}; overflow-x: clip;">
+
+  <div style="position: sticky; top: 0px; z-index: 100; background: #FFFFFF; transform: {{ hdrTf }}; box-shadow: {{ hdrShadow }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease;">
+    <dc-import name="Site Header" force-desktop="{{ true }}" vp="{{ vp }}" on-nav="{{ onHdrNav }}" hint-size="100%,124px" style="display: block;"></dc-import>
+  </div>
+
+  <nav style="background: #FFFFFF; border-bottom: 1px solid #E2E6EE;">
+    <div style="width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ padX }}; height: {{ crumbH }}; display: flex; align-items: center; gap: {{ crumbGap }}; white-space: nowrap; font-size: 13px; font-weight: 400; color: #5A6478;">
+      <a href="https://claude.ai/artifact/Q7UDLYKCdfRj9HygsXuie3" target="_top" style="flex: none; color: #5A6478; text-decoration: none; transition: color 380ms ease;" style-hover="color: #0041C0; text-decoration: none;">Home</a>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98A2B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block; flex: none;"><path d="m9.5 5 6.5 7-6.5 7"></path></svg>
+      <span style="flex: none; font-weight: 500; color: #111827;">About Us</span>
+    </div>
+  </nav>
+
+  <section data-screen-label="About hero" style="position: relative; background: {{ bBandBg }}; overflow: hidden;">
+    <div style="position: {{ bImgPos }}; inset: 0; height: {{ bImgH }};"><image-slot id="about-hero" src="assets/slots/space-banner-kitchen.webp" shape="rect" fit="cover" placeholder="Drop About Us banner image"></image-slot></div>
+    <div style="display: {{ bGradShow }}; position: absolute; inset: 0 auto 0 0; width: {{ bGradW }}; background: linear-gradient(90deg, rgba(10,11,13,0.92) 0%, rgba(10,11,13,0.78) 45%, rgba(10,11,13,0.4) 75%, rgba(10,11,13,0) 100%); pointer-events: none;"></div>
+    <div style="position: relative; width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ bPad }}; pointer-events: none;">
+      <div style="max-width: {{ bTextMax }}; margin: {{ bTextM }}; text-align: {{ bTextAlign }}; pointer-events: auto;">
+        <h1 style="margin: 0; font-size: {{ h1Fs }}; line-height: 1.16; font-weight: 500; letter-spacing: -0.015em; text-wrap: pretty; color: {{ bInk }};">Keeping Panasonic Appliances Going</h1>
+        <p style="margin: {{ bPMt }} 0 0; font-size: {{ bPFs }}; line-height: 1.5; font-weight: 400; color: {{ bSubInk }}; text-wrap: pretty;">Genuine Panasonic replacement parts that help your appliances work like new.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Legacy" style="background: #FFFFFF; padding: {{ secPad }};">
+    <div style="width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ padX }};">
+      <div style="display: grid; grid-template-columns: {{ legCols }}; gap: {{ legGap }}; align-items: center;">
+        <div style="position: relative; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: #F5F7FA;"><image-slot id="about-legacy" src="assets/slots/space-personal-care.webp" shape="rect" fit="cover" placeholder="Drop legacy image"></image-slot></div>
+        <div style="min-width: 0; text-align: {{ legHeadAlign }};">
+          <h2 style="margin: 0; text-align: {{ legHeadAlign }}; font-size: {{ h2SecSize }}; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; color: #111827; text-wrap: pretty;">Over a Century of<br><span style="font-weight: 700; color: #0041C0; white-space: nowrap;">Panasonic Engineering</span></h2>
+          <p style="margin: 20px 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">For more than a century, Panasonic has built appliances that pair thoughtful design with everyday reliability.</p>
+          <p style="margin: 14px 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">Our genuine replacement parts carry that same commitment, giving you the fit, quality and precision your appliance was designed for.</p>
+        </div>
+      </div></div>
+  </section>
+
+  <section data-screen-label="Why genuine parts" style="background: #F7F9FD; padding: {{ secPad }};">
+    <div style="width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ padX }};">
+      <h2 style="margin: 0; text-align: center; font-size: {{ h2SecSize }}; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; color: #111827;">The Genuine <span style="font-weight: 700; color: #0041C0;">Difference</span></h2>
+      <div style="display: grid; grid-template-columns: {{ whyCols }}; gap: {{ cardGap }}; margin-top: {{ headGap }};">
+          <div onMouseEnter="{{ gdEnter0 }}" onMouseLeave="{{ gdLeave }}" style="position: relative; display: flex; flex-direction: column; gap: 14px; padding: {{ whyPad }}; background: #FFFFFF; border: 1px solid {{ gdBd0 }}; border-radius: 12px; overflow: hidden; transform: {{ gdTf0 }}; box-shadow: {{ gdSh0 }}; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, border-color 380ms ease;">
+            <span style="position: absolute; left: 0; top: 0; height: 3px; width: {{ gdBar0 }}; background: #0041C0; transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);"></span>
+            
+            <span style="display: flex; flex-direction: {{ gdHeadDir }}; align-items: {{ gdHeadAlign }}; gap: {{ gdHeadGap }};">
+              <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: {{ gdIconBg0 }}; color: {{ gdIconInk0 }}; transform: {{ gdIconTf0 }}; transition: background 380ms ease, color 380ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6Z"></path></svg></span>
+              <div style="font-size: 17px; line-height: 1.3; font-weight: 600; color: #111827;">Original Performance</div>
+            </span>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; color: #5A6478; text-wrap: pretty;">Replace worn components without compromising how your appliance was designed to work.</p>
+          </div>
+          <div onMouseEnter="{{ gdEnter1 }}" onMouseLeave="{{ gdLeave }}" style="position: relative; display: flex; flex-direction: column; gap: 14px; padding: {{ whyPad }}; background: #FFFFFF; border: 1px solid {{ gdBd1 }}; border-radius: 12px; overflow: hidden; transform: {{ gdTf1 }}; box-shadow: {{ gdSh1 }}; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, border-color 380ms ease;">
+            <span style="position: absolute; left: 0; top: 0; height: 3px; width: {{ gdBar1 }}; background: #0041C0; transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);"></span>
+            
+            <span style="display: flex; flex-direction: {{ gdHeadDir }}; align-items: {{ gdHeadAlign }}; gap: {{ gdHeadGap }};">
+              <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: {{ gdIconBg1 }}; color: {{ gdIconInk1 }}; transform: {{ gdIconTf1 }}; transition: background 380ms ease, color 380ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.1 7.5 9.5 4.4-1.4 7.5-4.9 7.5-9.5V6Z"></path><path d="m8.8 12 2.2 2.2 4.2-4.4"></path></svg></span>
+              <div style="font-size: 17px; line-height: 1.3; font-weight: 600; color: #111827;">Quality You Can Trust</div>
+            </span>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; color: #5A6478; text-wrap: pretty;">Every part follows Panasonic manufacturing and quality standards for consistent results.</p>
+          </div>
+          <div onMouseEnter="{{ gdEnter2 }}" onMouseLeave="{{ gdLeave }}" style="position: relative; display: flex; flex-direction: column; gap: 14px; padding: {{ whyPad }}; background: #FFFFFF; border: 1px solid {{ gdBd2 }}; border-radius: 12px; overflow: hidden; transform: {{ gdTf2 }}; box-shadow: {{ gdSh2 }}; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, border-color 380ms ease;">
+            <span style="position: absolute; left: 0; top: 0; height: 3px; width: {{ gdBar2 }}; background: #0041C0; transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);"></span>
+            
+            <span style="display: flex; flex-direction: {{ gdHeadDir }}; align-items: {{ gdHeadAlign }}; gap: {{ gdHeadGap }};">
+              <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: {{ gdIconBg2 }}; color: {{ gdIconInk2 }}; transform: {{ gdIconTf2 }}; transition: background 380ms ease, color 380ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M19.44 7.85c-.05.32.06.65.29.88l1.57 1.57a2.4 2.4 0 0 1 0 3.4l-1.61 1.61a.98.98 0 0 1-.84.28c-.47-.07-.8-.48-.97-.93a2.5 2.5 0 1 0-3.21 3.21c.45.17.86.5.93.97a.98.98 0 0 1-.28.84l-1.61 1.61a2.4 2.4 0 0 1-3.4 0l-1.57-1.57a1.03 1.03 0 0 0-.88-.29c-.49.07-.84.5-1.02.97a2.5 2.5 0 1 1-3.24-3.24c.46-.18.9-.53.97-1.02a1.03 1.03 0 0 0-.29-.88l-1.57-1.57a2.4 2.4 0 0 1 0-3.4L4.23 8.77c.24-.24.58-.35.92-.3.51.08.88.53 1.07 1.01a2.5 2.5 0 1 0 3.26-3.26c-.48-.2-.93-.56-1.01-1.07-.05-.34.06-.68.3-.92l1.53-1.53a2.4 2.4 0 0 1 3.4 0l1.57 1.57c.23.23.56.34.88.29.49-.07.84-.5 1.02-.97a2.5 2.5 0 1 1 3.24 3.24c-.46.18-.9.53-.97 1.02Z"></path></svg></span>
+              <div style="font-size: 17px; line-height: 1.3; font-weight: 600; color: #111827;">Perfect Compatibility</div>
+            </span>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; color: #5A6478; text-wrap: pretty;">Parts are made to your model’s exact specifications for the right fit and reliable operation.</p>
+          </div>
+          <div onMouseEnter="{{ gdEnter3 }}" onMouseLeave="{{ gdLeave }}" style="position: relative; display: flex; flex-direction: column; gap: 14px; padding: {{ whyPad }}; background: #FFFFFF; border: 1px solid {{ gdBd3 }}; border-radius: 12px; overflow: hidden; transform: {{ gdTf3 }}; box-shadow: {{ gdSh3 }}; transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, border-color 380ms ease;">
+            <span style="position: absolute; left: 0; top: 0; height: 3px; width: {{ gdBar3 }}; background: #0041C0; transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);"></span>
+            
+            <span style="display: flex; flex-direction: {{ gdHeadDir }}; align-items: {{ gdHeadAlign }}; gap: {{ gdHeadGap }};">
+              <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: {{ gdIconBg3 }}; color: {{ gdIconInk3 }}; transform: {{ gdIconTf3 }}; transition: background 380ms ease, color 380ms ease, transform 460ms cubic-bezier(0.22, 1, 0.36, 1);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M4 12a8 8 0 1 0 2.6-5.9"></path><path d="M4 4v4h4"></path><path d="M12 8v4l2.8 1.8"></path></svg></span>
+              <div style="font-size: 17px; line-height: 1.3; font-weight: 600; color: #111827;">Extend Product Life</div>
+            </span>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; color: #5A6478; text-wrap: pretty;">Keep appliances in use longer by replacing individual components when they wear out.</p>
+          </div>
+      </div></div>
+  </section>
+
+  <section data-screen-label="Parts powerhouse" style="background: #FFFFFF; padding: {{ secPad }};">
+    <div style="width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ padX }};">
+      <div style="display: grid; grid-template-columns: {{ phTopCols }}; gap: {{ phTopGap }}; align-items: center;">
+        <div style="display: {{ phLeftDisp }}; min-width: 0; text-align: {{ phTopAlign }};">
+          <h2 style="order: 0; text-align: {{ phTopAlign }}; margin: 0;  font-size: {{ h2SecSize }}; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; color: #111827;">Powered by <span style="font-weight: 700; color: #0041C0;">Encompass</span></h2>
+          <p style="order: 2; margin: {{ phIntroMt }} 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">While there may be other distributors in the market, none can match the experience, comprehensive inventory and value-added services Encompass provides.</p>
+          <p style="display: {{ phPara2 }}; margin: 16px 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">State-of-the-art warehouse management and automated backorder sourcing keep genuine parts available, with next day and 2-day ground shipping to keep repairs moving.</p>
+        </div>
+        <div style="order: 1; position: relative; min-width: 0; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; display: flex; align-items: center; justify-content: center;">
+          <div style="position: absolute; left: 50%; top: 50%; width: 70%; aspect-ratio: 1; margin: -35% 0 0 -35%; border-radius: 999px; background: radial-gradient(circle, rgba(0,65,192,0.10) 0%, rgba(0,65,192,0) 65%); animation: encGlow 6s ease-in-out infinite; pointer-events: none;"></div>
+          <div style="position: relative; width: 82%; animation: encIn 900ms cubic-bezier(0.22, 1, 0.36, 1) both, encFloat 6s ease-in-out 900ms infinite;">
+            <img src="assets/encompass-logo.png" alt="Encompass, a Parts Town unlimited company" style="display: block; width: 100%; height: auto; mix-blend-mode: multiply; clip-path: inset(3px round 10px);">
+            <div style="position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0) 65%); background-size: 250% 100%; animation: encShine 5s ease-in-out 1.2s infinite; mix-blend-mode: screen; pointer-events: none;"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+  <section data-screen-label="Encompass timeline" onMouseEnter="{{ phPause }}" onMouseLeave="{{ phResume }}" style="background: #F7F9FD; padding: {{ secPad }};">
+    <div style="width: 100%; max-width: min(1376px, 100%); margin: 0 auto; padding: {{ padX }};">
+      <div style="display: grid; grid-template-columns: {{ phCols }}; gap: {{ cardGap }}; align-items: stretch;">
+        <div role="tablist" style="order: {{ phListOrder }}; display: {{ phListDisp }}; grid-template-columns: {{ phListCols }}; flex-direction: column; gap: {{ phListGap }}; min-width: 0;">
+            <button onClick="{{ phGo0 }}" onMouseEnter="{{ phGo0 }}" style="flex: 1 1 0; position: relative; display: flex; flex-direction: {{ phTabDir }}; align-items: {{ phTabAlign }}; gap: {{ phTabGap }}; width: 100%; padding: {{ phTabPad }}; text-align: left; background: {{ phTabBg0 }}; border: 1px solid {{ phTabBd0 }}; border-radius: 12px; overflow: hidden; cursor: pointer; transition: background 380ms ease, border-color 380ms ease;">
+              <span style="flex: none; min-width: {{ phNumW }}; font-size: {{ statFs }}; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: {{ phNumInk0 }}; transition: color 380ms ease;">{{ phNum0 }}</span>
+              <span style="min-width: 0; font-size: {{ phLblFs }}; line-height: 1.3; font-weight: 600; color: {{ phLblInk0 }}; transition: color 380ms ease;">{{ phLbl0 }}</span>
+              <span style="position: absolute; left: 0; bottom: 0; height: 3px; width: {{ phBarW0 }}; background: #0041C0; transition: {{ phBarT0 }};"></span>
+            </button>
+            <button onClick="{{ phGo1 }}" onMouseEnter="{{ phGo1 }}" style="flex: 1 1 0; position: relative; display: flex; flex-direction: {{ phTabDir }}; align-items: {{ phTabAlign }}; gap: {{ phTabGap }}; width: 100%; padding: {{ phTabPad }}; text-align: left; background: {{ phTabBg1 }}; border: 1px solid {{ phTabBd1 }}; border-radius: 12px; overflow: hidden; cursor: pointer; transition: background 380ms ease, border-color 380ms ease;">
+              <span style="flex: none; min-width: {{ phNumW }}; font-size: {{ statFs }}; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: {{ phNumInk1 }}; transition: color 380ms ease;">{{ phNum1 }}</span>
+              <span style="min-width: 0; font-size: {{ phLblFs }}; line-height: 1.3; font-weight: 600; color: {{ phLblInk1 }}; transition: color 380ms ease;">{{ phLbl1 }}</span>
+              <span style="position: absolute; left: 0; bottom: 0; height: 3px; width: {{ phBarW1 }}; background: #0041C0; transition: {{ phBarT1 }};"></span>
+            </button>
+            <button onClick="{{ phGo2 }}" onMouseEnter="{{ phGo2 }}" style="flex: 1 1 0; position: relative; display: flex; flex-direction: {{ phTabDir }}; align-items: {{ phTabAlign }}; gap: {{ phTabGap }}; width: 100%; padding: {{ phTabPad }}; text-align: left; background: {{ phTabBg2 }}; border: 1px solid {{ phTabBd2 }}; border-radius: 12px; overflow: hidden; cursor: pointer; transition: background 380ms ease, border-color 380ms ease;">
+              <span style="flex: none; min-width: {{ phNumW }}; font-size: {{ statFs }}; line-height: 1; font-weight: 700; letter-spacing: -0.02em; color: {{ phNumInk2 }}; transition: color 380ms ease;">{{ phNum2 }}</span>
+              <span style="min-width: 0; font-size: {{ phLblFs }}; line-height: 1.3; font-weight: 600; color: {{ phLblInk2 }}; transition: color 380ms ease;">{{ phLbl2 }}</span>
+              <span style="position: absolute; left: 0; bottom: 0; height: 3px; width: {{ phBarW2 }}; background: #0041C0; transition: {{ phBarT2 }};"></span>
+            </button>
+        </div>
+        <div style="display: grid; align-items: start; min-width: 0; padding: {{ phPanelPad }}; background: #F4F8FE; border: 1px solid #CFE0FA; border-radius: 12px;">
+            <div aria-hidden="{{ phHide0 }}" style="grid-area: 1 / 1; min-width: 0; opacity: {{ phOp0 }}; transform: {{ phTf0 }}; pointer-events: {{ phPe0 }}; transition: opacity 460ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);">
+              <div style="font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: #0041C0;">{{ phNum0 }}</div>
+              <div style="margin: 6px 0 18px; font-size: {{ phPanelTitleFs }}; line-height: 1.25; font-weight: 600; color: #111827;">{{ phLbl0 }}</div>
+              <p style="margin: 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">Formed in 1953, Encompass is one of the country’s largest suppliers of repair parts and accessories for products throughout the home.</p>
+            
+            </div>
+            <div aria-hidden="{{ phHide1 }}" style="grid-area: 1 / 1; min-width: 0; opacity: {{ phOp1 }}; transform: {{ phTf1 }}; pointer-events: {{ phPe1 }}; transition: opacity 460ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);">
+              <div style="font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: #0041C0;">{{ phNum1 }}</div>
+              <div style="margin: 6px 0 18px; font-size: {{ phPanelTitleFs }}; line-height: 1.25; font-weight: 600; color: #111827;">{{ phLbl1 }}</div>
+              <p style="margin: 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">In 2022, Encompass was acquired by Parts Town, the global market leader in foodservice equipment parts distribution, to expand its residential parts division along with Dayton Appliance Parts.</p>
+              <p style="margin: 14px 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">Joined Parts Town to widen parts availability and shipping reach.</p>
+            
+            </div>
+            <div aria-hidden="{{ phHide2 }}" style="grid-area: 1 / 1; min-width: 0; opacity: {{ phOp2 }}; transform: {{ phTf2 }}; pointer-events: {{ phPe2 }}; transition: opacity 460ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);">
+              <div style="font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: #0041C0;">{{ phNum2 }}</div>
+              <div style="margin: 6px 0 18px; font-size: {{ phPanelTitleFs }}; line-height: 1.25; font-weight: 600; color: #111827;">{{ phLbl2 }}</div>
+              <p style="margin: 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">Today, Encompass runs this dedicated Panasonic parts store, bringing genuine replacement parts and accessories for Panasonic appliances together in one place.</p>
+              <p style="margin: 14px 0 0; font-size: {{ bodyFs }}; line-height: 1.6; font-weight: 400; color: #4A5567; text-wrap: pretty;">Orders are packed and shipped from our facility in Lawrenceville, Georgia.</p>
+            
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Shop by appliance" style="background: #FFFFFF; padding: {{ apSecPad }};">
+    <div style="width: 100%; max-width: {{ apWrapMax }}; margin: 0 auto; padding: {{ padX }};">
+
+      <div style="display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: {{ apHeadGap }};">
+        <h2 style="margin: 0; font-size: {{ h2SecSize }}; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em;">Shop Parts By <span style="color: #0041C0; font-weight: 700;">Appliances</span></h2>
+        <a href="#" style="display: inline-flex; align-items: center; gap: 8px; font-size: {{ apCtaFs }}; font-weight: 600; color: #333C4B; white-space: nowrap;" style-hover="color: #0041C0; text-decoration: none;">
+          <span style="display: inline-flex; align-items: center; line-height: 1;">Explore All Appliances</span>
+          <span style="flex: none; display: inline-flex; align-items: center; margin-top: 2px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block;"><path data-chev="r" d="m9 5 7 7-7 7"></path><path data-shaft="r" d="M19.5 12H5"></path></svg>
+          </span>
+        </a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: {{ apCols }}; gap: {{ apGap }}; margin-top: {{ apGridTop }};">
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter0 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift0 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-microwave.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Microwave</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn0 }}; transform: {{ apArrowLift0 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter1 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift1 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-vacuum.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Vacuum Cleaner</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn1 }}; transform: {{ apArrowLift1 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter2 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift2 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-refrigerator.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Refrigerator</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn2 }}; transform: {{ apArrowLift2 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter3 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift3 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-shaver.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Shaver</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn3 }}; transform: {{ apArrowLift3 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter4 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift4 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-toaster.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Toaster</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn4 }}; transform: {{ apArrowLift4 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter5 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift5 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-camera.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Cameras</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn5 }}; transform: {{ apArrowLift5 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter6 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift6 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-toothbrush.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">Toothbrushes</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn6 }}; transform: {{ apArrowLift6 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+        <a href="#" style="position: relative; display: flex; flex-direction: column; align-items: {{ apCardAlign }}; justify-content: center; gap: 12px; min-height: {{ apCardH }}; padding: {{ apCardPad }}; overflow: hidden; background: #FFFFFF; border: 1px solid #E2E6EE; border-radius: 8px; text-decoration: none; transition: border-color 380ms ease, box-shadow 380ms ease;" onMouseEnter="{{ apEnter7 }}" onMouseLeave="{{ apLeave }}" style-hover="border-color: #0041C0; box-shadow: 0 6px 16px rgba(17,24,39,0.08); text-decoration: none;">
+          <span style="display: flex; flex-direction: {{ apInnerDir }}; align-items: center; gap: {{ apInnerGap }}; transform: {{ apLift7 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="flex: none; display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+              <img src="assets/icon-hvac.png" alt="" style="display: block; width: {{ apIcon }}; height: {{ apIcon }};">
+            </span>
+            <span style="font-size: {{ apLabelFs }}; font-weight: 500; line-height: 1.25; color: #111827; text-align: {{ apLabelAlign }};">HVAC</span>
+          </span>
+          <span style="position: absolute; left: 0; right: {{ apArrowR }}; top: {{ apArrowTop }}; display: flex; justify-content: {{ apArrowJust }}; opacity: {{ apArrowOn7 }}; transform: {{ apArrowLift7 }}; transition: opacity 380ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1);">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: {{ apChevBox }}; height: {{ apChevBox }}; border-radius: 999px; background: #FFFFFF; border: 1.5px solid #D6E0F7; color: #0041C0;">
+              <svg width="{{ apChevSvg }}" height="{{ apChevSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" stroke-linejoin="miter" style="display: block;"><path d="m9 5 7 7-7 7"></path></svg>
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="position: relative; background: #F7F9FD; padding: {{ secPadF }}; overflow: hidden;">
+    <div style="position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: {{ faqBgH }}; opacity: {{ faqBgOp }};">
+      <image-slot id="faq-background" src="assets/slots/faq-background.webp" shape="rect" fit="cover" placeholder="Panasonic product collage background"></image-slot>
+    </div>
+    <div style="position: absolute; z-index: 1; inset: 0; background: {{ faqScrim }}; pointer-events: none;"></div>
+    <div style="position: relative; z-index: 2; width: 100%; max-width: {{ wrapMax }}; margin: 0 auto; padding: {{ padX }}; pointer-events: none;">
+      <h2 style="margin: 0; text-align: center; font-size: {{ h2SecSize }}; line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; color: #111827;">Frequently Asked <span style="font-weight: 700; color: #0041C0;">Questions</span></h2>
+      <p style="margin: 12px 0 0; text-align: center; font-size: 15px; line-height: 1.5; font-weight: 400; color: #5A6478;">Find quick answers to common questions about Panasonic parts, orders, compatibility and more.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; max-width: 904px; box-sizing: border-box; margin: 26px auto 0; padding: 10px; pointer-events: auto; border-radius: 14px; background: rgba(255,255,255,0.72);">
+        <div style="border: 1px solid {{ faqBd0 }}; border-radius: 10px; background: {{ faqBg0 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap0 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW0 }}; line-height: 1.35; color: #111827;">Are these genuine Panasonic parts?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows0 }}; opacity: {{ faqOp0 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt0 }};"><span style="min-height: 0; overflow: hidden;">Yes. All parts available on our website are genuine Panasonic parts, ensuring the best fit, performance and durability for your product.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot0 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd1 }}; border-radius: 10px; background: {{ faqBg1 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap1 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW1 }}; line-height: 1.35; color: #111827;">How do I find the right part for my product?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows1 }}; opacity: {{ faqOp1 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt1 }};"><span style="min-height: 0; overflow: hidden;">Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot1 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd2 }}; border-radius: 10px; background: {{ faqBg2 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap2 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW2 }}; line-height: 1.35; color: #111827;">Can I search for parts using my model number?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows2 }}; opacity: {{ faqOp2 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt2 }};"><span style="min-height: 0; overflow: hidden;">Yes. Enter your model number in the search bar and we will show only the parts that match your product.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot2 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd3 }}; border-radius: 10px; background: {{ faqBg3 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap3 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW3 }}; line-height: 1.35; color: #111827;">How long will it take to receive my order?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows3 }}; opacity: {{ faqOp3 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt3 }};"><span style="min-height: 0; overflow: hidden;">Orders ship within 2 business days. Standard delivery takes 3 to 7 business days depending on your state; expedited options are shown at checkout.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot3 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd4 }}; border-radius: 10px; background: {{ faqBg4 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap4 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW4 }}; line-height: 1.35; color: #111827;">Do you ship across the United States?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows4 }}; opacity: {{ faqOp4 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt4 }};"><span style="min-height: 0; overflow: hidden;">Yes. We ship to all 50 states, including Alaska and Hawaii, as well as APO and FPO addresses.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot4 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd5 }}; border-radius: 10px; background: {{ faqBg5 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap5 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW5 }}; line-height: 1.35; color: #111827;">What is your return policy?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows5 }}; opacity: {{ faqOp5 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt5 }};"><span style="min-height: 0; overflow: hidden;">Unused parts in their original packaging can be returned within 30 days of delivery. Start a return from your order history to get a prepaid shipping label.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot5 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+        <div style="border: 1px solid {{ faqBd6 }}; border-radius: 10px; background: {{ faqBg6 }}; transition: background 380ms ease, border-color 380ms ease;">
+          <button onClick="{{ faqTap6 }}" style="display: flex; align-items: flex-start; gap: 24px; width: 100%; padding: 13px 20px; background: transparent; border: 0; text-align: left; cursor: pointer;">
+            <span style="flex: 1; min-width: 0;">
+              <span style="display: block; font-size: {{ faqQFs }}; font-weight: {{ faqW6 }}; line-height: 1.35; color: #111827;">Do you offer installation support?</span>
+              <span style="display: grid; grid-template-rows: {{ faqRows6 }}; opacity: {{ faqOp6 }}; overflow: hidden; font-size: {{ faqAFs }}; line-height: 1.6; font-weight: 400; color: #5A6478; max-width: 78ch; transition: grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease, margin-top 420ms cubic-bezier(0.22, 1, 0.36, 1); margin-top: {{ faqMt6 }};"><span style="min-height: 0; overflow: hidden;">Yes. Our support team can walk you through fitting most replacement parts, and can connect you with an authorized Panasonic service center when installation is required.</span></span>
+            </span>
+            <span style="flex: none; margin: -4px 0; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: #DCE7FB; color: #0041C0;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="display: block; transform: {{ faqRot6 }}; transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: {{ faqHelpWrap }}; flex-direction: {{ faqHelpDir }}; align-items: {{ faqHelpAlign }}; justify-content: {{ faqHelpJustify }}; text-align: {{ faqHelpText }}; gap: {{ faqHelpGap }}; max-width: 904px; box-sizing: border-box; margin: 22px auto 0; padding: {{ faqHelpPad }}; pointer-events: auto; border-radius: 12px; background: #E8EFFC;">
+        <span style="flex: none; display: inline-flex; align-items: center; justify-content: center; width: {{ faqHelpDot }}; height: {{ faqHelpDot }}; border-radius: 999px; background: #D6E0F7; color: #0041C0;">
+          <svg width="28" height="28" viewBox="0 1.05 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M4.6 15.4v-3.2a7.4 7.4 0 0 1 14.8 0v3.2"></path><rect x="2.8" y="13.3" width="3.6" height="5.4" rx="1.6"></rect><rect x="17.6" y="13.3" width="3.6" height="5.4" rx="1.6"></rect><path d="M19.4 18.7a3.4 3.4 0 0 1-3.4 2.6h-1.6"></path></svg>
+        </span>
+        <span style="display: {{ faqRuleShow }}; flex: none; align-self: stretch; width: 1px; background: #C9D8F2;"></span>
+        <span style="display: {{ faqTextDisp }}; flex: 1; min-width: 0;">
+          <span style="display: block; flex: {{ faqTitleFlex }}; min-width: 0; align-self: center; font-size: {{ faqHelpTitleFs }}; font-weight: 600; color: #111827;">Still have a question?</span>
+          <span style="display: block; flex: {{ faqBodyFlex }}; min-width: 0; margin-top: {{ faqBodyMt }}; font-size: {{ faqHelpBodyFs }}; line-height: 1.5; font-weight: 400; color: #5A6478; max-width: 42ch;">Our support team is here to help you find the right part or answer any questions.</span>
+        </span>
+        <span style="flex: {{ faqCtaFlex }}; min-width: 0; display: flex; flex-direction: column; align-items: {{ faqCtaAlign }}; gap: 10px;">
+          <a href="#" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: {{ faqCtaH }}; padding: {{ faqCtaPad }}; border-radius: 999px; background: #0041C0; font-size: {{ faqCtaFs }}; font-weight: 600; color: #FFFFFF; text-decoration: none; transition: background 380ms ease;" style-hover="background: #00309A; text-decoration: none;">
+            Contact Support
+            <span style="flex: none; display: inline-flex; align-items: center;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 1.8px; display: block;"><path d="M4 12h15"></path><path d="m13 6 6 6-6 6"></path></svg>
+            </span>
+          </a>
+          <span style="font-size: 13px; font-weight: 400; color: #5A6478; white-space: {{ nowrapSm }}; text-align: center;">Mon – Fri, 9 AM – 6 PM ET &nbsp;|&nbsp; 1-800-211-7262</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" force-desktop="{{ true }}" vp="{{ vp }}" hint-size="100%,560px" style="display: block;"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {};
+  bp() {
+    const vp = this.state.vp || 'desktop';
+    const pw = this.state.paneW || 1440;
+    const mob = vp === 'mobile' || (vp === 'desktop' && pw < 760);
+    const tab = vp === 'tablet' || (vp === 'desktop' && pw >= 760 && pw < 1180);
+    return { vp, mob, tab, small: mob || tab };
+  }
+  componentDidMount() {
+    this._lastY = window.scrollY || 0;
+    this._onHdrScroll = () => {
+      const y = window.scrollY || 0, d = y - this._lastY;
+      if (Math.abs(d) < 6) return;
+      this._lastY = y;
+      const hide = d > 0 && y > 160 && !this.state.nav, shade = y > 160;
+      if (hide !== !!this.state.hdrHidden || shade !== !!this.state.hdrShade) this.setState({ hdrHidden: hide, hdrShade: shade });
+    };
+    window.addEventListener('scroll', this._onHdrScroll, { passive: true });
+    this._onRs = () => this.setState({ paneW: window.innerWidth });
+    this._onRs();
+    window.addEventListener('resize', this._onRs);
+    this.phRestart();
+  }
+  phRestart() {
+    clearTimeout(this._phT);
+    if (this.state.phHold) return;
+    this.setState({ phRun: false }, () => requestAnimationFrame(() => requestAnimationFrame(() => { if (!this.state.phHold) this.setState({ phRun: true }); })));
+    this._phT = setTimeout(() => { this.setState({ ph: ((this.state.ph || 0) + 1) % 3 }); this.phRestart(); }, 6000);
+  }
+  componentWillUnmount() { clearTimeout(this._phT); window.removeEventListener('resize', this._onRs); window.removeEventListener('scroll', this._onHdrScroll); }
+  renderVals() {
+    const { vp, mob, tab, small } = this.bp();
+    const pick = (d, t, m) => (mob ? m : tab ? t : d);
+    const set = v => () => this.setState({ vp: v, nav: false });
+    const out = {
+      vp,
+      frameW: '100%',
+      frameMaxW: vp === 'mobile' ? '390px' : vp === 'tablet' ? '768px' : '1536px',
+      frameShadow: vp !== 'desktop' ? '0 18px 60px rgba(17,24,39,0.16)' : 'none',
+      hdrTf: this.state.hdrHidden ? 'translateY(-100%)' : 'translateY(0)',
+      hdrShadow: this.state.hdrShade && !this.state.hdrHidden ? '0 6px 18px rgba(17,24,39,0.08)' : 'none',
+      onHdrNav: open => this.setState({ nav: open }),
+      padX: pick('0 40px', '0 24px', '0 16px'),
+      secPad: pick('56px 0', '44px 0', '32px 0'),
+      crumbH: pick('48px', '46px', '42px'), crumbGap: pick('10px', '8px', '6px'),
+      h2SecSize: pick('34px', '28px', '24px'),
+      headGap: pick('32px', '28px', '24px'),
+      bodyFs: pick('17px', '15px', '15px'),
+      bImgPos: mob ? 'relative' : 'absolute', bImgH: mob ? '200px' : 'auto',
+      bBandBg: mob ? '#F4F8FE' : '#111214', bInk: mob ? '#111827' : '#FFFFFF', bSubInk: mob ? '#4A5567' : '#E4E7EC',
+      bGradShow: mob ? 'none' : 'block', bGradW: tab ? '62%' : 'min(760px, 62%)',
+      bPad: pick('64px 40px', '48px 24px', '22px 16px 28px'), bTextMax: pick('560px', '360px', 'none'), bTextM: mob ? '0 auto' : '0', bTextAlign: mob ? 'center' : 'left',
+      h1Fs: pick('46px', '36px', '30px'), bPFs: pick('17px', '15px', '15px'), bPMt: pick('24px', '16px', '16px'),
+      legHeadAlign: mob ? 'center' : 'left',
+      legCols: mob ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 1fr)', legGap: pick('64px', '32px', '24px'),
+      apSecPad: pick('64px 0', '48px 0', '36px 0'),
+      apWrapMax: small ? '100%' : 'min(1376px, 100%)',
+      apHeadGap: pick('32px', '20px', '10px'),
+      apCtaFs: pick('17px', '15px', '13px'),
+      apCols: pick('repeat(8, minmax(0, 1fr))', 'repeat(4, minmax(0, 1fr))', 'repeat(2, minmax(0, 1fr))'),
+      apGap: mob ? '20px' : '16px',
+      apGridTop: pick('40px', '30px', '24px'),
+      apCardAlign: mob ? 'stretch' : 'center',
+      apCardH: pick('158px', '132px', '76px'),
+      apCardPad: pick('22px 12px 18px', '16px 10px 14px', '12px 14px'),
+      apInnerDir: mob ? 'row' : 'column',
+      apInnerGap: pick('16px', '12px', '12px'),
+      apIcon: pick('clamp(46px, 4vw, 58px)', '44px', '48px'),
+      apLabelFs: pick('15px', '14px', '13px'),
+      apLabelAlign: mob ? 'left' : 'center',
+      apArrowR: mob ? '8px' : '0',
+      apArrowTop: pick('16px', '12px', '8px'),
+      apArrowJust: mob ? 'flex-end' : 'center',
+      apChevBox: pick('30px', '24px', '18px'),
+      apChevSvg: pick('13', '11', '9'),
+      phPara2: small ? 'none' : 'block',
+      phTopGap: mob ? '32px' : pick('24px', '16px', '12px'),
+      phLeftDisp: mob ? 'contents' : 'block',
+      phTopAlign: mob ? 'center' : 'left',
+      phTopCols: mob ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) minmax(0, 1fr)',
+      phIntroMt: pick('20px', '16px', '12px'),
+      gdHeadDir: small ? 'row' : 'column',
+      gdHeadGap: small ? '20px' : '14px',
+      gdHeadAlign: small ? 'center' : 'flex-start',
+      phCols: small ? 'minmax(0, 1fr)' : 'minmax(0, 1.1fr) minmax(0, 0.9fr)',
+      phListOrder: small ? 0 : 2,
+      phRowGap: pick('64px', '48px', '36px'),
+      phHeadAlign: small ? 'center' : 'left',
+      phListDisp: small ? 'grid' : 'flex', phListCols: 'repeat(3, minmax(0, 1fr))', phListGap: pick('12px', '12px', '8px'),
+      phTabDir: small ? 'column' : 'row', phTabAlign: small ? 'flex-start' : 'center', phTabGap: pick('20px', '6px', '6px'),
+      phTabPad: pick('22px 24px', '18px 20px', '14px 12px'), phNumW: small ? '0' : '96px',
+      phLblFs: pick('19px', '15px', '13px'), phPanelTitleFs: pick('24px', '20px', '17px'), phPanelPad: pick('36px 40px', '28px', '22px 18px'),
+      statFs: pick('34px', '34px', '24px'),
+      whyCols: mob ? 'minmax(0, 1fr)' : tab ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))',
+      whyPad: pick('24px', '20px', '18px'), cardGap: pick('24px', '16px', '12px'),
+      catCols: mob ? 'repeat(2, minmax(0, 1fr))' : tab ? 'repeat(3, minmax(0, 1fr))' : 'repeat(5, minmax(0, 1fr))', catGap: pick('16px', '14px', '10px'),
+      secPadF: mob ? '30px 0' : tab ? '40px 0' : '48px 0',
+      faqBgH: mob ? '820px' : tab ? '900px' : '980px', faqBgOp: 1,
+      faqScrim: 'linear-gradient(180deg, rgba(247,249,253,0.372), rgba(247,249,253,0.400))',
+      wrapMax: small ? '100%' : 'min(1376px, 100%)',
+      faqQFs: pick('17px', '15px', '15px'), faqAFs: mob ? '15px' : '17px',
+      faqHelpWrap: mob ? 'wrap' : 'nowrap', faqHelpDir: tab ? 'row' : small && !mob ? 'column' : 'row',
+      faqHelpAlign: 'center', faqHelpJustify: 'flex-start', faqHelpText: 'left',
+      faqHelpGap: mob ? '20px 16px' : '26px', faqHelpPad: mob ? '18px 18px 20px' : '16px 28px', faqHelpDot: mob ? '40px' : '52px',
+      faqRuleShow: 'none', faqTextDisp: 'block', faqTitleFlex: mob ? '0 1 auto' : 'none',
+      faqHelpTitleFs: tab ? '19px' : mob ? '16px' : '20px', faqBodyFlex: mob ? '1 1 100%' : 'none', faqBodyMt: mob ? '4px' : '6px',
+      faqHelpBodyFs: tab ? '15px' : mob ? '13px' : '15px', faqCtaFlex: mob ? '1 1 100%' : '0 1 auto', faqCtaAlign: mob ? 'flex-start' : 'center',
+      faqCtaH: '48px', faqCtaPad: mob ? '0 24px' : '0 28px', faqCtaFs: '16px', nowrapSm: small ? 'normal' : 'nowrap'
+    };
+    const fOpen = this.state.faq === undefined ? 0 : this.state.faq;
+    for (let i = 0; i < 7; i++) {
+      const on = fOpen === i;
+      out['faqRows' + i] = on ? '1fr' : '0fr';
+      out['faqOp' + i] = on ? 1 : 0;
+      out['faqMt' + i] = on ? '8px' : '0px';
+      out['faqBg' + i] = on ? '#F4F8FE' : '#FFFFFF';
+      out['faqBd' + i] = on ? '#CFE0FA' : '#E6EAF2';
+      out['faqRot' + i] = on ? 'rotate(45deg)' : 'rotate(0deg)';
+      out['faqW' + i] = on ? 600 : 500;
+      out['faqTap' + i] = e => { e.preventDefault(); this.setState({ faq: on ? null : i }); };
+    }
+    out.apLeave = () => this.setState({ apCard: null });
+    for (let i = 0; i < 8; i++) {
+      const on = this.state.apCard === i;
+      out['apEnter' + i] = () => this.setState({ apCard: i });
+      out['apLift' + i] = on ? (mob ? 'none' : 'translateY(19px)') : 'translateY(0)';
+      out['apArrowOn' + i] = on && !mob ? 1 : 0;
+      out['apArrowLift' + i] = on ? 'translateY(0)' : 'translateY(10px)';
+    }
+    out.gdLeave = () => this.setState({ gd: null });
+    for (let i = 0; i < 4; i++) {
+      const on = this.state.gd === i;
+      out['gdEnter' + i] = () => this.setState({ gd: i });
+      out['gdBd' + i] = on ? '#CFE0FA' : '#E2E6EE';
+      out['gdTf' + i] = on && !mob ? 'translateY(-5px)' : 'translateY(0)';
+      out['gdSh' + i] = on ? '0 14px 30px rgba(17,24,39,0.12)' : 'none';
+      out['gdBar' + i] = on ? '100%' : '0%';
+      out['gdIconBg' + i] = on ? '#0041C0' : '#DCE7FB';
+      out['gdIconInk' + i] = on ? '#FFFFFF' : '#0041C0';
+      out['gdIconTf' + i] = on ? 'rotate(-8deg) scale(1.06)' : 'none';
+    }
+    const PH = [['1953', 'Encompass Founded'], ['2022', 'Part of Parts Town'], ['Today', 'Your Panasonic Parts Store']];
+    const cur = this.state.ph || 0, dur = 6000;
+    PH.forEach(([n, l], i) => {
+      const on = cur === i;
+      out['phNum' + i] = n; out['phLbl' + i] = l;
+      out['phTabBg' + i] = on ? '#F4F8FE' : '#FFFFFF'; out['phTabBd' + i] = on ? '#CFE0FA' : '#E2E6EE';
+      out['phNumInk' + i] = on ? '#0041C0' : '#98A2B3'; out['phLblInk' + i] = on ? '#111827' : '#5A6478';
+      out['phBarW' + i] = on && (this.state.phHold || this.state.phRun) ? '100%' : '0%';
+      out['phBarT' + i] = on && !this.state.phHold && this.state.phRun ? 'width ' + dur + 'ms linear' : 'none';
+      out['phOp' + i] = on ? 1 : 0; out['phTf' + i] = on ? 'translateY(0)' : 'translateY(12px)';
+      out['phPe' + i] = on ? 'auto' : 'none'; out['phHide' + i] = on ? 'false' : 'true';
+      out['phGo' + i] = () => { if (this.state.ph !== i) this.setState({ ph: i }); this.phRestart(); };
+    });
+    out.phPause = () => { this.setState({ phHold: true }); clearTimeout(this._phT); };
+    out.phResume = () => this.setState({ phHold: false }, () => this.phRestart());
+    for (const [k, v] of [['D', 'desktop'], ['T', 'tablet'], ['M', 'mobile']]) {
+      const on = vp === v;
+      out['vpSet' + k] = set(v); out['vpBg' + k] = on ? '#FFFFFF' : 'transparent'; out['vpFg' + k] = on ? '#111827' : 'rgba(255,255,255,0.72)';
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

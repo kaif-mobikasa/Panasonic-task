@@ -1,0 +1,255 @@
+{{ 'about-timeline.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'about-timeline.js' | asset_url }}" defer="defer"></script>
+
+<div
+  class="about-timeline"
+  id="AboutTimeline-{{ section.id }}"
+  data-duration="{{ section.settings.autoplay_duration | default: 6 | times: 1000 }}"
+  data-pause-hover="{{ section.settings.pause_on_hover }}"
+  style="
+    --timeline-bg: {{ section.settings.background_color | default: '#f7f9fd' }};
+    --timeline-accent: {{ section.settings.accent_color | default: '#0041c0' }};
+    --timeline-duration: {{ section.settings.autoplay_duration | default: 6 }}s;
+    --timeline-pt: {{ section.settings.padding_top | default: 48 }}px;
+    --timeline-pb: {{ section.settings.padding_bottom | default: 64 }}px;
+    --timeline-pt-mobile: {{ section.settings.padding_top_mobile | default: 32 }}px;
+    --timeline-pb-mobile: {{ section.settings.padding_bottom_mobile | default: 48 }}px;
+  "
+>
+  <div class="about-timeline-container">
+    {%- if section.blocks.size > 0 -%}
+      <div class="about-timeline-grid">
+        <div class="about-timeline-panel-wrap">
+          {%- for block in section.blocks -%}
+            <div
+              class="about-timeline-panel-item{% if forloop.first %} is-active{% endif %}"
+              id="AboutTimelinePanel-{{ block.id }}"
+              data-index="{{ forloop.index0 }}"
+              role="tabpanel"
+              aria-hidden="{% if forloop.first %}false{% endif %}{% if forloop.first == false %}true{% endif %}"
+            >
+              {%- if block.settings.year_or_tag != blank -%}
+                <div class="about-timeline-panel-tag">{{ block.settings.year_or_tag | escape }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.title != blank -%}
+                <h3 class="about-timeline-panel-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.title == blank and block.settings.tab_label != blank -%}
+                <h3 class="about-timeline-panel-title">{{ block.settings.tab_label | escape }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description_1 != blank or block.settings.description_2 != blank -%}
+                <div class="about-timeline-panel-body">
+                  {%- if block.settings.description_1 != blank -%}
+                    <p class="about-timeline-panel-p">{{ block.settings.description_1 | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.description_2 != blank -%}
+                    <p class="about-timeline-panel-p">{{ block.settings.description_2 | escape }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="about-timeline-tabs-wrap" role="tablist" aria-label="Company Timeline">
+          {%- for block in section.blocks -%}
+            <button
+              type="button"
+              class="about-timeline-tab{% if forloop.first %} is-active{% endif %}"
+              id="AboutTimelineTab-{{ block.id }}"
+              data-index="{{ forloop.index0 }}"
+              data-block-id="{{ block.id }}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% endif %}{% if forloop.first == false %}false{% endif %}"
+              aria-controls="AboutTimelinePanel-{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.year_or_tag != blank -%}
+                <span class="about-timeline-tab-stat">{{ block.settings.year_or_tag | escape }}</span>
+              {%- endif -%}
+
+              {%- if block.settings.tab_label != blank -%}
+                <span class="about-timeline-tab-label">{{ block.settings.tab_label | escape }}</span>
+              {%- endif -%}
+
+              <span class="about-timeline-progress-bar" aria-hidden="true"></span>
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Timeline",
+  "tag": "section",
+  "class": "section-about-timeline",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Playback Settings"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_duration",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Auto-switch Duration",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#F7F9FD"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent / Active Color",
+      "default": "#0041C0"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Padding Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Top",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Padding Bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline_item",
+      "name": "Timeline Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year_or_tag",
+          "label": "Year or Tag",
+          "default": "1953"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Encompass Founded"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Panel Title (Optional)",
+          "info": "Leave blank to use Tab Label"
+        },
+        {
+          "type": "textarea",
+          "id": "description_1",
+          "label": "Primary Description",
+          "default": "Formed in 1953, Encompass is one of the country’s largest suppliers of repair parts and accessories for products throughout the home."
+        },
+        {
+          "type": "textarea",
+          "id": "description_2",
+          "label": "Secondary Description (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Timeline",
+      "settings": {
+        "autoplay_duration": 6,
+        "pause_on_hover": true,
+        "padding_top": 48,
+        "padding_bottom": 64,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 48
+      },
+      "blocks": [
+        {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "1953",
+            "tab_label": "Encompass Founded",
+            "title": "Encompass Founded",
+            "description_1": "Formed in 1953, Encompass is one of the country’s largest suppliers of repair parts and accessories for products throughout the home."
+          }
+        },
+        {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "2022",
+            "tab_label": "Part of Parts Town",
+            "title": "Part of Parts Town",
+            "description_1": "In 2022, Encompass was acquired by Parts Town, the global market leader in foodservice equipment parts distribution, to expand its residential parts division along with Dayton Appliance Parts.",
+            "description_2": "Joined Parts Town to widen parts availability and shipping reach."
+          }
+        },
+        {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "Today",
+            "tab_label": "Your Panasonic Parts Store",
+            "title": "Your Panasonic Parts Store",
+            "description_1": "Today, Encompass runs this dedicated Panasonic parts store, bringing genuine replacement parts and accessories for Panasonic appliances together in one place.",
+            "description_2": "Orders are packed and shipped from our facility in Lawrenceville, Georgia."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

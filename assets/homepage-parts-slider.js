@@ -1,9 +1,3 @@
-/**
- * Homepage Parts Experience Slider Section JavaScript
- * Implements 3D stacked card deck sliding and text synchronization
- * Matches Figma Desktop & Mobile specifications and Homepage 01-dc.html logic
- */
-
 (function () {
   'use strict';
 
@@ -35,7 +29,6 @@
         const isSmall = window.innerWidth < 990;
         const mult = isSmall ? 3.5 : 7.0;
 
-        // 1. Calculate & apply 3D transforms to cards
         cards.forEach((card, i) => {
           let d = i - currentIndex;
           if (d > Math.floor(N / 2)) d -= N;
@@ -59,7 +52,6 @@
           card.classList.toggle('is-active', isNow);
         });
 
-        // 2. Update Dots
         desktopDots.forEach((dot, i) => {
           dot.classList.toggle('is-active', i === currentIndex);
           dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
@@ -70,7 +62,6 @@
           dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
         });
 
-        // 3. Update Text Content with subtle fade
         const activeCard = cards[currentIndex];
         if (activeCard) {
           const newTitle = activeCard.dataset.title;
@@ -114,7 +105,6 @@
         }
       }
 
-      // Card click event
       cards.forEach((card, i) => {
         card.addEventListener('click', (e) => {
           e.preventDefault();
@@ -124,7 +114,6 @@
         });
       });
 
-      // Prev & Next buttons
       prevButtons.forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -139,7 +128,6 @@
         });
       });
 
-      // Pagination dots click
       desktopDots.forEach((dot, i) => {
         dot.addEventListener('click', (e) => {
           e.preventDefault();
@@ -154,7 +142,6 @@
         });
       });
 
-      // Touch Swipe handling on the card deck
       if (deck) {
         let touchStartX = 0;
         let touchEndX = 0;
@@ -174,9 +161,9 @@
             const diffX = touchEndX - touchStartX;
             if (Math.abs(diffX) > 40) {
               if (diffX < 0) {
-                updateStack(currentIndex + 1); // Swipe left
+                updateStack(currentIndex + 1);
               } else {
-                updateStack(currentIndex - 1); // Swipe right
+                updateStack(currentIndex - 1);
               }
             }
           },
@@ -184,7 +171,6 @@
         );
       }
 
-      // Handle screen resize smoothly
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -193,7 +179,6 @@
         }, 150);
       });
 
-      // Initial layout update
       updateStack(0);
     });
   }
@@ -204,7 +189,6 @@
     initPartsSliders();
   }
 
-  // Shopify Theme Editor support
   document.addEventListener('shopify:section:load', (e) => {
     if (e.target.classList.contains('section-homepage-parts-slider') || e.target.querySelector('.hp-parts-slider')) {
       initPartsSliders();
