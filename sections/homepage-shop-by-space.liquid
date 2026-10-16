@@ -16,7 +16,7 @@
   endif
 -%}
 
-<div class="hp-section hp-space" id="ShopBySpace-{{ section.id }}">
+<shop-by-space class="hp-section hp-space" id="ShopBySpace-{{ section.id }}">
   <div class="hp-container">
     <div class="hp-space-header">
       {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
@@ -510,7 +510,7 @@
       {%- endfor -%}
     {%- endif -%}
   </div>
-</div>
+</shop-by-space>
 
 {% schema %}
 {

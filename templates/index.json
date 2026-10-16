@@ -12,68 +12,79 @@
     "hero": {
       "type": "homepage-hero",
       "blocks": {
-        "slide_fNpM8H": {
-          "type": "slide",
+        "hero_slide_PGd6H7": {
+          "type": "hero-slide",
+          "name": "Hero Slide",
           "settings": {
             "image": "shopify://shop_images/home-img.webp",
-            "label": "Appliances.",
-            "hotspot_enable": true,
-            "hotspot_top": 50,
-            "hotspot_left": 50,
-            "hotspot_image": "shopify://shop_images/cleaner.png",
-            "hotspot_title": "Cleaner",
-            "hotspot_desc": "Cleaner",
-            "hotspot_btn_label": "View Parts",
-            "hotspot_btn_url": "shopify://products/copy-1"
-          }
+            "label": "Appliances."
+          },
+          "blocks": {
+            "additional_hotspot_hezXRA": {
+              "type": "additional-hotspot",
+              "name": "Additional Hotspot",
+              "settings": {
+                "top": 70,
+                "left": 50,
+                "image": "shopify://shop_images/microwave.png",
+                "title": "Product Title",
+                "description": "Category",
+                "button_label": "View Parts",
+                "button_url": ""
+              },
+              "blocks": {}
+            },
+            "additional_hotspot_NVpFED": {
+              "type": "additional-hotspot",
+              "name": "Additional Hotspot",
+              "settings": {
+                "top": 50,
+                "left": 50,
+                "image": "shopify://shop_images/hvac.png",
+                "title": "Product Title",
+                "description": "Category",
+                "button_label": "View Parts",
+                "button_url": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "additional_hotspot_hezXRA",
+            "additional_hotspot_NVpFED"
+          ]
         },
-        "slide_VEC6hg": {
-          "type": "slide",
+        "hero_slide_RJQr7V": {
+          "type": "hero-slide",
+          "name": "Hero Slide",
           "settings": {
-            "image": "shopify://shop_images/Oven.webp",
-            "label": "Appliances.",
-            "hotspot_enable": true,
-            "hotspot_top": 50,
-            "hotspot_left": 50,
-            "hotspot_image": "shopify://shop_images/trimmer.png",
-            "hotspot_title": "Oven",
-            "hotspot_desc": "Oven",
-            "hotspot_btn_label": "View Parts",
-            "hotspot_btn_url": ""
-          }
-        },
-        "hotspot_PLnELw": {
-          "type": "hotspot",
-          "settings": {
-            "slide": "0",
-            "top": 50,
-            "left": 64,
-            "image": "shopify://shop_images/fridge.png",
-            "title": "Fridge",
-            "description": "Fridge",
-            "button_label": "View Parts",
-            "button_url": ""
-          }
-        },
-        "hotspot_TCL3R4": {
-          "type": "hotspot",
-          "settings": {
-            "slide": "0",
-            "top": 67,
-            "left": 59,
-            "image": "shopify://shop_images/microwave.png",
-            "title": "Oven",
-            "description": "Oven",
-            "button_label": "View Parts",
-            "button_url": ""
-          }
+            "image": "shopify://shop_images/abiut-us-sencond.webp",
+            "label": "Appliances."
+          },
+          "blocks": {
+            "additional_hotspot_xXcWpm": {
+              "type": "additional-hotspot",
+              "name": "Additional Hotspot",
+              "settings": {
+                "top": 50,
+                "left": 50,
+                "image": "shopify://shop_images/new4.webp",
+                "title": "Product Title",
+                "description": "Category",
+                "button_label": "View Parts",
+                "button_url": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "additional_hotspot_xXcWpm"
+          ]
         }
       },
       "block_order": [
-        "slide_fNpM8H",
-        "slide_VEC6hg",
-        "hotspot_PLnELw",
-        "hotspot_TCL3R4"
+        "hero_slide_PGd6H7",
+        "hero_slide_RJQr7V"
       ],
       "settings": {
         "heading_prefix": "Find The Exact",
@@ -83,17 +94,7 @@
         "search_placeholder": "e.g. LRSOS2706S",
         "search_button_text": "SEARCH",
         "model_link_text": "Where's my model number?",
-        "model_link_url": "",
-        "image_1": "shopify://shop_images/home-img.webp",
-        "label_1": "Appliances.",
-        "image_2": "shopify://shop_images/microwave.webp",
-        "label_2": "Microwave.",
-        "image_3": "shopify://shop_images/Trimmer.webp",
-        "label_3": "Shaver.",
-        "image_4": "shopify://shop_images/camera.webp",
-        "label_4": "Camera.",
-        "image_5": "shopify://shop_images/vaccum-cleaner.webp",
-        "label_5": "Vacuum Cleaner."
+        "model_link_url": ""
       }
     },
     "trust_bar": {
@@ -358,6 +359,146 @@
     },
     "featured_products": {
       "type": "homepage-featured-products",
+      "blocks": {
+        "product_card_hYpa7a": {
+          "type": "product_card",
+          "settings": {
+            "category": "refrigerator",
+            "product": "",
+            "image": "shopify://shop_images/micro.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_4HDYGP": {
+          "type": "product_card",
+          "settings": {
+            "category": "vacuum",
+            "product": "",
+            "image": "shopify://shop_images/micro2.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_kjkCcy": {
+          "type": "product_card",
+          "settings": {
+            "category": "personal_care",
+            "product": "",
+            "image": "shopify://shop_images/micro3.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_xUUYtN": {
+          "type": "product_card",
+          "settings": {
+            "category": "personal_care",
+            "product": "",
+            "image": "shopify://shop_images/micro.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_taJ6n7": {
+          "type": "product_card",
+          "settings": {
+            "category": "microwave",
+            "product": "",
+            "image": "shopify://shop_images/micro2.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_mMDhaa": {
+          "type": "product_card",
+          "settings": {
+            "category": "microwave",
+            "product": "",
+            "image": "shopify://shop_images/micro.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_GVQ639": {
+          "type": "product_card",
+          "settings": {
+            "category": "microwave",
+            "product": "",
+            "image": "shopify://shop_images/micro2.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        },
+        "product_card_67deqn": {
+          "type": "product_card",
+          "settings": {
+            "category": "microwave",
+            "product": "",
+            "image": "shopify://shop_images/micro3.webp",
+            "part_number": "Part No. A0601Y00AP",
+            "title": "Microwave Glass Turntable Tray",
+            "compatible_models_text": "View Compatible Models",
+            "compatible_models_url": "",
+            "price": "$24.99",
+            "compare_at_price": "$32.99",
+            "product_url": "",
+            "button_text": "Add to Cart"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_hYpa7a",
+        "product_card_4HDYGP",
+        "product_card_kjkCcy",
+        "product_card_xUUYtN",
+        "product_card_taJ6n7",
+        "product_card_mMDhaa",
+        "product_card_GVQ639",
+        "product_card_67deqn"
+      ],
       "settings": {
         "title_prefix": "Popular Parts",
         "title_highlight": "& Accessories",
@@ -532,6 +673,54 @@
     },
     "error_code_lookup": {
       "type": "homepage-error-code-lookup",
+      "blocks": {
+        "appliance_VkPbrh": {
+          "type": "appliance",
+          "settings": {
+            "image": "shopify://shop_images/section.webp",
+            "title": "Microwave",
+            "link": "",
+            "codes_label": "Common codes:",
+            "codes": "H97, H98, H99, U50"
+          }
+        },
+        "appliance_Y7RqEx": {
+          "type": "appliance",
+          "settings": {
+            "image": "shopify://shop_images/section2.webp",
+            "title": "Microwave",
+            "link": "",
+            "codes_label": "Common codes:",
+            "codes": "H97, H98, H99, U50"
+          }
+        },
+        "appliance_freax3": {
+          "type": "appliance",
+          "settings": {
+            "image": "shopify://shop_images/section4.webp",
+            "title": "Microwave",
+            "link": "",
+            "codes_label": "Common codes:",
+            "codes": "H97, H98, H99, U50"
+          }
+        },
+        "appliance_iJhecH": {
+          "type": "appliance",
+          "settings": {
+            "image": "shopify://shop_images/section3.webp",
+            "title": "Microwave",
+            "link": "",
+            "codes_label": "Common codes:",
+            "codes": "H97, H98, H99, U50"
+          }
+        }
+      },
+      "block_order": [
+        "appliance_VkPbrh",
+        "appliance_Y7RqEx",
+        "appliance_freax3",
+        "appliance_iJhecH"
+      ],
       "settings": {
         "title_prefix": "Error Code",
         "title_highlight": "Lookup",
@@ -542,9 +731,20 @@
     "homepage_parts_slider_M649HV": {
       "type": "homepage-parts-slider",
       "blocks": {
+        "slide_Hk84r4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/slide.webp",
+            "title": "Genuine Panasonic Parts",
+            "body": "Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.",
+            "button_label": "Shop Original Parts",
+            "button_link": ""
+          }
+        },
         "slide_fVzqPp": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/slide3.webp",
             "title": "Genuine Panasonic Parts",
             "body": "Shop genuine Panasonic replacement parts made specifically for Panasonic appliances.",
             "button_label": "Shop Original Parts",
@@ -554,6 +754,7 @@
         "slide_tXh47y": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/slide2.webp",
             "title": "Find The Right Part",
             "body": "Find the right replacement using your appliance model number or part number.",
             "button_label": "Find Your Part",
@@ -563,6 +764,7 @@
         "slide_9Jh9yr": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/slide.webp",
             "title": "Parts Ready To Ship",
             "body": "Find stocked replacement parts and get your order moving without unnecessary delays.",
             "button_label": "Shop In-Stock Parts",
@@ -572,6 +774,7 @@
         "slide_aUGyCe": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/slide2.webp",
             "title": "Know It Fits Before You Buy",
             "body": "Confirm that a part is compatible with your Panasonic appliance before completing your purchase.",
             "button_label": "Check Compatibility",
@@ -581,6 +784,7 @@
         "slide_6hbJ3Q": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/slide3.webp",
             "title": "Easy From Search To Return",
             "body": "From finding your part to getting it delivered, shop with straightforward ordering and easy returns.",
             "button_label": "Explore Parts",
@@ -589,6 +793,7 @@
         }
       },
       "block_order": [
+        "slide_Hk84r4",
         "slide_fVzqPp",
         "slide_tXh47y",
         "slide_9Jh9yr",
@@ -625,8 +830,7 @@
         "stat_VAgmRC": {
           "type": "stat",
           "settings": {
-            "icon": "users",
-            "custom_svg": "",
+            "custom_svg": "<svg viewbox=\"-0.87 0.35 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                          <circle cx=\"9\" cy=\"8.6\" r=\"3.1\"></circle>\n                          <path d=\"M3.4 19.2a5.9 5.9 0 0 1 11.2 0\"></path>\n                          <path d=\"M16.4 6.4a3 3 0 0 1 0 5.9M17.6 19.2a5.6 5.6 0 0 0-1.5-3.8\"></path>\n                        </svg>",
             "title": "10,000+",
             "subtitle": "Happy Customers",
             "link": ""
@@ -635,8 +839,7 @@
         "stat_qyXdqG": {
           "type": "stat",
           "settings": {
-            "icon": "genuine",
-            "custom_svg": "",
+            "custom_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                          <path d=\"m12 3 2 1.6 2.5-.4 1 2.4 2.4 1-.4 2.5L21 12l-1.5 2-.4 2.5-2.4 1-1 2.4-2.5-.4L12 21l-2-1.5-2.5.4-1-2.4-2.4-1 .4-2.5L3 12l1.5-2-.4-2.5 2.4-1 1-2.4 2.5.4Z\"></path>\n                          <path d=\"m8.8 12 2.2 2.2 4.2-4.4\"></path>\n                        </svg>",
             "title": "Genuine",
             "subtitle": "Panasonic Parts",
             "link": ""
@@ -645,8 +848,7 @@
         "stat_wfX6iB": {
           "type": "stat",
           "settings": {
-            "icon": "truck",
-            "custom_svg": "",
+            "custom_svg": "<svg viewbox=\"-1 0.8 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                          <path d=\"M2.8 6.4h10.4v9.2H2.8z\"></path>\n                          <path d=\"M13.2 9.6h3.6l2.4 2.8v3.2h-6z\"></path>\n                          <circle cx=\"6.6\" cy=\"17.4\" r=\"1.8\"></circle>\n                          <circle cx=\"16.4\" cy=\"17.4\" r=\"1.8\"></circle>\n                        </svg>",
             "title": "Reliable",
             "subtitle": "& On-Time Delivery",
             "link": ""
@@ -655,8 +857,7 @@
         "stat_ykYX7j": {
           "type": "stat",
           "settings": {
-            "icon": "support",
-            "custom_svg": "",
+            "custom_svg": "<svg viewbox=\"0 1.05 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                          <path d=\"M4.6 15.4v-3.2a7.4 7.4 0 0 1 14.8 0v3.2\"></path>\n                          <rect x=\"2.8\" y=\"13.3\" width=\"3.6\" height=\"5.4\" rx=\"1.6\"></rect>\n                          <rect x=\"17.6\" y=\"13.3\" width=\"3.6\" height=\"5.4\" rx=\"1.6\"></rect>\n                          <path d=\"M19.4 18.7a3.4 3.4 0 0 1-3.4 2.6h-1.6\"></path>\n                        </svg>",
             "title": "Dedicated",
             "subtitle": "Customer Support",
             "link": ""

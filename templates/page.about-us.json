@@ -15,23 +15,381 @@
         "show_breadcrumbs": true,
         "breadcrumb_home_label": "Home",
         "breadcrumb_current_label": "About Us",
+        "image": "shopify://shop_images/about-home.webp",
         "banner_height_desktop": 420,
         "banner_height_mobile": 260,
-        "overlay_opacity": 75,
+        "overlay_opacity": 80,
         "heading": "Keeping Panasonic Appliances Going",
         "subtext": "Genuine Panasonic replacement parts that help your appliances work like new."
       }
     },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
+      }
+    },
+    "about_brand_story_WR8AkQ": {
+      "type": "about-brand-story",
+      "name": "About Brand Story",
+      "settings": {
+        "image": "shopify://shop_images/abiut-us-sencond.webp",
+        "image_position": "left",
+        "corner_radius": 20,
+        "corner_radius_mobile": 16,
+        "heading_prefix": "Over a Century of",
+        "heading_highlight": "Panasonic Engineering",
+        "highlight_color": "#0041c0",
+        "paragraph_1": "For more than a century, Panasonic has built appliances that pair thoughtful design with everyday reliability.",
+        "paragraph_2": "Our genuine replacement parts carry that same commitment, giving you the fit, quality and precision your appliance was designed for.",
+        "background_color": "#ffffff",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_genuine_difference_kjrnkW": {
+      "type": "about-genuine-difference",
+      "blocks": {
+        "feature_card_VCHKJV": {
+          "type": "feature_card",
+          "settings": {
+            "custom_svg": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                    <polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon>\n                  </svg>",
+            "icon_bg_color": "#ebf3ff",
+            "icon_color": "#0041c0",
+            "title": "Original Performance",
+            "description": "Replace worn components without compromising how your appliance was designed to work."
+          }
+        },
+        "feature_card_qp6xtQ": {
+          "type": "feature_card",
+          "settings": {
+            "custom_svg": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                    <path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path>\n                    <path d=\"m9 12 2 2 4-4\"></path>\n                  </svg>",
+            "icon_bg_color": "#ebf3ff",
+            "icon_color": "#0041c0",
+            "title": "Quality You Can Trust",
+            "description": "Every part follows Panasonic manufacturing and quality standards for consistent results."
+          }
+        },
+        "feature_card_qWRx4x": {
+          "type": "feature_card",
+          "settings": {
+            "custom_svg": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                    <path d=\"M19.439 7.85c0-1.57.876-2.52 2.061-2.52.5 0 .9.15 1.25.4a.5.5 0 0 0 .75-.4V3.5a1.5 1.5 0 0 0-1.5-1.5h-4.32a.5.5 0 0 0-.4.2 3.65 3.65 0 0 1-5.78 0 .5.5 0 0 0-.4-.2H6.5A1.5 1.5 0 0 0 5 3.5v4.32a.5.5 0 0 0 .2.4 3.65 3.65 0 0 1 0 5.78.5.5 0 0 0-.2.4v4.32A1.5 1.5 0 0 0 6.5 20.22h4.32a.5.5 0 0 0 .4-.2 3.65 3.65 0 0 1 5.78 0 .5.5 0 0 0 .4.2h4.32a1.5 1.5 0 0 0 1.5-1.5v-1.83a.5.5 0 0 0-.75-.4 2.45 2.45 0 0 1-1.25.4c-1.185 0-2.061-.95-2.061-2.52 0-1.57.876-2.52 2.061-2.52.5 0 .9.15 1.25.4a.5.5 0 0 0 .75-.4v-1.83a.5.5 0 0 0-.75-.4 2.45 2.45 0 0 1-1.25.4c-1.185 0-2.061-.95-2.061-2.52z\"></path>\n                  </svg>",
+            "icon_bg_color": "#ebf3ff",
+            "icon_color": "#0041c0",
+            "title": "Perfect Compatibility",
+            "description": "Parts are made to your model's exact specifications for the right fit and reliable operation."
+          }
+        },
+        "feature_card_gcrF3p": {
+          "type": "feature_card",
+          "settings": {
+            "custom_svg": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n                    <path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\"></path>\n                    <path d=\"M3 3v5h5\"></path>\n                    <path d=\"M12 7v5l4 2\"></path>\n                  </svg>",
+            "icon_bg_color": "#ebf3ff",
+            "icon_color": "#0041c0",
+            "title": "Extend Product Life",
+            "description": "Keep appliances in use longer by replacing individual components when they wear out."
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_VCHKJV",
+        "feature_card_qp6xtQ",
+        "feature_card_qWRx4x",
+        "feature_card_gcrF3p"
+      ],
+      "name": "The Genuine Difference",
+      "settings": {
+        "heading_prefix": "The Genuine",
+        "heading_highlight": "Difference",
+        "highlight_color": "#0041c0",
+        "background_color": "#ffffff",
+        "padding_top": 64,
+        "padding_bottom": 72,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_encompass_iiy96c": {
+      "type": "about-encompass",
+      "name": "Powered by Encompass",
+      "settings": {
+        "heading_prefix": "Powered by",
+        "heading_highlight": "Encompass",
+        "highlight_color": "#0041c0",
+        "paragraph_1": "While there may be other distributors in the market, none can match the experience, comprehensive inventory and value-added services Encompass provides.",
+        "paragraph_2": "State-of-the-art warehouse management and automated backorder sourcing keep genuine parts available, with next day and 2-day ground shipping to keep repairs moving.",
+        "logo_image": "shopify://shop_images/about-encompass-logo.png",
+        "logo_svg": "",
+        "logo_alt": "Encompass - A Parts Town unlimited Company",
+        "logo_width": 420,
+        "card_position": "right",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#e8eef5",
+        "card_radius": 20,
+        "background_color": "#ffffff",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_timeline_LRakzw": {
+      "type": "about-timeline",
+      "blocks": {
+        "timeline_item_gyx3gH": {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "1953",
+            "tab_label": "Encompass Founded",
+            "title": "Encompass Founded",
+            "description_1": "Formed in 1953, Encompass is one of the country’s largest suppliers of repair parts and accessories for products throughout the home.",
+            "description_2": ""
+          }
+        },
+        "timeline_item_xmYREz": {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "2022",
+            "tab_label": "Part of Parts Town",
+            "title": "Part of Parts Town",
+            "description_1": "In 2022, Encompass was acquired by Parts Town, the global market leader in foodservice equipment parts distribution, to expand its residential parts division along with Dayton Appliance Parts.",
+            "description_2": "Joined Parts Town to widen parts availability and shipping reach."
+          }
+        },
+        "timeline_item_YmHTgk": {
+          "type": "timeline_item",
+          "settings": {
+            "year_or_tag": "Today",
+            "tab_label": "Your Panasonic Parts Store",
+            "title": "Your Panasonic Parts Store",
+            "description_1": "Today, Encompass runs this dedicated Panasonic parts store, bringing genuine replacement parts and accessories for Panasonic appliances together in one place.",
+            "description_2": "Orders are packed and shipped from our facility in Lawrenceville, Georgia."
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_gyx3gH",
+        "timeline_item_xmYREz",
+        "timeline_item_YmHTgk"
+      ],
+      "name": "About Timeline",
+      "settings": {
+        "autoplay_duration": 6,
+        "pause_on_hover": true,
+        "background_color": "#f7f9fd",
+        "accent_color": "#0041c0",
+        "padding_top": 48,
+        "padding_bottom": 64,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "about_appliances_wVweUF": {
+      "type": "about-appliances",
+      "blocks": {
+        "appliance_item_7jp8BQ": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-microwave.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Microwave",
+            "url": ""
+          }
+        },
+        "appliance_item_Wr8FWp": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-vacuum.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Vacuum Cleaner",
+            "url": ""
+          }
+        },
+        "appliance_item_j3MRjm": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-refrigerator.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Refrigerator",
+            "url": ""
+          }
+        },
+        "appliance_item_kJNmr4": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-shaver.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Shaver",
+            "url": ""
+          }
+        },
+        "appliance_item_3xRtgY": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-toaster.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Toaster",
+            "url": ""
+          }
+        },
+        "appliance_item_GgdRHR": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-camera.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Cameras",
+            "url": ""
+          }
+        },
+        "appliance_item_MgUjLU": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-shaver.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "Toothbrushes",
+            "url": ""
+          }
+        },
+        "appliance_item_7ddRdc": {
+          "type": "appliance_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon-vacuum.png",
+            "icon_svg": "",
+            "icon_bg_color": "#EBF3FF",
+            "title": "HVAC",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "appliance_item_7jp8BQ",
+        "appliance_item_Wr8FWp",
+        "appliance_item_j3MRjm",
+        "appliance_item_kJNmr4",
+        "appliance_item_3xRtgY",
+        "appliance_item_GgdRHR",
+        "appliance_item_MgUjLU",
+        "appliance_item_7ddRdc"
+      ],
+      "name": "Shop by Appliances",
+      "settings": {
+        "heading_prefix": "Shop Parts By",
+        "heading_highlight": "Appliances",
+        "highlight_color": "#0041C0",
+        "cta_text": "Explore All Appliances",
+        "cta_link": "",
+        "background_color": "#FFFFFF",
+        "padding_top": 56,
+        "padding_bottom": 64,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "homepage_faq_cVyBwC": {
+      "type": "homepage-faq",
+      "blocks": {
+        "faq_item_3QGhdf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are these genuine Panasonic parts?",
+            "answer": "Yes. All parts available on our website are genuine Panasonic parts, ensuring the best fit, performance and durability for your product.",
+            "open_by_default": true
+          }
+        },
+        "faq_item_cGyh8A": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I find the right part for my product?",
+            "answer": "Search by your model number, or browse by appliance and part type. Every listing shows the models it fits so you can confirm compatibility before you order.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_GJMe4M": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I search for parts using my model number?",
+            "answer": "Yes. Enter your model number in the search bar and we will show only the parts that match your product.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_QTga73": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long will it take to receive my order?",
+            "answer": "Orders ship within 2 business days. Standard delivery takes 3 to 7 business days depending on your state; expedited options are shown at checkout.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_gMer8x": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship across the United States?",
+            "answer": "Yes. We ship to all 50 states, including Alaska and Hawaii, as well as APO and FPO addresses.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_RfcPf4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "Unused parts in their original packaging can be returned within 30 days of delivery. Start a return from your order history to get a prepaid shipping label.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_h7pWN4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer installation support?",
+            "answer": "Yes. Our support team can walk you through fitting most replacement parts, and can connect you with an authorized Panasonic service center when installation is required.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_3QGhdf",
+        "faq_item_cGyh8A",
+        "faq_item_GJMe4M",
+        "faq_item_QTga73",
+        "faq_item_gMer8x",
+        "faq_item_RfcPf4",
+        "faq_item_h7pWN4"
+      ],
+      "name": "Homepage FAQ",
+      "settings": {
+        "bg_image": "shopify://shop_images/faq-img-about.webp",
+        "title_prefix": "Frequently Asked",
+        "title_highlight": "Questions",
+        "subtext": "Find quick answers to common questions about Panasonic parts, orders, compatibility and more.",
+        "support_card_enable": true,
+        "support_title": "Still have a question?",
+        "support_text": "Our support team is here to help you find the right part or answer any questions.",
+        "support_btn_text": "Contact Support",
+        "support_btn_url": "",
+        "support_hours": "Mon – Fri, 9 AM – 6 PM ET | 1-800-211-7262",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
     "about_hero",
-    "main"
+    "main",
+    "about_brand_story_WR8AkQ",
+    "about_genuine_difference_kjrnkW",
+    "about_encompass_iiy96c",
+    "about_timeline_LRakzw",
+    "about_appliances_wVweUF",
+    "homepage_faq_cVyBwC"
   ]
 }

@@ -1,7 +1,3 @@
-/**
- * Homepage Sections Interactive Script - Panasonic Shopify OS 2.0 Theme
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   initHeroSlider();
   initFaqAccordions();
@@ -11,87 +7,155 @@ document.addEventListener('DOMContentLoaded', () => {
   initPartsTypeSlider();
 });
 
-/* --------------------------------------------------------------------------
-   Hero Slider & Interactive Hotspots
-   -------------------------------------------------------------------------- */
 function initHeroSlider() {
-  const slider = document.querySelector('[data-hero-slider]');
-  if (!slider) return;
+  const sliders = document.querySelectorAll('[data-hero-slider]');
+  if (!sliders.length) return;
 
-  const slides = slider.querySelectorAll('[data-hero-slide]');
-  const dots = slider.querySelectorAll('[data-hero-dot]');
-  const prevBtn = slider.querySelector('[data-hero-prev]');
-  const nextBtn = slider.querySelector('[data-hero-next]');
-  const targetLabel = slider.querySelector('[data-hero-target]');
+  sliders.forEach(slider => {
+    const stage = slider.querySelector('.hp-hero-stage');
+    let slides = slider.querySelectorAll('[data-hero-slide]');
+    let dots = slider.querySelectorAll('[data-hero-dot]');
+    const prevBtn = slider.querySelector('[data-hero-prev]');
+    const nextBtn = slider.querySelector('[data-hero-next]');
+    const targetLabel = slider.querySelector('[data-hero-target]');
+    const dotsContainer = slider.querySelector('.hp-hero-dots');
 
-  if (!slides.length) return;
+    if (!slides.length) return;
 
-  let currentIndex = 0;
+    let currentIndex = 0;
 
-  function goToSlide(index) {
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-    currentIndex = index;
+    function refreshElements() {
+      slides = slider.querySelectorAll('[data-hero-slide]');
+      dots = slider.querySelectorAll('[data-hero-dot]');
+    }
 
-    slides.forEach((slide, i) => {
-      if (i === currentIndex) {
-        slide.classList.add('is-active');
-        const label = slide.getAttribute('data-appliance-label');
-        if (targetLabel && label) {
-          targetLabel.textContent = label;
+    function closeAllHotspots() {
+      slider.querySelectorAll('.hp-hotspot').forEach(spot => spot.classList.remove('is-active'));
+    }
+
+    function goToSlide(index) {
+      refreshElements();
+      if (!slides.length) return;
+
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentIndex = index;
+
+      closeAllHotspots();
+
+      slides.forEach((slide, i) => {
+        const isCurrent = i === currentIndex;
+        slide.classList.toggle('is-active', isCurrent);
+        if (isCurrent) {
+          const label = slide.getAttribute('data-appliance-label');
+          if (targetLabel && label) {
+            targetLabel.textContent = label;
+          }
         }
-      } else {
-        slide.classList.remove('is-active');
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === currentIndex);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(currentIndex + 1);
+      });
+    }
+
+    if (dotsContainer) {
+      dotsContainer.addEventListener('click', (e) => {
+        const dot = e.target.closest('[data-hero-dot]');
+        if (!dot) return;
+        e.preventDefault();
+        const index = Array.from(dotsContainer.querySelectorAll('[data-hero-dot]')).indexOf(dot);
+        if (index >= 0) {
+          goToSlide(index);
+        }
+      });
+    }
+
+    slider.addEventListener('click', (e) => {
+      const pin = e.target.closest('.hp-hotspot-pin');
+      if (pin) {
+        e.preventDefault();
+        e.stopPropagation();
+        const spot = pin.closest('.hp-hotspot');
+        if (!spot) return;
+        const wasActive = spot.classList.contains('is-active');
+        closeAllHotspots();
+        if (!wasActive) {
+          spot.classList.add('is-active');
+        }
+        return;
+      }
+
+      if (!e.target.closest('.hp-hotspot-card')) {
+        closeAllHotspots();
       }
     });
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === currentIndex);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      goToSlide(currentIndex - 1);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      goToSlide(currentIndex + 1);
-    });
-  }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      goToSlide(i);
-    });
+    goToSlide(0);
+    if (stage) {
+      stage.setAttribute('data-slider-ready', 'true');
+    }
   });
 
-  // Hotspot Click / Toggle Behavior
-  const hotspots = slider.querySelectorAll('.hp-hotspot');
-  hotspots.forEach(spot => {
-    const pin = spot.querySelector('.hp-hotspot-pin');
-    if (!pin) return;
+  document.addEventListener('shopify:block:select', (e) => {
+    const target = e.target;
+    if (!target) return;
 
-    pin.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    const heroSlide = target.closest ? target.closest('[data-hero-slide]') : null;
+    const hotspot = target.closest ? target.closest('.hp-hotspot') : null;
 
-      const isActive = spot.classList.contains('is-active');
-      hotspots.forEach(s => s.classList.remove('is-active'));
-      if (!isActive) {
-        spot.classList.add('is-active');
+    if (hotspot) {
+      const parentSlide = hotspot.closest('[data-hero-slide]');
+      const parentSlider = hotspot.closest('[data-hero-slider]');
+      if (parentSlide && parentSlider) {
+        const allSlides = Array.from(parentSlider.querySelectorAll('[data-hero-slide]'));
+        const slideIdx = allSlides.indexOf(parentSlide);
+        if (slideIdx >= 0) {
+          const dots = parentSlider.querySelectorAll('[data-hero-dot]');
+          if (dots[slideIdx]) {
+            dots[slideIdx].click();
+          }
+        }
+        hotspot.classList.add('is-active');
       }
-    });
+      return;
+    }
+
+    if (heroSlide) {
+      const parentSlider = heroSlide.closest('[data-hero-slider]');
+      if (parentSlider) {
+        const allSlides = Array.from(parentSlider.querySelectorAll('[data-hero-slide]'));
+        const slideIdx = allSlides.indexOf(heroSlide);
+        if (slideIdx >= 0) {
+          const dots = parentSlider.querySelectorAll('[data-hero-dot]');
+          if (dots[slideIdx]) {
+            dots[slideIdx].click();
+          }
+        }
+      }
+    }
   });
 
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.hp-hotspot')) {
-      hotspots.forEach(s => s.classList.remove('is-active'));
+  document.addEventListener('shopify:block:deselect', (e) => {
+    const target = e.target;
+    if (!target) return;
+    const hotspot = target.closest ? target.closest('.hp-hotspot') : null;
+    if (hotspot) {
+      hotspot.classList.remove('is-active');
     }
   });
 }

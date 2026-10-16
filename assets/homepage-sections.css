@@ -123,7 +123,7 @@
 
 .hp-hero {
   position: relative;
-  background: #f1f4f8;
+  background: rgb(241, 242, 244);
   overflow: hidden;
   padding: 0;
   min-height: 580px;
@@ -486,13 +486,33 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: 58%;
+  width: 62%;
   height: 100%;
   border-radius: 0;
   box-shadow: none;
   overflow: hidden;
   z-index: 1;
   pointer-events: auto;
+}
+
+.hp-hero-media-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(340px, 48%);
+  background: linear-gradient(
+    90deg,
+    #f1f4f8 0%,
+    rgba(241, 244, 248, 0.98) 20%,
+    rgba(241, 244, 248, 0.8) 42%,
+    rgba(241, 244, 248, 0.4) 68%,
+    rgba(241, 244, 248, 0.1) 88%,
+    rgba(241, 244, 248, 0) 100%
+  );
+  z-index: 5;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1023px) {
@@ -504,6 +524,10 @@
     width: 100%;
     height: clamp(340px, 85vw, 440px);
     overflow: hidden;
+  }
+
+  .hp-hero-media-wrapper::before {
+    display: none;
   }
 }
 
@@ -521,6 +545,14 @@
   background: transparent;
 }
 
+.hp-hero-stage > .shopify-block {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .hp-hero-slide {
   position: absolute;
   inset: 0;
@@ -532,7 +564,9 @@
     visibility 500ms ease;
 }
 
-.hp-hero-slide.is-active {
+.hp-hero-slide.is-active,
+.hp-hero-stage:not([data-slider-ready]) > .hp-hero-slide:first-of-type,
+.hp-hero-stage:not([data-slider-ready]) > :first-child > .hp-hero-slide {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -1058,34 +1092,32 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: 175px;
-  padding: 16px 8px 14px;
+  min-height: 185px;
+  padding: 16px 10px 16px;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1.5px solid #dbe4f2;
+  border-radius: 16px;
   text-decoration: none;
   overflow: hidden;
   transition:
     border-color 260ms ease,
-    box-shadow 260ms ease,
-    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow 260ms ease;
 }
 
 .hp-cat-card:hover {
   border-color: #0041c0;
-  box-shadow: 0 8px 22px rgba(0, 65, 192, 0.09);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 65, 192, 0.12);
   text-decoration: none;
 }
 
 .hp-cat-media {
   position: relative;
   width: 100%;
-  height: 107px;
+  height: 114px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .hp-cat-blob {
@@ -1106,6 +1138,37 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
   transform: translateX(-50%) scale(1.06);
 }
 
+.hp-cat-arrow {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -8px) scale(0.85);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #dbe4f2;
+  box-shadow: 0 4px 12px rgba(0, 65, 192, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0041c0;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  transition:
+    opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 280ms ease;
+  pointer-events: none;
+}
+
+.hp-cat-card:hover .hp-cat-arrow {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0) scale(1);
+}
+
 .hp-cat-img {
   position: relative;
   z-index: 1;
@@ -1116,10 +1179,6 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hp-cat-card:hover .hp-cat-img {
-  transform: scale(1.05);
-}
-
 .hp-cat-placeholder {
   position: relative;
   z-index: 1;
@@ -1127,10 +1186,16 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
   align-items: center;
   justify-content: center;
   color: #0041c0;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hp-cat-placeholder svg {
   display: block;
+}
+
+.hp-cat-card:hover .hp-cat-img,
+.hp-cat-card:hover .hp-cat-placeholder {
+  transform: translateY(20px);
 }
 
 .hp-cat-name {
@@ -1180,6 +1245,15 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
 
   .hp-cat-card:hover .hp-cat-blob {
     transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .hp-cat-arrow {
+    display: none;
+  }
+
+  .hp-cat-card:hover .hp-cat-img,
+  .hp-cat-card:hover .hp-cat-placeholder {
+    transform: none;
   }
 
   .hp-cat-img {

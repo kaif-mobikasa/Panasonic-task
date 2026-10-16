@@ -1,4 +1,6 @@
+shop-by-space,
 .hp-space {
+  display: block;
   padding: 56px 0 64px;
   background: #ffffff;
 }

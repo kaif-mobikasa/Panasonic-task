@@ -1,0 +1,46 @@
+{%- assign is_first_slide = false -%}
+{%- if section.blocks.first.id == block.id -%}
+  {%- assign is_first_slide = true -%}
+{%- endif -%}
+
+<div class="hp-hero-slide{% if is_first_slide %} is-active{% endif %}" data-hero-slide data-appliance-label="{{ block.settings.label | escape }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.image != blank -%}
+    {%- assign img_alt = block.settings.image.alt | default: block.settings.label | default: 'Panasonic Genuine OEM Appliance Parts' | escape -%}
+    {%- assign img_loading = 'lazy' -%}
+    {%- if is_first_slide -%}
+      {%- assign img_loading = 'eager' -%}
+    {%- endif -%}
+    {{ block.settings.image | image_url: width: 1600 | image_tag: class: 'hp-hero-banner-img', loading: img_loading, alt: img_alt }}
+  {%- endif -%}
+
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Hero Slide",
+  "blocks": [
+    {
+      "type": "additional-hotspot"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Slide Image"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "default": "Appliances.",
+      "label": "Target Appliance Label (e.g. Appliances., Microwave.)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slide"
+    }
+  ]
+}
+{% endschema %}

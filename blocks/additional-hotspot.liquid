@@ -1,0 +1,71 @@
+{%- render 'hp-hotspot-item',
+  hs_top: block.settings.top,
+  hs_left: block.settings.left,
+  hs_image: block.settings.image,
+  hs_title: block.settings.title,
+  hs_desc: block.settings.description,
+  hs_btn_label: block.settings.button_label,
+  hs_btn_url: block.settings.button_url,
+  shopify_attributes: block.shopify_attributes
+-%}
+
+{% schema %}
+{
+  "name": "Additional Hotspot",
+  "settings": [
+    {
+      "type": "range",
+      "id": "top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
+      "label": "Vertical Position (Top %)"
+    },
+    {
+      "type": "range",
+      "id": "left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
+      "label": "Horizontal Position (Left %)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product Thumbnail"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Product Title",
+      "label": "Product Title"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "default": "Category",
+      "label": "Short Description / Category"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "View Parts",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Additional Hotspot"
+    }
+  ]
+}
+{% endschema %}
