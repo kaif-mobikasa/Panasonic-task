@@ -5,7 +5,7 @@
 {%- if slide_blocks.size == 0 -%}
   {%- assign slide_blocks = section.blocks -%}
 {%- endif -%}
-<div class="hp-section hp-hero" data-hero-slider>
+<homepage-hero class="hp-section hp-hero" data-hero-slider>
   <div class="hp-hero-media-wrapper">
     <div class="hp-hero-stage">
       {% content_for 'blocks' %}
@@ -93,7 +93,7 @@
       </div>
     </div>
   </div>
-</div>
+</homepage-hero>
 
 {% schema %}
 {

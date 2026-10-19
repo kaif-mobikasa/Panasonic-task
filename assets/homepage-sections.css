@@ -121,6 +121,7 @@
   text-decoration: none;
 }
 
+homepage-hero,
 .hp-hero {
   position: relative;
   background: rgb(241, 242, 244);
@@ -1276,7 +1277,9 @@ a.hp-trust-item:hover .hp-trust-icon-badge {
   }
 }
 
+homepage-parts-by-type,
 .hp-parts-type {
+  display: block;
   padding: 56px 0 64px;
   background: #f7f9fd;
 }

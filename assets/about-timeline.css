@@ -1,4 +1,6 @@
+about-timeline,
 .about-timeline {
+  display: block;
   width: 100%;
   position: relative;
   background-color: var(--timeline-bg, #f7f9fd);

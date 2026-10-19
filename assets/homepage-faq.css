@@ -1,4 +1,6 @@
+homepage-faq,
 .hp-faq-section {
+  display: block;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;

@@ -1,7 +1,7 @@
 {{ 'homepage-sections.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'homepage-sections.js' | asset_url }}" defer="defer"></script>
 
-<div class="hp-section hp-parts-type">
+<homepage-parts-by-type class="hp-section hp-parts-type">
   <div class="hp-container">
     <div class="hp-header-row">
       <div class="hp-header-text">
@@ -62,7 +62,7 @@
       </div>
     {%- endif -%}
   </div>
-</div>
+</homepage-parts-by-type>
 
 {% schema %}
 {

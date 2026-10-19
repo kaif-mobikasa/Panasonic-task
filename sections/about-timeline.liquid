@@ -1,7 +1,7 @@
 {{ 'about-timeline.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'about-timeline.js' | asset_url }}" defer="defer"></script>
 
-<div
+<about-timeline
   class="about-timeline"
   id="AboutTimeline-{{ section.id }}"
   data-duration="{{ section.settings.autoplay_duration | default: 6 | times: 1000 }}"
@@ -81,7 +81,7 @@
       </div>
     {%- endif -%}
   </div>
-</div>
+</about-timeline>
 
 {% schema %}
 {

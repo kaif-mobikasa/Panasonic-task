@@ -1,7 +1,7 @@
 {{ 'homepage-parts-slider.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'homepage-parts-slider.js' | asset_url }}" defer="defer"></script>
 
-<div class="hp-section hp-parts-slider" id="PartsSlider-{{ section.id }}">
+<homepage-parts-slider class="hp-section hp-parts-slider" id="PartsSlider-{{ section.id }}">
   <div class="hp-container">
     {%- if section.settings.title_prefix != blank or section.settings.title_highlight != blank -%}
       <div class="hp-ps-mobile-header">
@@ -130,7 +130,7 @@
       </div>
     </div>
   </div>
-</div>
+</homepage-parts-slider>
 
 {% schema %}
 {

@@ -1,4 +1,6 @@
+homepage-parts-slider,
 .hp-parts-slider {
+  display: block;
   padding: 64px 0 72px;
   background: #ffffff;
   position: relative;

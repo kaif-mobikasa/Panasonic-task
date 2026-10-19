@@ -1,247 +1,291 @@
-document.addEventListener('DOMContentLoaded', () => {
-  initHeroSlider();
-  initFaqAccordions();
-  initSpaceHotspots();
-  initErrorCodeLookup();
-  initPartsTypeTabs();
-  initPartsTypeSlider();
-});
+class HomepageHero extends HTMLElement {
+  constructor() {
+    super();
+    this.handleBlockSelect = this.handleBlockSelect.bind(this);
+    this.handleBlockDeselect = this.handleBlockDeselect.bind(this);
+    this.handleSectionLoad = this.handleSectionLoad.bind(this);
+    this.onPrevClick = this.onPrevClick.bind(this);
+    this.onNextClick = this.onNextClick.bind(this);
+    this.onDotsClick = this.onDotsClick.bind(this);
+    this.onRootClick = this.onRootClick.bind(this);
+    this.cleanups = [];
+    this.isConnectedComponent = false;
+    this.currentIndex = 0;
+  }
 
-function initHeroSlider() {
-  const sliders = document.querySelectorAll('[data-hero-slider]');
-  if (!sliders.length) return;
+  connectedCallback() {
+    if (this.isConnectedComponent) return;
+    this.isConnectedComponent = true;
+    this.init();
+    document.addEventListener('shopify:block:select', this.handleBlockSelect);
+    document.addEventListener('shopify:block:deselect', this.handleBlockDeselect);
+    document.addEventListener('shopify:section:load', this.handleSectionLoad);
+  }
 
-  sliders.forEach(slider => {
-    const stage = slider.querySelector('.hp-hero-stage');
-    let slides = slider.querySelectorAll('[data-hero-slide]');
-    let dots = slider.querySelectorAll('[data-hero-dot]');
-    const prevBtn = slider.querySelector('[data-hero-prev]');
-    const nextBtn = slider.querySelector('[data-hero-next]');
-    const targetLabel = slider.querySelector('[data-hero-target]');
-    const dotsContainer = slider.querySelector('.hp-hero-dots');
+  disconnectedCallback() {
+    this.isConnectedComponent = false;
+    this.destroy();
+    document.removeEventListener('shopify:block:select', this.handleBlockSelect);
+    document.removeEventListener('shopify:block:deselect', this.handleBlockDeselect);
+    document.removeEventListener('shopify:section:load', this.handleSectionLoad);
+  }
 
-    if (!slides.length) return;
-
-    let currentIndex = 0;
-
-    function refreshElements() {
-      slides = slider.querySelectorAll('[data-hero-slide]');
-      dots = slider.querySelectorAll('[data-hero-dot]');
-    }
-
-    function closeAllHotspots() {
-      slider.querySelectorAll('.hp-hotspot').forEach(spot => spot.classList.remove('is-active'));
-    }
-
-    function goToSlide(index) {
-      refreshElements();
-      if (!slides.length) return;
-
-      if (index < 0) index = slides.length - 1;
-      if (index >= slides.length) index = 0;
-      currentIndex = index;
-
-      closeAllHotspots();
-
-      slides.forEach((slide, i) => {
-        const isCurrent = i === currentIndex;
-        slide.classList.toggle('is-active', isCurrent);
-        if (isCurrent) {
-          const label = slide.getAttribute('data-appliance-label');
-          if (targetLabel && label) {
-            targetLabel.textContent = label;
-          }
-        }
-      });
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('is-active', i === currentIndex);
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        goToSlide(currentIndex - 1);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        goToSlide(currentIndex + 1);
-      });
-    }
-
-    if (dotsContainer) {
-      dotsContainer.addEventListener('click', (e) => {
-        const dot = e.target.closest('[data-hero-dot]');
-        if (!dot) return;
-        e.preventDefault();
-        const index = Array.from(dotsContainer.querySelectorAll('[data-hero-dot]')).indexOf(dot);
-        if (index >= 0) {
-          goToSlide(index);
+  destroy() {
+    if (Array.isArray(this.cleanups)) {
+      this.cleanups.forEach((cleanup) => {
+        if (typeof cleanup === 'function') {
+          cleanup();
         }
       });
     }
+    this.cleanups = [];
+  }
 
-    slider.addEventListener('click', (e) => {
-      const pin = e.target.closest('.hp-hotspot-pin');
-      if (pin) {
-        e.preventDefault();
-        e.stopPropagation();
-        const spot = pin.closest('.hp-hotspot');
-        if (!spot) return;
-        const wasActive = spot.classList.contains('is-active');
-        closeAllHotspots();
-        if (!wasActive) {
-          spot.classList.add('is-active');
+  init() {
+    this.destroy();
+
+    this.stage = this.querySelector('.hp-hero-stage');
+    this.slides = Array.from(this.querySelectorAll('[data-hero-slide]'));
+    this.dots = Array.from(this.querySelectorAll('[data-hero-dot]'));
+    this.prevBtn = this.querySelector('[data-hero-prev]');
+    this.nextBtn = this.querySelector('[data-hero-next]');
+    this.targetLabel = this.querySelector('[data-hero-target]');
+    this.dotsContainer = this.querySelector('.hp-hero-dots');
+
+    if (!this.slides.length) return;
+
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', this.onPrevClick);
+      this.cleanups.push(() => this.prevBtn.removeEventListener('click', this.onPrevClick));
+    }
+
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', this.onNextClick);
+      this.cleanups.push(() => this.nextBtn.removeEventListener('click', this.onNextClick));
+    }
+
+    if (this.dotsContainer) {
+      this.dotsContainer.addEventListener('click', this.onDotsClick);
+      this.cleanups.push(() => this.dotsContainer.removeEventListener('click', this.onDotsClick));
+    }
+
+    this.addEventListener('click', this.onRootClick);
+    this.cleanups.push(() => this.removeEventListener('click', this.onRootClick));
+
+    this.goToSlide(0);
+    if (this.stage) {
+      this.stage.setAttribute('data-slider-ready', 'true');
+    }
+  }
+
+  refreshElements() {
+    this.slides = Array.from(this.querySelectorAll('[data-hero-slide]'));
+    this.dots = Array.from(this.querySelectorAll('[data-hero-dot]'));
+  }
+
+  closeAllHotspots() {
+    this.querySelectorAll('.hp-hotspot').forEach((spot) => spot.classList.remove('is-active'));
+  }
+
+  goToSlide(index) {
+    this.refreshElements();
+    if (!this.slides.length) return;
+
+    let targetIdx = index;
+    if (targetIdx < 0) targetIdx = this.slides.length - 1;
+    if (targetIdx >= this.slides.length) targetIdx = 0;
+    this.currentIndex = targetIdx;
+
+    this.closeAllHotspots();
+
+    this.slides.forEach((slide, i) => {
+      const isCurrent = i === this.currentIndex;
+      slide.classList.toggle('is-active', isCurrent);
+      if (isCurrent) {
+        const label = slide.getAttribute('data-appliance-label');
+        if (this.targetLabel && label) {
+          this.targetLabel.textContent = label;
         }
-        return;
-      }
-
-      if (!e.target.closest('.hp-hotspot-card')) {
-        closeAllHotspots();
       }
     });
 
-    goToSlide(0);
-    if (stage) {
-      stage.setAttribute('data-slider-ready', 'true');
-    }
-  });
+    this.dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === this.currentIndex);
+    });
+  }
 
-  document.addEventListener('shopify:block:select', (e) => {
+  onPrevClick(e) {
+    e.preventDefault();
+    this.goToSlide(this.currentIndex - 1);
+  }
+
+  onNextClick(e) {
+    e.preventDefault();
+    this.goToSlide(this.currentIndex + 1);
+  }
+
+  onDotsClick(e) {
+    const dot = e.target.closest('[data-hero-dot]');
+    if (!dot || !this.dotsContainer) return;
+    e.preventDefault();
+    const dotsArray = Array.from(this.dotsContainer.querySelectorAll('[data-hero-dot]'));
+    const index = dotsArray.indexOf(dot);
+    if (index >= 0) {
+      this.goToSlide(index);
+    }
+  }
+
+  onRootClick(e) {
+    const pin = e.target.closest('.hp-hotspot-pin');
+    if (pin) {
+      e.preventDefault();
+      e.stopPropagation();
+      const spot = pin.closest('.hp-hotspot');
+      if (!spot) return;
+      const wasActive = spot.classList.contains('is-active');
+      this.closeAllHotspots();
+      if (!wasActive) {
+        spot.classList.add('is-active');
+      }
+      return;
+    }
+
+    if (!e.target.closest('.hp-hotspot-card')) {
+      this.closeAllHotspots();
+    }
+  }
+
+  handleBlockSelect(e) {
     const target = e.target;
-    if (!target) return;
+    if (!target || !this.contains(target)) return;
 
     const heroSlide = target.closest ? target.closest('[data-hero-slide]') : null;
     const hotspot = target.closest ? target.closest('.hp-hotspot') : null;
 
     if (hotspot) {
       const parentSlide = hotspot.closest('[data-hero-slide]');
-      const parentSlider = hotspot.closest('[data-hero-slider]');
-      if (parentSlide && parentSlider) {
-        const allSlides = Array.from(parentSlider.querySelectorAll('[data-hero-slide]'));
-        const slideIdx = allSlides.indexOf(parentSlide);
+      if (parentSlide && this.slides) {
+        const slideIdx = this.slides.indexOf(parentSlide);
         if (slideIdx >= 0) {
-          const dots = parentSlider.querySelectorAll('[data-hero-dot]');
-          if (dots[slideIdx]) {
-            dots[slideIdx].click();
-          }
+          this.goToSlide(slideIdx);
         }
         hotspot.classList.add('is-active');
       }
       return;
     }
 
-    if (heroSlide) {
-      const parentSlider = heroSlide.closest('[data-hero-slider]');
-      if (parentSlider) {
-        const allSlides = Array.from(parentSlider.querySelectorAll('[data-hero-slide]'));
-        const slideIdx = allSlides.indexOf(heroSlide);
-        if (slideIdx >= 0) {
-          const dots = parentSlider.querySelectorAll('[data-hero-dot]');
-          if (dots[slideIdx]) {
-            dots[slideIdx].click();
-          }
-        }
+    if (heroSlide && this.slides) {
+      const slideIdx = this.slides.indexOf(heroSlide);
+      if (slideIdx >= 0) {
+        this.goToSlide(slideIdx);
       }
     }
-  });
+  }
 
-  document.addEventListener('shopify:block:deselect', (e) => {
+  handleBlockDeselect(e) {
     const target = e.target;
-    if (!target) return;
+    if (!target || !this.contains(target)) return;
     const hotspot = target.closest ? target.closest('.hp-hotspot') : null;
     if (hotspot) {
       hotspot.classList.remove('is-active');
     }
-  });
-}
+  }
 
-/* --------------------------------------------------------------------------
-   FAQ Accordions
-   -------------------------------------------------------------------------- */
-function initFaqAccordions() {
-  const faqButtons = document.querySelectorAll('[data-faq-toggle]');
-  faqButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const item = btn.closest('.hp-faq-item');
-      if (!item) return;
-
-      const isOpen = item.classList.contains('is-open');
-
-      // Close other items if desired or keep toggling
-      if (isOpen) {
-        item.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
-      } else {
-        item.classList.add('is-open');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        btn.click();
-      }
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   Shop By Space Hotspots
-   -------------------------------------------------------------------------- */
-function initSpaceHotspots() {
-  const pins = document.querySelectorAll('[data-space-pin]');
-  pins.forEach(pin => {
-    const togglePin = (e) => {
-      e.preventDefault();
-      const pinId = pin.getAttribute('data-space-pin');
-      const popCard = document.querySelector(`[data-space-pop="${pinId}"]`);
-
-      // Deactivate other pins in this section
-      const parentStage = pin.closest('.hp-space-stage');
-      if (parentStage) {
-        parentStage.querySelectorAll('.hp-space-pin').forEach(p => {
-          if (p !== pin) p.classList.remove('is-active');
-        });
-        parentStage.querySelectorAll('.hp-space-card-pop').forEach(c => {
-          if (c !== popCard) c.classList.remove('is-open');
-        });
-      }
-
-      pin.classList.toggle('is-active');
-      if (popCard) popCard.classList.toggle('is-open');
-    };
-
-    pin.addEventListener('click', togglePin);
-    pin.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') togglePin(e);
-    });
-  });
-
-  // Close hotspots when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.hp-space-pin') && !e.target.closest('.hp-space-card-pop')) {
-      document.querySelectorAll('.hp-space-pin').forEach(p => p.classList.remove('is-active'));
-      document.querySelectorAll('.hp-space-card-pop').forEach(c => c.classList.remove('is-open'));
+  handleSectionLoad(e) {
+    const section = e.target;
+    if (section === this || (section && typeof section.contains === 'function' && section.contains(this))) {
+      this.init();
     }
-  });
+  }
 }
 
-/* --------------------------------------------------------------------------
-   Error Code Lookup Tool
-   -------------------------------------------------------------------------- */
-function initErrorCodeLookup() {
-  const ecForm = document.querySelector('[data-ec-form]');
-  const ecInput = document.querySelector('[data-ec-input]');
-  const ecResult = document.querySelector('[data-ec-result]');
+if (!customElements.get('homepage-hero')) {
+  customElements.define('homepage-hero', HomepageHero);
+}
 
-  if (!ecForm || !ecInput) return;
+class HomepagePartsByType extends HTMLElement {
+  constructor() {
+    super();
+    this.handleSectionLoad = this.handleSectionLoad.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.cleanups = [];
+    this.isConnectedComponent = false;
+  }
+
+  connectedCallback() {
+    if (this.isConnectedComponent) return;
+    this.isConnectedComponent = true;
+    this.init();
+    document.addEventListener('shopify:section:load', this.handleSectionLoad);
+  }
+
+  disconnectedCallback() {
+    this.isConnectedComponent = false;
+    this.destroy();
+    document.removeEventListener('shopify:section:load', this.handleSectionLoad);
+  }
+
+  destroy() {
+    if (Array.isArray(this.cleanups)) {
+      this.cleanups.forEach((cleanup) => {
+        if (typeof cleanup === 'function') {
+          cleanup();
+        }
+      });
+    }
+    this.cleanups = [];
+  }
+
+  init() {
+    this.destroy();
+
+    this.grid = this.querySelector('[data-hp-type-grid]');
+    this.dots = Array.from(this.querySelectorAll('[data-hp-type-dot]'));
+    if (!this.grid || !this.dots.length) return;
+
+    this.grid.addEventListener('scroll', this.onScroll, { passive: true });
+    this.cleanups.push(() => this.grid.removeEventListener('scroll', this.onScroll));
+
+    this.dots.forEach((dot) => {
+      const onDotClick = (e) => {
+        e.preventDefault();
+        const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+        const targetScroll = idx === 0 ? 0 : (this.grid.scrollWidth - this.grid.clientWidth);
+        this.grid.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      };
+      dot.addEventListener('click', onDotClick);
+      this.cleanups.push(() => dot.removeEventListener('click', onDotClick));
+    });
+  }
+
+  onScroll() {
+    if (!this.grid || !this.dots) return;
+    const isPage2 = this.grid.scrollLeft > (this.grid.scrollWidth - this.grid.clientWidth) * 0.35;
+    const activeIndex = isPage2 ? 1 : 0;
+    this.dots.forEach((dot, idx) => {
+      dot.classList.toggle('is-active', idx === activeIndex);
+    });
+  }
+
+  handleSectionLoad(e) {
+    const section = e.target;
+    if (section === this || (section && typeof section.contains === 'function' && section.contains(this))) {
+      this.init();
+    }
+  }
+}
+
+if (!customElements.get('homepage-parts-by-type')) {
+  customElements.define('homepage-parts-by-type', HomepagePartsByType);
+}
+
+function initErrorCodeLookup(context = document) {
+  const ecForm = context.querySelector('[data-ec-form]');
+  const ecInput = context.querySelector('[data-ec-input]');
+  const ecResult = context.querySelector('[data-ec-result]');
+
+  if (!ecForm || !ecInput || ecForm.dataset.ecInit) return;
+  ecForm.dataset.ecInit = 'true';
 
   ecForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -256,24 +300,25 @@ function initErrorCodeLookup() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   Shop Parts By Type Tabs
-   -------------------------------------------------------------------------- */
-function initPartsTypeTabs() {
-  const typeTabs = document.querySelectorAll('[data-type-tab]');
-  typeTabs.forEach(tab => {
+function initPartsTypeTabs(context = document) {
+  const typeTabs = context.querySelectorAll('[data-type-tab]');
+  typeTabs.forEach((tab) => {
+    if (tab.dataset.tabInit) return;
+    tab.dataset.tabInit = 'true';
+
     tab.addEventListener('click', (e) => {
       e.preventDefault();
       const cat = tab.getAttribute('data-type-tab');
 
-      typeTabs.forEach(t => t.classList.remove('is-active'));
+      typeTabs.forEach((t) => t.classList.remove('is-active'));
       tab.classList.add('is-active');
 
-      const items = document.querySelectorAll('[data-type-item]');
-      items.forEach(item => {
+      const items = context.querySelectorAll('[data-type-item]');
+      items.forEach((item) => {
         if (cat === 'all' || item.getAttribute('data-type-cat') === cat) {
           item.style.display = 'flex';
-        } else {
+        }
+        if (cat !== 'all' && item.getAttribute('data-type-cat') !== cat) {
           item.style.display = 'none';
         }
       });
@@ -281,28 +326,13 @@ function initPartsTypeTabs() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   Parts By Type Mobile Dots & Scroll Sync
-   -------------------------------------------------------------------------- */
-function initPartsTypeSlider() {
-  const grid = document.querySelector('[data-hp-type-grid]');
-  const dots = document.querySelectorAll('[data-hp-type-dot]');
-  if (!grid || !dots.length) return;
-
-  grid.addEventListener('scroll', () => {
-    const isPage2 = grid.scrollLeft > (grid.scrollWidth - grid.clientWidth) * 0.35;
-    const activeIndex = isPage2 ? 1 : 0;
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('is-active', idx === activeIndex);
-    });
-  }, { passive: true });
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
-      const targetScroll = idx === 0 ? 0 : (grid.scrollWidth - grid.clientWidth);
-      grid.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    });
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initErrorCodeLookup();
+    initPartsTypeTabs();
   });
+}
+if (document.readyState !== 'loading') {
+  initErrorCodeLookup();
+  initPartsTypeTabs();
 }
